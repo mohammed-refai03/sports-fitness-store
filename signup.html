@@ -210,7 +210,13 @@
       display: grid; grid-template-columns: 1fr 1fr;
       gap: 10px; margin-bottom: 10px;
     }
-    .role-option { display: none; }
+    .role-option {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+      pointer-events: none;
+    }
     .role-label {
       display: flex; align-items: center; justify-content: center;
       gap: 8px; padding: 6px 10px;
@@ -226,10 +232,12 @@
       color: var(--primary);
       background: rgba(255,107,53,0.04);
     }
-    .role-option:checked + .role-label {
-      border-color: var(--primary);
-      color: var(--primary);
-      background: rgba(255,107,53,0.08);
+    .role-option:checked + .role-label,
+    .role-label.active {
+      border-color: var(--primary) !important;
+      color: var(--primary) !important;
+      background: rgba(255,107,53,0.08) !important;
+      box-shadow: 0 0 0 1px var(--primary) !important;
     }
 
     /* Grid Form */
@@ -477,16 +485,16 @@
 <!-- Role Selector -->
 <div class="role-selector">
 <input checked="" class="role-option" id="roleUser" name="signupRole" type="radio" value="user"/>
-<label class="role-label" for="roleUser">
+<label class="role-label active" for="roleUser" id="labelRoleUser">
 <i class="fa-solid fa-user"></i> Customer
             </label>
 <input class="role-option" id="roleAdmin" name="signupRole" type="radio" value="admin"/>
-<label class="role-label" for="roleAdmin">
+<label class="role-label" for="roleAdmin" id="labelRoleAdmin">
 <i class="fa-solid fa-user-shield"></i> Admin / Coach
             </label>
 </div>
 <div class="form-grid">
-<div class="input-group grid-full">
+<div class="input-group">
 <label class="input-label" for="username">Full Name / Username</label>
 <div class="input-wrapper">
 <i class="fa-regular fa-user input-icon"></i>
@@ -511,7 +519,7 @@
 <i class="fa-regular fa-eye"></i>
 </button>
 </div>
-<div class="field-error" id="passwordError">Password must be at least 8 characters, with 1 uppercase, 1 lowercase, 1 digit, and 1 special character (@$!%*?&amp;).</div>
+<div class="field-error" id="passwordError">Password must be at least 6 characters.</div>
 </div>
 <div class="input-group">
 <label class="input-label" for="confirmPassword">Confirm Password</label>
@@ -668,7 +676,6 @@
       const passwordInput = document.getElementById('password');
       const passwordError = document.getElementById('passwordError');
       const val = passwordInput.value;
-      const passRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
 
       if (val.length === 0) {
         passwordError.textContent = 'Password is required.';
@@ -676,8 +683,8 @@
         passwordInput.classList.add('error');
         passwordInput.classList.remove('success');
         return false;
-      } else if (!passRegex.test(val)) {
-        passwordError.textContent = 'Password must be at least 8 characters, with 1 uppercase, 1 lowercase, 1 digit, and 1 special character (@$!%*?&).';
+      } else if (val.length < 6) {
+        passwordError.textContent = 'Password must be at least 6 characters.';
         passwordError.classList.add('show');
         passwordInput.classList.add('error');
         passwordInput.classList.remove('success');
@@ -742,29 +749,73 @@
       }
     }
 
-    // Attach live validation events
-    document.getElementById('username').addEventListener('input', validateUsername);
-    document.getElementById('username').addEventListener('blur', validateUsername);
+    let signupAttempted = false;
+    const runIfAttempted = (fn) => () => { if (signupAttempted) fn(); };
 
-    document.getElementById('email').addEventListener('input', validateEmail);
-    document.getElementById('email').addEventListener('blur', validateEmail);
+    // Bulletproof Role Selection Toggle
+    function updateRoleSelection(selectedRole) {
+      const roleUserRadio = document.getElementById('roleUser');
+      const roleAdminRadio = document.getElementById('roleAdmin');
+      const labelUser = document.getElementById('labelRoleUser');
+      const labelAdmin = document.getElementById('labelRoleAdmin');
+
+      if (selectedRole === 'admin') {
+        if (roleAdminRadio) roleAdminRadio.checked = true;
+        if (roleUserRadio) roleUserRadio.checked = false;
+        if (labelAdmin) labelAdmin.classList.add('active');
+        if (labelUser) labelUser.classList.remove('active');
+      } else {
+        if (roleUserRadio) roleUserRadio.checked = true;
+        if (roleAdminRadio) roleAdminRadio.checked = false;
+        if (labelUser) labelUser.classList.add('active');
+        if (labelAdmin) labelAdmin.classList.remove('active');
+      }
+    }
+
+    const labelUserEl = document.getElementById('labelRoleUser');
+    const labelAdminEl = document.getElementById('labelRoleAdmin');
+    if (labelUserEl) {
+      labelUserEl.addEventListener('click', function(e) {
+        e.preventDefault();
+        updateRoleSelection('user');
+      });
+    }
+    if (labelAdminEl) {
+      labelAdminEl.addEventListener('click', function(e) {
+        e.preventDefault();
+        updateRoleSelection('admin');
+      });
+    }
+
+    // Set initial active state on page load
+    updateRoleSelection('user');
+
+    // Attach live validation events (active only after submit is clicked)
+    document.getElementById('username').addEventListener('input', runIfAttempted(validateUsername));
+    document.getElementById('username').addEventListener('blur', runIfAttempted(validateUsername));
+
+    document.getElementById('email').addEventListener('input', runIfAttempted(validateEmail));
+    document.getElementById('email').addEventListener('blur', runIfAttempted(validateEmail));
 
     document.getElementById('password').addEventListener('input', () => {
-      validatePassword();
-      if (document.getElementById('confirmPassword').value.length > 0) {
-        validateConfirmPassword();
+      if (signupAttempted) {
+        validatePassword();
+        if (document.getElementById('confirmPassword').value.length > 0) {
+          validateConfirmPassword();
+        }
       }
     });
-    document.getElementById('password').addEventListener('blur', validatePassword);
+    document.getElementById('password').addEventListener('blur', runIfAttempted(validatePassword));
 
-    document.getElementById('confirmPassword').addEventListener('input', validateConfirmPassword);
-    document.getElementById('confirmPassword').addEventListener('blur', validateConfirmPassword);
+    document.getElementById('confirmPassword').addEventListener('input', runIfAttempted(validateConfirmPassword));
+    document.getElementById('confirmPassword').addEventListener('blur', runIfAttempted(validateConfirmPassword));
 
-    document.getElementById('terms').addEventListener('change', validateTerms);
+    document.getElementById('terms').addEventListener('change', runIfAttempted(validateTerms));
 
-    // Form submission - goes directly to dashboard after strict validations
+    // Form submission - redirects to login page after successful validation & registration
     document.getElementById('signupForm').addEventListener('submit', function(e) {
       e.preventDefault();
+      signupAttempted = true;
 
       // Trigger all validations
       const isUsernameValid = validateUsername();
@@ -777,7 +828,7 @@
 
       if (hasError) {
         gsap.to('#formCard', { x: -8, duration: 0.07, yoyo: true, repeat: 5 });
-        return;
+        return false;
       }
 
       const btn = document.getElementById('signupBtn');
@@ -786,43 +837,23 @@
       const username = document.getElementById('username').value.trim();
       const email = document.getElementById('email').value.trim();
       const password = document.getElementById('password').value;
-      const role = document.querySelector('input[name="signupRole"]:checked').value;
+      const roleRadio = document.querySelector('input[name="signupRole"]:checked');
+      const role = roleRadio ? roleRadio.value : 'user';
+
+      // Save user profile to localStorage
+      AUTH.signup(username, email, '', password, role);
+
+      const banner = document.getElementById('alertBanner');
+      if (banner) {
+        banner.className = 'alert-banner success show';
+        const msgEl = document.getElementById('alertMsg');
+        if (msgEl) msgEl.innerHTML = '<i class="fa-solid fa-circle-check"></i> Account created successfully! Redirecting to login page...';
+        gsap.from('#alertBanner', { y: -10, opacity: 0, duration: 0.3 });
+      }
 
       setTimeout(() => {
-        btn.classList.remove('loading');
-
-        // Save user to localStorage
-        const result = AUTH.signup(username, email, '', password, role);
-        if (result.success) {
-          // Log user in automatically (set active session)
-          localStorage.setItem('stackly_active_user_email', email);
-          localStorage.setItem('stackly_active_user_role', role);
-
-          const banner = document.getElementById('alertBanner');
-          banner.className = 'alert-banner success show';
-          document.getElementById('alertMsg').innerHTML = '<i class="fa-solid fa-circle-check"></i> Account created successfully! Redirecting...';
-          gsap.from('#alertBanner', { y: -10, opacity: 0, duration: 0.3 });
-
-          setTimeout(() => {
-            gsap.to('#formCard', {
-              scale: 0.97, opacity: 0, duration: 0.4,
-              onComplete: () => {
-                if (role === 'admin') {
-                  window.location.href = 'admin-dashboard.html';
-                } else {
-                  window.location.href = 'user-dashboard.html';
-                }
-              }
-            });
-          }, 1200);
-        } else {
-          const banner = document.getElementById('alertBanner');
-          banner.className = 'alert-banner error show';
-          document.getElementById('alertMsg').textContent = result.message;
-          gsap.from('#alertBanner', { y: -10, opacity: 0, duration: 0.3 });
-          gsap.to('#formCard', { x: -8, duration: 0.07, yoyo: true, repeat: 5 });
-        }
-      }, 1200);
+        window.location.href = 'login.html';
+      }, 800);
     });
   </script>
 </body>

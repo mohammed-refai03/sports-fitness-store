@@ -1279,12 +1279,12 @@ body {
 /* ==========================================================================
    BACKGROUND ASSET IMAGES
    ========================================================================== */
-.program-card:nth-child(1)::before { background-image: url('assets/strength.webp'); }
-.program-card:nth-child(2)::before { background-image: url('assets/cardio.webp'); }
-.program-card:nth-child(3)::before { background-image: url('assets/yoga.webp'); }
-.program-card:nth-child(4)::before { background-image: url('assets/sports.webp'); }
-.program-card:nth-child(5)::before { background-image: url('assets/hiit.webp'); }
-.program-card:nth-child(6)::before { background-image: url('assets/bodybuilding.webp'); }
+.program-card:nth-child(1)::before { background-image: url('../assets/strength.webp'); }
+.program-card:nth-child(2)::before { background-image: url('../assets/cardio.webp'); }
+.program-card:nth-child(3)::before { background-image: url('../assets/yoga.webp'); }
+.program-card:nth-child(4)::before { background-image: url('../assets/sports.webp'); }
+.program-card:nth-child(5)::before { background-image: url('../assets/hiit.webp'); }
+.program-card:nth-child(6)::before { background-image: url('../assets/bodybuilding.webp'); }
 /* ==========================================================================
    FLUID RESPONSIVE SYSTEM MEDIA QUERIES
    ========================================================================== */
@@ -3501,7 +3501,7 @@ body {
    CLIENT TESTIMONIALS SECTION
    ========================================================================== */
 .testimonial-wrapper { position: relative; background-color: #ffffff; padding-bottom: 80px; margin-top: 40px; overflow: hidden; }
-.testimonial-bg { position: absolute; top: 0; left: 0; width: 100%; height: 500px; background: linear-gradient(rgba(15,23,42,0.6), rgba(15,23,42,0.85)), url('assets/slide2.webp'); background-size: cover; background-position: center; background-attachment: fixed; z-index: 1; }
+.testimonial-bg { position: absolute; top: 0; left: 0; width: 100%; height: 500px; background: linear-gradient(rgba(15,23,42,0.6), rgba(15,23,42,0.85)), url('../assets/slide2.webp'); background-size: cover; background-position: center; background-attachment: fixed; z-index: 1; }
 .testimonial-content { position: relative; z-index: 2; padding-top: 100px; }
 .testimonial-header { text-align: center; color: #fff; margin-bottom: 60px; padding: 0 20px; }
 .testimonial-header .subtitle { color: #ff7a00; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 12px; font-size: 0.95rem; }
@@ -3678,8 +3678,8 @@ body {
 .prc-card-mid .prc-top-container { background: #1a1a1a; }
 
 .prc-top { position: relative; padding: 50px 30px 80px; color: #fff; background-size: cover; background-position: center; clip-path: polygon(0 0, 100% 0, 100% 88%, 0 100%); z-index: 2; transition: padding 0.4s; }
-.prc-card-dark .prc-top { background-image: linear-gradient(rgba(17,17,17,0.9), rgba(17,17,17,0.9)), url('assets/slide1.webp'); }
-.prc-card-mid .prc-top { background-image: linear-gradient(rgba(255,122,0,0.95), rgba(255,122,0,0.95)), url('assets/slide2.webp'); }
+.prc-card-dark .prc-top { background-image: linear-gradient(rgba(17,17,17,0.9), rgba(17,17,17,0.9)), url('../assets/slide1.webp'); }
+.prc-card-mid .prc-top { background-image: linear-gradient(rgba(255,122,0,0.95), rgba(255,122,0,0.95)), url('../assets/slide2.webp'); }
 
 .prc-slant { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; clip-path: polygon(0 0, 100% 0, 100% 92%, 0 100%); transition: 0.4s; }
 .prc-card-dark .prc-slant { background: #ff7a00; }
@@ -3808,8 +3808,8 @@ textarea.appt-input { resize: vertical; min-height: 140px; }
 .circle-rings::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 450px; height: 450px; border: 1px solid #ffefe6; border-radius: 50%; transition: 0.8s; }
 .circle-rings::after { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 650px; height: 650px; border: 1px solid #fff5f0; border-radius: 50%; transition: 0.8s; }
 
-.bal-img-1 { position: absolute; top: 30px; left: 0; width: 60%; height: 280px; background: url('assets/hiit.webp') center/cover; border-radius: 16px; box-shadow: 0 15px 40px rgba(0,0,0,0.08); z-index: 1; transition: 0.6s cubic-bezier(0.16,1,0.3,1); }
-.bal-img-2 { position: absolute; bottom: 30px; right: 0; width: 70%; height: 360px; background: url('assets/slide2.webp') center/cover; border-radius: 16px; box-shadow: 0 20px 50px rgba(0,0,0,0.12); z-index: 2; transition: 0.6s cubic-bezier(0.16,1,0.3,1); }
+.bal-img-1 { position: absolute; top: 30px; left: 0; width: 60%; height: 280px; background: url('../assets/hiit.webp') center/cover; border-radius: 16px; box-shadow: 0 15px 40px rgba(0,0,0,0.08); z-index: 1; transition: 0.6s cubic-bezier(0.16,1,0.3,1); }
+.bal-img-2 { position: absolute; bottom: 30px; right: 0; width: 70%; height: 360px; background: url('../assets/slide2.webp') center/cover; border-radius: 16px; box-shadow: 0 20px 50px rgba(0,0,0,0.12); z-index: 2; transition: 0.6s cubic-bezier(0.16,1,0.3,1); }
 
 .track-badge { position: absolute; top: 25%; right: 5%; background: #fff; padding: 25px 25px; border-radius: 20px; text-align: center; box-shadow: 0 25px 50px rgba(0,0,0,0.08); z-index: 3; transition: 0.5s cubic-bezier(0.16,1,0.3,1); border: 1px solid #f8fafc; }
 .track-badge i { font-size: 3.2rem; color: #ef4444; margin-bottom: 15px; display: inline-block; filter: drop-shadow(0 5px 10px rgba(239,68,68,0.25)); transform: rotate(-15deg); }

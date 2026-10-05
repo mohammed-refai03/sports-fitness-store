@@ -182,25 +182,26 @@
             }
         });
 
-        const inputs = document.querySelectorAll('input, select, textarea');
-        inputs.forEach(input => {
-            input.addEventListener('input', function() {
-                validateSingleInput(this);
-            });
-            input.addEventListener('change', function() {
-                validateSingleInput(this);
-            });
-            input.addEventListener('blur', function() {
-                validateSingleInput(this);
-            });
-        });
-
         const forms = document.querySelectorAll('form');
         forms.forEach(form => {
             form.setAttribute('novalidate', 'true');
+
+            // Attach input/change/blur listeners that ONLY run validation AFTER the submit button has been clicked
+            const formInputs = form.querySelectorAll('input, select, textarea');
+            formInputs.forEach(input => {
+                const handleRealtimeValidation = function() {
+                    if (form.dataset.hasAttemptedSubmit === 'true') {
+                        validateSingleInput(this);
+                    }
+                };
+                input.addEventListener('input', handleRealtimeValidation);
+                input.addEventListener('change', handleRealtimeValidation);
+                input.addEventListener('blur', handleRealtimeValidation);
+            });
+
             form.addEventListener('submit', function(e) {
+                form.dataset.hasAttemptedSubmit = 'true';
                 let isFormValid = true;
-                const formInputs = form.querySelectorAll('input, select, textarea');
                 formInputs.forEach(inp => {
                     if (!validateSingleInput(inp)) {
                         isFormValid = false;
@@ -210,6 +211,13 @@
                 if (!isFormValid) {
                     e.preventDefault();
                     e.stopPropagation();
+                    e.stopImmediatePropagation();
+                    return false;
+                } else {
+                    if (form.id === 'promo-newsletter-form') {
+                        e.preventDefault();
+                        window.location.href = '404.html';
+                    }
                 }
             });
         });

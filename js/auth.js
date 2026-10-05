@@ -39,13 +39,7 @@ const AUTH = (() => {
 
   return {
     signup: (username, email, phone, password, role) => {
-      // Check if user already exists
-      const existingUser = localStorage.getItem(`${USER_KEY_PREFIX}${email}`);
-      if (existingUser) {
-        return { success: false, message: 'Email address already registered' };
-      }
-
-      // Create new user account object
+      // Create or update user account object
       const newUser = {
         username,
         email,
@@ -63,6 +57,12 @@ const AUTH = (() => {
     },
 
     login: (email, password, expectedRole) => {
+      if (!email || !email.trim()) {
+        return { success: false, message: 'Please enter a valid email address.' };
+      }
+      if (!password || !password.trim()) {
+        return { success: false, message: 'Please enter your password.' };
+      }
       let userJSON = localStorage.getItem(`${USER_KEY_PREFIX}${email}`);
       let user;
 

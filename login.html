@@ -589,11 +589,7 @@
             </span>
 </button>
 </form>
-<div class="divider">or continue with</div>
-<div class="social-btns">
-<a class="social-btn" href="404.html"><i class="fa-brands fa-google" style="color:#EA4335"></i> Google</a>
-<a class="social-btn" href="404.html"><i class="fa-brands fa-apple" style="color:#000"></i> Apple</a>
-</div>
+
 <div class="switch-link">
           New to Stackly? <a href="signup.html">Create Account <i class="fa-solid fa-arrow-right"></i></a>
 </div>
@@ -660,10 +656,27 @@
     // Form submission
     document.getElementById('loginForm').addEventListener('submit', function(e) {
       e.preventDefault();
-      const email = document.getElementById('loginEmail').value.trim();
-      const pass = document.getElementById('loginPassword').value;
-      const role = document.querySelector('input[name="loginRole"]:checked').value;
+      
+      const emailInp = document.getElementById('loginEmail');
+      const passInp = document.getElementById('loginPassword');
+      const email = emailInp ? emailInp.value.trim() : '';
+      const pass = passInp ? passInp.value : '';
 
+      // Validate inputs before processing authentication or navigation
+      let isFormValid = true;
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        isFormValid = false;
+      }
+      if (!pass || pass.length < 6) {
+        isFormValid = false;
+      }
+
+      if (!isFormValid) {
+        gsap.to('#formCard', { x: -8, duration: 0.07, yoyo: true, repeat: 5 });
+        return false;
+      }
+
+      const role = document.querySelector('input[name="loginRole"]:checked').value;
       const btn = document.getElementById('loginBtn');
       btn.classList.add('loading');
 

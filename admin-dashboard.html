@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Admin Operations Center — Stackly Sports &amp; Fitness Store</title>
+<meta content="Stackly Sports &amp; Fitness Store Admin Panel. Manage equipment inventory, orders, customer accounts, and store revenue analytics." name="description"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&amp;family=Montserrat:wght@700;800;900&amp;family=Bebas+Neue&amp;display=swap" rel="stylesheet"/>
+<link href="css/style.css" rel="stylesheet"/>
+</head>
+<body>
+<!-- Page Loader -->
+<div class="page-loader" id="adminLoader">
+<img alt="Stackly" src="assets/logo.webp" style="height:52px;width:auto;object-fit:contain;animation:pulseLogoAdmin 1.4s ease-in-out infinite;"/>
+<div class="loader-bar"><div class="loader-bar-fill"></div></div>
+</div>
+<style>
+    @keyframes pulseLogoAdmin {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.7; transform: scale(0.96); }
+    }
+  </style>
+<div class="dashboard-root">
+<!-- Sidebar Overlay -->
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+<!-- Sidebar (5 MAIN MENUS ONLY) -->
+<aside class="sidebar" id="sidebar">
+<div class="sidebar-logo" style="flex-direction: column; align-items: center; justify-content: center; text-align: center; width: 100%;">
+<a href="404.html" style="display: flex; align-items: center; justify-content: center; width: 100%;">
+<img alt="Stackly Logo" src="assets/logo.webp" style="height:36px;width:auto;object-fit:contain;"/>
+</a>
+<div class="sidebar-dashboard-tag" style="text-align: center; margin-top: 6px;">Admin Dashboard</div>
+<button aria-label="Close Sidebar" class="sidebar-close-btn" id="sidebarCloseBtn" onclick="window.location.href='404.html'" style="display: none; position: absolute; right: 15px; top: 15px;">
+<i class="fa-solid fa-xmark"></i>
+</button>
+</div>
+<nav class="sidebar-nav">
+<div class="sidebar-section-label">Store Operations</div>
+<!-- 1. Dashboard -->
+<a class="nav-item active" data-tab="dashboard">
+<i class="fa-solid fa-chart-line nav-icon"></i>
+<span>Dashboard</span>
+</a>
+<!-- 2. Equipment Inventory -->
+<a class="nav-item" data-tab="inventory">
+<i class="fa-solid fa-boxes-stacked nav-icon"></i>
+<span>Equipment Inventory</span>
+</a>
+<!-- 3. Orders & Shipments -->
+<a class="nav-item" data-tab="orders">
+<i class="fa-solid fa-truck-fast nav-icon"></i>
+<span>Orders &amp; Shipments</span>
+</a>
+<!-- 4. Athletes & Accounts -->
+<a class="nav-item" data-tab="customers">
+<i class="fa-solid fa-users nav-icon"></i>
+<span>Athletes &amp; Accounts</span>
+</a>
+<!-- 5. Store Settings & Reports -->
+<a class="nav-item" data-tab="settings">
+<i class="fa-solid fa-gears nav-icon"></i>
+<span>Store Settings &amp; Reports</span>
+</a>
+</nav>
+<div class="sidebar-footer">
+<div class="sidebar-user-card" id="sidebarUserBtn">
+<div class="user-avatar-sm" id="sidebarAvatar">A</div>
+<div class="sidebar-user-info">
+<div class="sidebar-user-name" id="sidebarName">admin@stackly.com</div>
+<div class="sidebar-user-role" id="sidebarRole">Admin / Store Manager</div>
+</div>
+<i class="fa-solid fa-right-from-bracket text-muted" id="logoutBtn" style="cursor:pointer;" title="Log Out"></i>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="main-content">
+<!-- Top Navbar -->
+<header class="top-navbar">
+<button aria-label="Toggle Navigation Sidebar" class="navbar-toggle" id="navbarToggle">
+<i class="fa-solid fa-bars"></i>
+</button>
+<div class="navbar-title">Store Admin Operations</div>
+<div class="navbar-actions">
+<!-- Profile Badge (Green Marked Area: Email ID & Role) -->
+<div class="navbar-profile" id="navbarProfile">
+<div class="navbar-avatar" id="navAvatar">A</div>
+<div class="navbar-user-info">
+<div class="navbar-user-name" id="navName">admin@stackly.com</div>
+<div class="navbar-user-email" id="navEmail" style="font-size: 11px; color: var(--text-mid);">Admin / Store Manager</div>
+</div>
+</div>
+</div>
+</header>
+<!-- Dashboard View Port -->
+<div class="content-area">
+<!-- ==================== TAB 1: DASHBOARD ==================== -->
+<section class="page-section active" id="sect-dashboard">
+<div class="page-header">
+<div class="page-header-top">
+<div>
+<h1 class="page-title">Sports Store Telemetry &amp; Revenue</h1>
+<p class="page-subtitle">Real-time control center for Stackly Sports &amp; Fitness Store performance and logistics.</p>
+</div>
+</div>
+</div>
+<!-- Statistics Cards (5 Cards) -->
+<div class="stats-grid">
+<div class="stat-card yellow" data-tilt="">
+<div class="stat-card-header">
+<div class="stat-icon-wrap yellow"><i class="fa-solid fa-sack-dollar"></i></div>
+<span class="stat-trend up"><i class="fa-solid fa-caret-up"></i> +18%</span>
+</div>
+<div class="stat-value" id="valMonthlyRevenue">$0</div>
+<div class="stat-label">Monthly Store Revenue</div>
+</div>
+<div class="stat-card orange" data-tilt="">
+<div class="stat-card-header">
+<div class="stat-icon-wrap orange"><i class="fa-solid fa-cart-shopping"></i></div>
+<span class="stat-trend up"><i class="fa-solid fa-caret-up"></i> +14%</span>
+</div>
+<div class="stat-value" id="valTotalOrders">0</div>
+<div class="stat-label">Equipment Orders</div>
+</div>
+<div class="stat-card green" data-tilt="">
+<div class="stat-card-header">
+<div class="stat-icon-wrap green"><i class="fa-solid fa-boxes-stacked"></i></div>
+<span class="stat-trend up"><i class="fa-solid fa-caret-up"></i> +8%</span>
+</div>
+<div class="stat-value" id="valStockSKUs">0</div>
+<div class="stat-label">Warehouse Stock Units</div>
+</div>
+<div class="stat-card blue" data-tilt="">
+<div class="stat-card-header">
+<div class="stat-icon-wrap blue"><i class="fa-solid fa-users"></i></div>
+<span class="stat-trend up"><i class="fa-solid fa-caret-up"></i> +12%</span>
+</div>
+<div class="stat-value" id="valActiveCustomers">0</div>
+<div class="stat-label">Active Gym Accounts</div>
+</div>
+<div class="stat-card purple" data-tilt="">
+<div class="stat-card-header">
+<div class="stat-icon-wrap purple"><i class="fa-solid fa-truck-fast"></i></div>
+<span class="stat-trend up"><i class="fa-solid fa-caret-up"></i> +2%</span>
+</div>
+<div class="stat-value" id="valFulfillmentRate">0</div>
+<div class="stat-label">Fulfillment Rate</div>
+</div>
+</div>
+<!-- Charts Section -->
+<div class="charts-grid">
+<div class="chart-card full-width">
+<div class="chart-header">
+<div>
+<h2 class="chart-title">Store Revenue &amp; Freight Growth Curve</h2>
+<p class="chart-subtitle">Monthly sales telemetry vs projected sales targets.</p>
+</div>
+</div>
+<div class="chart-container" style="height: 320px;">
+<canvas id="revenueGrowthChart"></canvas>
+</div>
+</div>
+<div class="chart-card">
+<div class="chart-header">
+<h2 class="chart-title">Sales by Product Category</h2>
+</div>
+<div class="chart-container" style="height: 280px;">
+<canvas id="categoryRevenueChart"></canvas>
+</div>
+</div>
+<div class="chart-card">
+<div class="chart-header">
+<h2 class="chart-title">Top Selling Equipment Units</h2>
+</div>
+<div class="chart-container" style="height: 280px;">
+<canvas id="equipmentSalesChart"></canvas>
+</div>
+</div>
+</div>
+<!-- Tables & Feeds Grid -->
+<div class="content-grid">
+<div class="table-card" style="grid-column: span 2;">
+<div class="table-card-header">
+<h2 class="table-card-title">Recent Equipment Orders</h2>
+<div class="table-search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<input id="recentOrdersSearch" placeholder="Filter orders..." type="text"/>
+</div>
+</div>
+<div style="overflow-x:auto;">
+<table class="data-table" id="recentOrdersTable">
+<thead>
+<tr>
+<th onclick="window.dashboardApp.sortTable('orderId')">Order ID <i class="fa-solid fa-sort"></i></th>
+<th onclick="window.dashboardApp.sortTable('customer')">Customer Account <i class="fa-solid fa-sort"></i></th>
+<th>Gear Items</th>
+<th onclick="window.dashboardApp.sortTable('amount')">Total ($) <i class="fa-solid fa-sort"></i></th>
+<th onclick="window.dashboardApp.sortTable('status')">Delivery Status <i class="fa-solid fa-sort"></i></th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody id="recentOrdersList">
+<!-- Dynamic -->
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<div class="content-grid">
+<!-- Recent Store Activity -->
+<div class="info-card">
+<h2 class="card-section-title"><i class="fa-solid fa-clock-rotate-left"></i> Live Store Activity</h2>
+<div class="activity-list" id="recentStoreActivities">
+<!-- Dynamic -->
+</div>
+</div>
+<!-- Warehouse Alerts -->
+<div class="info-card">
+<h2 class="card-section-title"><i class="fa-solid fa-triangle-exclamation"></i> Warehouse Restock Alerts</h2>
+<div class="activity-list" id="warehouseAlertsList">
+<!-- Dynamic -->
+</div>
+</div>
+</div>
+</section>
+<!-- ==================== TAB 2: EQUIPMENT INVENTORY ==================== -->
+<section class="page-section" id="sect-inventory">
+<div class="page-header">
+<div class="page-header-top">
+<div>
+<h1 class="page-title">Equipment Inventory &amp; Stock Analytics</h1>
+<p class="page-subtitle">Warehouse stock levels, equipment valuation, category distributions, and automated reorder points.</p>
+</div>
+</div>
+</div>
+<div class="stats-grid">
+<div class="stat-card blue">
+<div class="stat-card-header">
+<div class="stat-icon-wrap blue"><i class="fa-solid fa-boxes-stacked"></i></div>
+</div>
+<div class="stat-value">5,840 Units</div>
+<div class="stat-label">Total Stock Units</div>
+</div>
+<div class="stat-card green">
+<div class="stat-card-header">
+<div class="stat-icon-wrap green"><i class="fa-solid fa-vault"></i></div>
+</div>
+<div class="stat-value">$840,000</div>
+<div class="stat-label">Inventory Valuation</div>
+</div>
+<div class="stat-card yellow">
+<div class="stat-card-header">
+<div class="stat-icon-wrap yellow"><i class="fa-solid fa-box-open"></i></div>
+</div>
+<div class="stat-value">12 SKUs</div>
+<div class="stat-label">Low Stock Reorders</div>
+</div>
+<div class="stat-card orange">
+<div class="stat-card-header">
+<div class="stat-icon-wrap orange"><i class="fa-solid fa-circle-xmark"></i></div>
+</div>
+<div class="stat-value">3 Items</div>
+<div class="stat-label">Out of Stock Alerts</div>
+</div>
+</div>
+<!-- Inventory Charts Grid -->
+<div class="charts-grid">
+<div class="chart-card">
+<div class="chart-header">
+<h2 class="chart-title">Stock Level Distribution by Category</h2>
+</div>
+<div class="chart-container" style="height: 260px;">
+<canvas id="inventoryCategoryChart"></canvas>
+</div>
+</div>
+<div class="chart-card">
+<div class="chart-header">
+<h2 class="chart-title">Warehouse Space Capacity &amp; Utilization</h2>
+</div>
+<div class="chart-container" style="height: 260px;">
+<canvas id="warehouseCapacityChart"></canvas>
+</div>
+</div>
+</div>
+<!-- Inventory Catalog Table Card -->
+<div class="table-card">
+<div class="table-card-header">
+<h2 class="table-card-title">Sports Gear Inventory Catalog</h2>
+<div class="table-search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<input id="inventorySearch" placeholder="Search product name or SKU..." type="text"/>
+</div>
+</div>
+<div style="overflow-x:auto;">
+<table class="data-table" id="inventoryTable">
+<thead>
+<tr>
+<th>SKU</th>
+<th>Product Name</th>
+<th>Category</th>
+<th>Stock Units</th>
+<th>Unit Price</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody id="inventoryList">
+<!-- Dynamically populated -->
+</tbody>
+</table>
+</div>
+</div>
+<!-- Reorder Queue Table Card -->
+<div class="table-card">
+<div class="table-card-header">
+<h2 class="table-card-title">Urgent Warehouse Reorder &amp; Supplier Queue</h2>
+</div>
+<div style="overflow-x:auto;">
+<table class="data-table" id="reorderQueueTable">
+<thead>
+<tr>
+<th>Supplier Partner</th>
+<th>Product SKU</th>
+<th>Reorder Quantity</th>
+<th>Estimated Arrival</th>
+<th>PO Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Apex Steel Manufacturing</strong></td>
+<td><code>STK-EQP-001</code> (Olympic Barbells)</td>
+<td>100 Units</td>
+<td>2026-06-08</td>
+<td><span class="status-badge active">PO Dispatched</span></td>
+</tr>
+<tr>
+<td><strong>Stackly Nutrition Labs</strong></td>
+<td><code>STK-NUT-302</code> (BCAA Fuel)</td>
+<td>250 Units</td>
+<td>2026-06-05</td>
+<td><span class="status-badge warning">In Transit</span></td>
+</tr>
+<tr>
+<td><strong>Pro-Fit Apparel Ltd</strong></td>
+<td><code>STK-APP-501</code> (Wicking Hoodie)</td>
+<td>300 Units</td>
+<td>2026-06-10</td>
+<td><span class="status-badge pending">Pending Confirmation</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<!-- ==================== TAB 3: ORDERS & SHIPMENTS ==================== -->
+<section class="page-section" id="sect-orders">
+<div class="page-header">
+<div class="page-header-top">
+<div>
+<h1 class="page-title">Orders &amp; Freight Fulfillment Logistics</h1>
+<p class="page-subtitle">Track wholesale gym equipment shipments, retail orders, carrier performance, and delivery velocity.</p>
+</div>
+</div>
+</div>
+<div class="stats-grid">
+<div class="stat-card yellow">
+<div class="stat-card-header">
+<div class="stat-icon-wrap yellow"><i class="fa-solid fa-spinner"></i></div>
+</div>
+<div class="stat-value">48 Orders</div>
+<div class="stat-label">Active Processing</div>
+</div>
+<div class="stat-card blue">
+<div class="stat-card-header">
+<div class="stat-icon-wrap blue"><i class="fa-solid fa-truck-fast"></i></div>
+</div>
+<div class="stat-value">182 Freight</div>
+<div class="stat-label">In Transit Consignments</div>
+</div>
+<div class="stat-card green">
+<div class="stat-card-header">
+<div class="stat-icon-wrap green"><i class="fa-solid fa-circle-check"></i></div>
+</div>
+<div class="stat-value">1,190 Orders</div>
+<div class="stat-label">Completed Deliveries</div>
+</div>
+<div class="stat-card orange">
+<div class="stat-card-header">
+<div class="stat-icon-wrap orange"><i class="fa-solid fa-stopwatch"></i></div>
+</div>
+<div class="stat-value">3.2 Hours</div>
+<div class="stat-label">Avg Dispatch Speed</div>
+</div>
+</div>
+<!-- Orders & Carrier Charts Grid -->
+<div class="charts-grid">
+<div class="chart-card">
+<div class="chart-header">
+<h2 class="chart-title">Daily Order Processing &amp; Dispatch Volume</h2>
+</div>
+<div class="chart-container" style="height: 260px;">
+<canvas id="orderVolumeChart"></canvas>
+</div>
+</div>
+<div class="chart-card">
+<div class="chart-header">
+<h2 class="chart-title">Shipping Courier Carrier Share</h2>
+</div>
+<div class="chart-container" style="height: 260px;">
+<canvas id="carrierShareChart"></canvas>
+</div>
+</div>
+</div>
+<!-- Master Orders Table Card -->
+<div class="table-card">
+<div class="table-card-header">
+<h2 class="table-card-title">All Customer &amp; Freight Orders</h2>
+<div class="table-search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<input id="ordersSearch" placeholder="Search orders..." type="text"/>
+</div>
+</div>
+<div style="overflow-x:auto;">
+<table class="data-table" id="adminOrdersTable">
+<thead>
+<tr>
+<th>Order ID</th>
+<th>Customer Name</th>
+<th>Equipment Items</th>
+<th>Total Price</th>
+<th>Carrier</th>
+<th>Fulfillment Status</th>
+</tr>
+</thead>
+<tbody id="adminOrdersList">
+<!-- Dynamically populated -->
+</tbody>
+</table>
+</div>
+</div>
+<!-- Live Carrier Logistics Manifest Table -->
+<div class="table-card">
+<div class="table-card-header">
+<h2 class="table-card-title">Live Freight Logistics &amp; Carrier BOL Manifest</h2>
+</div>
+<div style="overflow-x:auto;">
+<table class="data-table" id="logisticsManifestTable">
+<thead>
+<tr>
+<th>Freight BOL #</th>
+<th>Carrier Partner</th>
+<th>Origin Hub</th>
+<th>Destination Facility</th>
+<th>Estimated Delivery</th>
+<th>Tracking Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>BOL-99021-FX</code></td>
+<td><strong>FedEx Freight</strong></td>
+<td>Chicago Central Hub</td>
+<td>Gold Strength Gym (NY)</td>
+<td>2026-06-04</td>
+<td><span class="status-badge active">On Schedule</span></td>
+</tr>
+<tr>
+<td><code>BOL-44102-DH</code></td>
+<td><strong>DHL Express</strong></td>
+<td>Dallas Logistics Park</td>
+<td>Metro Athletic Club (CA)</td>
+<td>2026-06-05</td>
+<td><span class="status-badge active">Out for Delivery</span></td>
+</tr>
+<tr>
+<td><code>BOL-11204-UP</code></td>
+<td><strong>UPS Ground</strong></td>
+<td>Atlanta Depot</td>
+<td>Apex Training Center (FL)</td>
+<td>2026-06-06</td>
+<td><span class="status-badge warning">In Sorting</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<!-- ==================== TAB 4: ATHLETES & ACCOUNTS ==================== -->
+<section class="page-section" id="sect-customers">
+<div class="page-header">
+<div class="page-header-top">
+<div>
+<h1 class="page-title">Athletes &amp; Commercial Gym Accounts Analytics</h1>
+<p class="page-subtitle">Commercial gym partners, sports clubs, athlete retention metrics, and account lifetime values.</p>
+</div>
+</div>
+</div>
+<div class="stats-grid">
+<div class="stat-card blue">
+<div class="stat-card-header">
+<div class="stat-icon-wrap blue"><i class="fa-solid fa-users"></i></div>
+</div>
+<div class="stat-value">342 Accounts</div>
+<div class="stat-label">Total Accounts</div>
+</div>
+<div class="stat-card orange">
+<div class="stat-card-header">
+<div class="stat-icon-wrap orange"><i class="fa-solid fa-building-user"></i></div>
+</div>
+<div class="stat-value">84 Gyms</div>
+<div class="stat-label">B2B Commercial Gyms</div>
+</div>
+<div class="stat-card green">
+<div class="stat-card-header">
+<div class="stat-icon-wrap green"><i class="fa-solid fa-user-ninja"></i></div>
+</div>
+<div class="stat-value">128 Athletes</div>
+<div class="stat-label">Pro Athletes</div>
+</div>
+<div class="stat-card yellow">
+<div class="stat-card-header">
+<div class="stat-icon-wrap yellow"><i class="fa-solid fa-chart-line"></i></div>
+</div>
+<div class="stat-value">98.2%</div>
+<div class="stat-label">Account Retention Rate</div>
+</div>
+</div>
+<!-- Customer Growth & Revenue Charts Grid -->
+<div class="charts-grid">
+<div class="chart-card">
+<div class="chart-header">
+<h2 class="chart-title">Monthly New Account Signups Trend</h2>
+</div>
+<div class="chart-container" style="height: 260px;">
+<canvas id="customerGrowthChart"></canvas>
+</div>
+</div>
+<div class="chart-card">
+<div class="chart-header">
+<h2 class="chart-title">Revenue Contribution by Account Type</h2>
+</div>
+<div class="chart-container" style="height: 260px;">
+<canvas id="accountRevenueChart"></canvas>
+</div>
+</div>
+</div>
+<!-- Accounts Roster Table Card -->
+<div class="table-card">
+<div class="table-card-header">
+<h2 class="table-card-title">Registered Accounts &amp; Commercial Clients</h2>
+<div class="table-search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<input id="customersSearch" placeholder="Search account or email..." type="text"/>
+</div>
+</div>
+<div style="overflow-x:auto;">
+<table class="data-table" id="customersTable">
+<thead>
+<tr>
+<th>Account Name</th>
+<th>Account Type</th>
+<th>Orders Count</th>
+<th>Lifetime Spend</th>
+<th>Phone</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody id="customersList">
+<!-- Dynamically populated -->
+</tbody>
+</table>
+</div>
+</div>
+<!-- Key Commercial Gym Contracts Table Card -->
+<div class="table-card">
+<div class="table-card-header">
+<h2 class="table-card-title">Key Commercial Gym Contracts &amp; High Volume Accounts</h2>
+</div>
+<div style="overflow-x:auto;">
+<table class="data-table" id="highVolumeAccountsTable">
+<thead>
+<tr>
+<th>Commercial Facility</th>
+<th>Facility Manager</th>
+<th>Active Contract Tier</th>
+<th>Annual Spend ($)</th>
+<th>Account Manager</th>
+<th>Renewal Date</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Gold Strength Gym (5 Locations)</strong></td>
+<td>Marcus Vance</td>
+<td><span class="role-badge admin">Enterprise B2B</span></td>
+<td><strong>$124,000 / yr</strong></td>
+<td>Rick Manager</td>
+<td>2027-01-15</td>
+</tr>
+<tr>
+<td><strong>Metro Athletic Club</strong></td>
+<td>Sarah Jenkins</td>
+<td><span class="role-badge user">Commercial Tier 1</span></td>
+<td><strong>$85,500 / yr</strong></td>
+<td>Alex Support</td>
+<td>2026-11-20</td>
+</tr>
+<tr>
+<td><strong>Velocity Fitness Hub</strong></td>
+<td>David Miller</td>
+<td><span class="role-badge user">Commercial Tier 2</span></td>
+<td><strong>$48,200 / yr</strong></td>
+<td>Alex Support</td>
+<td>2026-09-10</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<!-- ==================== TAB 5: STORE SETTINGS & REPORTS ==================== -->
+<section class="page-section" id="sect-settings">
+<div class="page-header">
+<h1 class="page-title">Store Settings &amp; Telemetry Analytics</h1>
+<p class="page-subtitle">Real-time infrastructure performance, server telemetry, API metrics, and report downloads.</p>
+</div>
+<div class="profile-header-card">
+<div class="profile-avatar-large" id="settingsAvatar">A</div>
+<h2 class="profile-name" id="settingsName">admin@stackly.com</h2>
+<p class="profile-email-display" id="settingsEmail">admin@stackly.com</p>
+</div>
+<!-- Telemetry Health Stat Cards -->
+<div class="stats-grid">
+<div class="stat-card green">
+<div class="stat-card-header">
+<div class="stat-icon-wrap green"><i class="fa-solid fa-server"></i></div>
+</div>
+<div class="stat-value">99.98%</div>
+<div class="stat-label">API Gateway Uptime</div>
+</div>
+<div class="stat-card blue">
+<div class="stat-card-header">
+<div class="stat-icon-wrap blue"><i class="fa-solid fa-microchip"></i></div>
+</div>
+<div class="stat-value">12 ms</div>
+<div class="stat-label">DB Query Latency</div>
+</div>
+<div class="stat-card yellow">
+<div class="stat-card-header">
+<div class="stat-icon-wrap yellow"><i class="fa-solid fa-network-wired"></i></div>
+</div>
+<div class="stat-value">842</div>
+<div class="stat-label">Active Connections</div>
+</div>
+<div class="stat-card orange">
+<div class="stat-card-header">
+<div class="stat-icon-wrap orange"><i class="fa-solid fa-cloud-arrow-down"></i></div>
+</div>
+<div class="stat-value">1.4 TB</div>
+<div class="stat-label">Monthly CDN Bandwidth</div>
+</div>
+</div>
+<!-- Charts Grid: Server Telemetry -->
+<div class="charts-grid">
+<div class="chart-card">
+<div class="chart-header">
+<h2 class="chart-title">Server Traffic &amp; Request Latency</h2>
+</div>
+<div class="chart-container" style="height: 260px;">
+<canvas id="serverLatencyChart"></canvas>
+</div>
+</div>
+<div class="chart-card">
+<div class="chart-header">
+<h2 class="chart-title">Warehouse Fulfillment Velocity</h2>
+</div>
+<div class="chart-container" style="height: 260px;">
+<canvas id="fulfillmentVelocityChart"></canvas>
+</div>
+</div>
+</div>
+<!-- System Audit Logs Table Card -->
+<div class="table-card">
+<div class="table-card-header">
+<h2 class="table-card-title">Store System Operational Audit &amp; Event Logs</h2>
+</div>
+<div style="overflow-x:auto;">
+<table class="data-table" id="auditLogsTable">
+<thead>
+<tr>
+<th>Event ID</th>
+<th>Timestamp</th>
+<th>Operation Type</th>
+<th>Service / Module</th>
+<th>Origin IP</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>EVT-90412</code></td>
+<td>2026-06-03 14:22:04</td>
+<td>Inventory Sync</td>
+<td>Warehouse Logistics API</td>
+<td>192.168.1.104</td>
+<td><span class="status-badge active">Completed</span></td>
+</tr>
+<tr>
+<td><code>EVT-90411</code></td>
+<td>2026-06-03 14:15:30</td>
+<td>Freight Manifest Export</td>
+<td>Orders &amp; Shipments</td>
+<td>192.168.1.112</td>
+<td><span class="status-badge active">Completed</span></td>
+</tr>
+<tr>
+<td><code>EVT-90410</code></td>
+<td>2026-06-03 13:58:12</td>
+<td>Payment Gateway Clearing</td>
+<td>Billing Microservice</td>
+<td>10.0.4.82</td>
+<td><span class="status-badge active">Verified</span></td>
+</tr>
+<tr>
+<td><code>EVT-90409</code></td>
+<td>2026-06-03 12:40:00</td>
+<td>Cloud Backup Mirror</td>
+<td>Database Cluster</td>
+<td>10.0.0.1</td>
+<td><span class="status-badge active">Synced</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Financial & Inventory Reports Export -->
+<div class="settings-section">
+<h3 class="settings-section-title"><i class="fa-solid fa-file-invoice-dollar"></i> Generate Export Reports</h3>
+<div class="settings-row">
+<div class="settings-info">
+<div class="settings-label">Equipment Inventory Log</div>
+<div class="settings-desc">Download complete stock manifest with SKUs, counts, and unit costs.</div>
+</div>
+<button class="btn btn-secondary btn-sm" onclick="window.location.href='404.html'">Export CSV</button>
+</div>
+<div class="settings-row">
+<div class="settings-info">
+<div class="settings-label">Quarterly Revenue Summary</div>
+<div class="settings-desc">Includes sales volume breakdown, customer growth, and profit margins.</div>
+</div>
+<button class="btn btn-secondary btn-sm" onclick="window.location.href='404.html'">Export XLS</button>
+</div>
+<div class="settings-row">
+<div class="settings-info">
+<div class="settings-label">Commercial Accounts Roster</div>
+<div class="settings-desc">Export B2B gym partner contacts and order history.</div>
+</div>
+<button class="btn btn-secondary btn-sm" onclick="window.location.href='404.html'">Export PDF</button>
+</div>
+</div>
+</section>
+</div>
+</main>
+</div>
+<!-- Toast Container -->
+<div class="toast-container" id="toastContainer"></div>
+<!-- Scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/form-validation.js"></script>
+<script src="js/dashboard.js"></script>
+<script>
+    // Verify Session is Admin
+    document.addEventListener('DOMContentLoaded', () => {
+      if (AUTH.checkSession('admin')) {
+        window.dashboardApp.init('admin');
+      }
+    });
+  </script>
+</body>
+</html>

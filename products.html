@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Products | Stackly Sports Store</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&amp;family=Poppins:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet"/>
+<link href="css/main.css" rel="stylesheet"/>
+<style>
+        .page-header { padding: 180px 0 100px; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: #fff; text-align: center; }
+        .page-header h1 { font-size: 4rem; margin-bottom: 20px; font-family: 'Montserrat', sans-serif; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; }
+        .page-header h1 span { color: #ff7a00; }
+        .page-header p { font-size: 1.2rem; color: #cbd5e1; max-width: 700px; margin: 0 auto; line-height: 1.8; }
+        
+        .content-section { padding: 80px 0; }
+        .bg-light { background-color: #f8fafc; }
+        
+        /* Modular UI Components */
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+        .grid-2-asym { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 50px; align-items: center; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+        
+        .card { background: #fff; border-radius: 16px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.04); transition: transform 0.3s; border: 1px solid #f1f5f9; }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
+        
+        .img-placeholder { background: #e2e8f0; border-radius: 16px; background-size: cover; background-position: center; }
+        .img-h300 { height: 300px; }
+        .img-h400 { height: 400px; }
+        
+        .section-title { font-size: 2.5rem; margin-bottom: 20px; color: #0f172a; font-family: 'Montserrat', sans-serif; font-weight: 800; }
+        .section-subtitle { color: #ff7a00; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; margin-bottom: 10px; display: block; }
+        .section-desc { color: #64748b; font-size: 1.1rem; line-height: 1.7; margin-bottom: 30px; }
+        
+        .btn-solid { background: #ff7a00; color: #fff; padding: 14px 32px; border-radius: 50px; font-weight: 600; display: inline-block; transition: 0.3s; border: none; cursor: pointer; }
+        .btn-solid:hover { background: #ea580c; color: #fff; transform: translateY(-2px); }
+        
+        .btn-outline { background: transparent; color: #0f172a; padding: 12px 30px; border-radius: 50px; font-weight: 600; display: inline-block; transition: 0.3s; border: 2px solid #0f172a; }
+        .btn-outline:hover { background: #0f172a; color: #fff; }
+        
+        .icon-box { width: 60px; height: 60px; border-radius: 12px; background: #fff7ed; color: #ff7a00; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 20px; }
+        
+        .faq-item { border-bottom: 1px solid #e2e8f0; padding: 20px 0; }
+        .faq-q { font-weight: 700; font-size: 1.1rem; color: #0f172a; margin-bottom: 10px; }
+        .faq-a { color: #64748b; line-height: 1.6; }
+
+        /* Keyframes & Advanced Animations */
+        @keyframes pulseGlow {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.15); opacity: 0.8; }
+        }
+
+        /* Section A: Bundle Deals Hover Effects */
+        .bundle-card {
+            background: #ffffff;
+            border-radius: 20px;
+            border: 1px solid #e2e8f0;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        .bundle-card:hover {
+            transform: translateY(-10px);
+            border-color: #ff7a00;
+            box-shadow: 0 20px 40px rgba(255, 122, 0, 0.15);
+        }
+        .bundle-img-wrapper {
+            position: relative;
+            height: 260px;
+            overflow: hidden;
+        }
+        .bundle-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .bundle-card:hover .bundle-img-wrapper img {
+            transform: scale(1.08);
+        }
+        .bundle-badge {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            background: linear-gradient(135deg, #ff7a00, #ea580c);
+            color: #fff;
+            font-weight: 800;
+            font-size: 0.75rem;
+            padding: 6px 14px;
+            border-radius: 50px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            box-shadow: 0 4px 12px rgba(255, 122, 0, 0.3);
+        }
+        .bundle-timer {
+            position: absolute;
+            bottom: 14px;
+            right: 14px;
+            background: rgba(15, 23, 42, 0.88);
+            backdrop-filter: blur(8px);
+            color: #ff7a00;
+            font-size: 0.8rem;
+            font-weight: 700;
+            padding: 6px 14px;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            border: 1px solid rgba(255, 122, 0, 0.3);
+        }
+        .bundle-timer i {
+            animation: pulseGlow 1.8s infinite ease-in-out;
+        }
+
+        /* Section B: Equipment Buying Guide Hover Effects */
+        .guide-card {
+            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 20px;
+            padding: 35px 30px;
+            border: 1px solid #e2e8f0;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        .guide-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: #ff7a00;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .guide-card:hover {
+            transform: translateY(-8px) scale(1.01);
+            box-shadow: 0 25px 50px rgba(15, 23, 42, 0.08);
+            border-color: #cbd5e1;
+        }
+        .guide-card:hover::before {
+            opacity: 1;
+        }
+        .guide-icon {
+            width: 65px;
+            height: 65px;
+            border-radius: 16px;
+            background: #fff7ed;
+            color: #ff7a00;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 22px;
+            transition: all 0.4s ease;
+        }
+        .guide-card:hover .guide-icon {
+            background: #ff7a00;
+            color: #ffffff;
+            transform: rotate(-6deg) scale(1.1);
+            box-shadow: 0 10px 20px rgba(255, 122, 0, 0.3);
+        }
+        .guide-feature-list { list-style: none; padding: 0; }
+        .guide-feature-list li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #475569;
+            font-size: 0.95rem;
+            margin-bottom: 12px;
+            transition: transform 0.2s ease;
+        }
+        .guide-card:hover .guide-feature-list li {
+            transform: translateX(4px);
+        }
+        .guide-feature-list li i {
+            color: #22c55e;
+            font-size: 0.9rem;
+        }
+
+        /* Section C: Champion Reviews Hover Effects */
+        .review-card {
+            background: #0f172a;
+            color: #ffffff;
+            border-radius: 20px;
+            padding: 35px 30px;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            flex-direction: column;
+        }
+        .review-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(255, 122, 0, 0.5);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+        .review-quote-icon {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            font-size: 2.5rem;
+            color: rgba(255, 122, 0, 0.15);
+            transition: all 0.3s ease;
+        }
+        .review-card:hover .review-quote-icon {
+            color: #ff7a00;
+            transform: scale(1.2) rotate(10deg);
+        }
+        .review-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-top: auto;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .review-avatar {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #ff7a00;
+            transition: transform 0.3s ease;
+        }
+        .review-card:hover .review-avatar {
+            transform: scale(1.1);
+        }
+        .review-stars {
+            color: #ff7a00;
+            font-size: 0.9rem;
+            margin-bottom: 14px;
+        }
+
+        /* Redesigned Store Benefits Section */
+        .benefit-card-new {
+            background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 20px;
+            padding: 35px 24px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .benefit-card-new::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #ff7a00, #ea580c);
+            transition: width 0.4s ease;
+        }
+        .benefit-card-new:hover {
+            transform: translateY(-8px);
+            border-color: #ff7a00;
+            box-shadow: 0 20px 40px rgba(255, 122, 0, 0.12);
+        }
+        .benefit-card-new:hover::after {
+            width: 100%;
+        }
+        .benefit-icon-badge {
+            width: 75px;
+            height: 75px;
+            border-radius: 20px;
+            background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
+            color: #ff7a00;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 22px;
+            box-shadow: 0 8px 20px rgba(255, 122, 0, 0.12);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .benefit-card-new:hover .benefit-icon-badge {
+            background: linear-gradient(135deg, #ff7a00 0%, #ea580c 100%);
+            color: #ffffff;
+            transform: scale(1.1) rotate(-6deg);
+            box-shadow: 0 12px 25px rgba(255, 122, 0, 0.35);
+        }
+        .benefit-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 1.25rem;
+            color: #0f172a;
+            margin-bottom: 10px;
+            transition: color 0.3s ease;
+        }
+        .benefit-card-new:hover .benefit-title {
+            color: #ff7a00;
+        }
+        .benefit-desc {
+            color: #64748b;
+            font-size: 0.92rem;
+            line-height: 1.6;
+            margin: 0;
+        }
+        .benefit-badge-tag {
+            display: inline-block;
+            background: #fff7ed;
+            color: #ff7a00;
+            font-size: 0.72rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 4px 10px;
+            border-radius: 30px;
+            margin-bottom: 14px;
+        }
+
+        /* Responsive Media Queries */
+        @media (max-width: 992px) {
+            .grid-3 { grid-template-columns: repeat(2, 1fr) !important; }
+            .grid-4 { grid-template-columns: repeat(2, 1fr) !important; }
+        }
+        @media (max-width: 640px) {
+            .grid-3 { grid-template-columns: 1fr !important; }
+            .grid-4 { grid-template-columns: 1fr !important; }
+            .guide-card { padding: 25px 20px; }
+            .review-card { padding: 25px 20px; }
+            .benefit-card-new { padding: 25px 18px; }
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar scrolled" style="background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(20px); padding: 16px 0; box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05); color: #111; position: fixed; top: 0; width: 100%; z-index: 9999;">
+<div class="nav-container">
+<a class="logo" href="index.html">
+<img alt="Stackly Logo" class="brand-logo-img" src="assets/logo.webp"/>
+</a>
+<ul class="nav-links">
+<li class="mobile-menu-logo">
+<a href="index.html"><img alt="Stackly Logo" class="brand-logo-img" src="assets/logo.webp"/></a>
+</li>
+<li><a class="nav-link" href="index.html">Home</a></li>
+<li><a class="nav-link active" href="products.html">Products</a></li>
+<li><a class="nav-link" href="about.html">About</a></li>
+<li><a class="nav-link" href="services.html">Services</a></li>
+<li><a class="nav-link" href="blog.html">Blog</a></li>
+<li><a class="nav-link" href="contact.html">Contact</a></li>
+<li class="mobile-menu-btn">
+<a class="btn-nav mobile-btn-login" href="login.html">Login</a>
+</li>
+</ul>
+<div class="nav-actions">
+<a class="btn-nav" href="login.html">Login</a>
+<div class="hamburger">
+<span class="bar"></span>
+<span class="bar"></span>
+<span class="bar"></span>
+</div>
+</div>
+</div>
+</nav>
+<!-- Section 1: Page Header -->
+<header class="page-header page-header-products reveal" data-aos="fade-down">
+<div class="container">
+<span class="section-subtitle" data-aos="fade-down" data-aos-delay="100" style="color: #ff7a00; font-size: 1.1rem;">Store Collection</span>
+<h1 data-aos="fade-up" data-aos-delay="200">Our <span>Products</span></h1>
+<p data-aos="fade-up" data-aos-delay="300">Equip yourself with the best gear in the industry. From high-end cardiovascular machines to commercial-grade free weights.</p>
+</div>
+</header>
+<!-- Section 2: Shop by Category -->
+<section class="content-section bg-light reveal" data-aos="fade-up">
+<div class="container text-center">
+<span class="section-subtitle" data-aos="fade-up">Browse Selection</span>
+<h2 class="section-title" data-aos="fade-up" data-aos-delay="100">Shop By Category</h2>
+<div class="grid-4" style="margin-top: 40px;">
+<div class="card reveal" data-aos="fade-up" data-aos-delay="150" style="padding: 0; overflow: hidden;">
+<div class="img-h300" style="background-image: url('assets/strength.webp'); background-size: cover; background-position: center;"></div>
+<div style="padding: 20px;">
+<h3 style="font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.2rem;">Strength</h3>
+</div>
+</div>
+<div class="card reveal" data-aos="fade-up" data-aos-delay="250" style="padding: 0; overflow: hidden;">
+<div class="img-h300" style="background-image: url('assets/cardio.webp'); background-size: cover; background-position: center;"></div>
+<div style="padding: 20px;">
+<h3 style="font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.2rem;">Cardio</h3>
+</div>
+</div>
+<div class="card reveal" data-aos="fade-up" data-aos-delay="350" style="padding: 0; overflow: hidden;">
+<div class="img-h300" style="background-image: url('assets/apparels.webp'); background-size: cover; background-position: center;"></div>
+<div style="padding: 20px;">
+<h3 style="font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.2rem;">Apparel</h3>
+</div>
+</div>
+<div class="card reveal" data-aos="fade-up" data-aos-delay="450" style="padding: 0; overflow: hidden;">
+<div class="img-h300" style="background-image: url('assets/access.webp'); background-size: cover; background-position: center;"></div>
+<div style="padding: 20px;">
+<h3 style="font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.2rem;">Accessories</h3>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 3: Featured Gear (Products) -->
+<section class="content-section reveal" data-aos="fade-up">
+<div class="container">
+<div class="products-header-flex" data-aos="fade-up" style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px;">
+<div>
+<span class="section-subtitle">Top Rated</span>
+<h2 class="section-title" style="margin-bottom: 0;">Featured Gear</h2>
+</div>
+<a class="btn-outline" href="404.html">View All</a>
+</div>
+<div class="grid-3">
+<!-- Product 1 -->
+<div class="card reveal" data-aos="fade-up" data-aos-delay="100" style="padding: 0; overflow: hidden; display: flex; flex-direction: column;">
+<div class="img-h300" style="background-image: url('assets/dumbells.webp'); background-size: cover; position: relative;">
+<span style="position: absolute; top: 15px; left: 15px; background: #ff7a00; color: #fff; padding: 4px 10px; border-radius: 4px; font-weight: 700; font-size: 0.8rem;">SALE</span>
+</div>
+<div style="padding: 25px; flex: 1; display: flex; flex-direction: column;">
+<h3 style="font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.3rem; margin-bottom: 10px;">Pro Adjustable Dumbbells</h3>
+<div style="color: #ff7a00; font-size: 0.9rem; margin-bottom: 10px;">
+<i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+<span style="color: #64748b; margin-left: 5px;">(42)</span>
+</div>
+<div style="margin-bottom: 20px;">
+<span style="color: #94a3b8; text-decoration: line-through; font-size: 1.1rem; margin-right: 10px;">$499.00</span>
+<span style="color: #0f172a; font-weight: 800; font-size: 1.4rem;">$399.00</span>
+</div>
+<button class="btn-solid" onclick="window.location.href='404.html'" style="width: 100%; border-radius: 8px; margin-top: auto;"><i class="fa-solid fa-cart-shopping" style="margin-right: 8px;"></i> Add to Cart</button>
+</div>
+</div>
+<!-- Product 2 -->
+<div class="card reveal" data-aos="fade-up" data-aos-delay="200" style="padding: 0; overflow: hidden; display: flex; flex-direction: column;">
+<div class="img-h300" style="background-image: url('assets/elite-treadmill.webp'); background-size: cover;"></div>
+<div style="padding: 25px; flex: 1; display: flex; flex-direction: column;">
+<h3 style="font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.3rem; margin-bottom: 10px;">Elite Runner Treadmill</h3>
+<div style="color: #ff7a00; font-size: 0.9rem; margin-bottom: 10px;">
+<i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
+<span style="color: #64748b; margin-left: 5px;">(18)</span>
+</div>
+<div style="margin-bottom: 20px;">
+<span style="color: #0f172a; font-weight: 800; font-size: 1.4rem;">$1,299.00</span>
+</div>
+<button class="btn-solid" onclick="window.location.href='404.html'" style="width: 100%; border-radius: 8px; margin-top: auto;"><i class="fa-solid fa-cart-shopping" style="margin-right: 8px;"></i> Add to Cart</button>
+</div>
+</div>
+<!-- Product 3 -->
+<div class="card reveal" data-aos="fade-up" data-aos-delay="300" style="padding: 0; overflow: hidden; display: flex; flex-direction: column;">
+<div class="img-h300" style="background-image: url('assets/basket-ball.webp'); background-size: cover; position: relative;">
+<span style="position: absolute; top: 15px; left: 15px; background: #0f172a; color: #fff; padding: 4px 10px; border-radius: 4px; font-weight: 700; font-size: 0.8rem;">NEW</span>
+</div>
+<div style="padding: 25px; flex: 1; display: flex; flex-direction: column;">
+<h3 style="font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.3rem; margin-bottom: 10px;">Official Match Basketball</h3>
+<div style="color: #ff7a00; font-size: 0.9rem; margin-bottom: 10px;">
+<i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+<span style="color: #64748b; margin-left: 5px;">(105)</span>
+</div>
+<div style="margin-bottom: 20px;">
+<span style="color: #0f172a; font-weight: 800; font-size: 1.4rem;">$75.00</span>
+</div>
+<button class="btn-solid" onclick="window.location.href='404.html'" style="width: 100%; border-radius: 8px; margin-top: auto;"><i class="fa-solid fa-cart-shopping" style="margin-right: 8px;"></i> Add to Cart</button>
+</div>
+</div>
+<!-- Product 4 -->
+<div class="card reveal" data-aos="fade-up" data-aos-delay="100" style="padding: 0; overflow: hidden; display: flex; flex-direction: column;">
+<div class="img-h300" style="background-image: url('assets/sport_boxing.webp'); background-size: cover; position: relative;">
+<span style="position: absolute; top: 15px; left: 15px; background: #ff7a00; color: #fff; padding: 4px 10px; border-radius: 4px; font-weight: 700; font-size: 0.8rem;">SALE</span>
+</div>
+<div style="padding: 25px; flex: 1; display: flex; flex-direction: column;">
+<h3 style="font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.3rem; margin-bottom: 10px;">Pro Leather Boxing Gloves</h3>
+<div style="color: #ff7a00; font-size: 0.9rem; margin-bottom: 10px;">
+<i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+<span style="color: #64748b; margin-left: 5px;">(56)</span>
+</div>
+<div style="margin-bottom: 20px;">
+<span style="color: #94a3b8; text-decoration: line-through; font-size: 1.1rem; margin-right: 10px;">$150.00</span>
+<span style="color: #0f172a; font-weight: 800; font-size: 1.4rem;">$119.00</span>
+</div>
+<button class="btn-solid" onclick="window.location.href='404.html'" style="width: 100%; border-radius: 8px; margin-top: auto;"><i class="fa-solid fa-cart-shopping" style="margin-right: 8px;"></i> Add to Cart</button>
+</div>
+</div>
+<!-- Product 5 -->
+<div class="card reveal" data-aos="fade-up" data-aos-delay="200" style="padding: 0; overflow: hidden; display: flex; flex-direction: column;">
+<div class="img-h300" style="background-image: url('assets/tennis-racket.webp'); background-size: cover;"></div>
+<div style="padding: 25px; flex: 1; display: flex; flex-direction: column;">
+<h3 style="font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.3rem; margin-bottom: 10px;">Tour Precision Tennis Racket</h3>
+<div style="color: #ff7a00; font-size: 0.9rem; margin-bottom: 10px;">
+<i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
+<span style="color: #64748b; margin-left: 5px;">(34)</span>
+</div>
+<div style="margin-bottom: 20px;">
+<span style="color: #0f172a; font-weight: 800; font-size: 1.4rem;">$210.00</span>
+</div>
+<button class="btn-solid" onclick="window.location.href='404.html'" style="width: 100%; border-radius: 8px; margin-top: auto;"><i class="fa-solid fa-cart-shopping" style="margin-right: 8px;"></i> Add to Cart</button>
+</div>
+</div>
+<!-- Product 6 -->
+<div class="card reveal" data-aos="fade-up" data-aos-delay="300" style="padding: 0; overflow: hidden; display: flex; flex-direction: column;">
+<div class="img-h300" style="background-image: url('assets/football.webp'); background-size: cover; position: relative;">
+<span style="position: absolute; top: 15px; left: 15px; background: #0f172a; color: #fff; padding: 4px 10px; border-radius: 4px; font-weight: 700; font-size: 0.8rem;">NEW</span>
+</div>
+<div style="padding: 25px; flex: 1; display: flex; flex-direction: column;">
+<h3 style="font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.3rem; margin-bottom: 10px;">Professional Match Football</h3>
+<div style="color: #ff7a00; font-size: 0.9rem; margin-bottom: 10px;">
+<i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+<span style="color: #64748b; margin-left: 5px;">(88)</span>
+</div>
+<div style="margin-bottom: 20px;">
+<span style="color: #0f172a; font-weight: 800; font-size: 1.4rem;">$65.00</span>
+</div>
+<button class="btn-solid" onclick="window.location.href='404.html'" style="width: 100%; border-radius: 8px; margin-top: auto;"><i class="fa-solid fa-cart-shopping" style="margin-right: 8px;"></i> Add to Cart</button>
+</div>
+</div>
+<!-- Product 7 -->
+<div class="card reveal" data-aos="fade-up" data-aos-delay="100" style="padding: 0; overflow: hidden; display: flex; flex-direction: column;">
+<div class="img-h300" style="background-image: url('assets/sport_cricket.webp'); background-size: cover;"></div>
+<div style="padding: 25px; flex: 1; display: flex; flex-direction: column;">
+<h3 style="font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.3rem; margin-bottom: 10px;">English Willow Cricket Bat</h3>
+<div style="color: #ff7a00; font-size: 0.9rem; margin-bottom: 10px;">
+<i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
+<span style="color: #64748b; margin-left: 5px;">(29)</span>
+</div>
+<div style="margin-bottom: 20px;">
+<span style="color: #0f172a; font-weight: 800; font-size: 1.4rem;">$299.00</span>
+</div>
+<button class="btn-solid" onclick="window.location.href='404.html'" style="width: 100%; border-radius: 8px; margin-top: auto;"><i class="fa-solid fa-cart-shopping" style="margin-right: 8px;"></i> Add to Cart</button>
+</div>
+</div>
+<!-- Product 8 -->
+<div class="card reveal" data-aos="fade-up" data-aos-delay="200" style="padding: 0; overflow: hidden; display: flex; flex-direction: column;">
+<div class="img-h300" style="background-image: url('assets/sport_swimming.webp'); background-size: cover; position: relative;">
+<span style="position: absolute; top: 15px; left: 15px; background: #ff7a00; color: #fff; padding: 4px 10px; border-radius: 4px; font-weight: 700; font-size: 0.8rem;">SALE</span>
+</div>
+<div style="padding: 25px; flex: 1; display: flex; flex-direction: column;">
+<h3 style="font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.3rem; margin-bottom: 10px;">Hydro Goggles &amp; Cap Set</h3>
+<div style="color: #ff7a00; font-size: 0.9rem; margin-bottom: 10px;">
+<i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+<span style="color: #64748b; margin-left: 5px;">(64)</span>
+</div>
+<div style="margin-bottom: 20px;">
+<span style="color: #94a3b8; text-decoration: line-through; font-size: 1.1rem; margin-right: 10px;">$45.00</span>
+<span style="color: #0f172a; font-weight: 800; font-size: 1.4rem;">$35.00</span>
+</div>
+<button class="btn-solid" onclick="window.location.href='404.html'" style="width: 100%; border-radius: 8px; margin-top: auto;"><i class="fa-solid fa-cart-shopping" style="margin-right: 8px;"></i> Add to Cart</button>
+</div>
+</div>
+<!-- Product 9 -->
+<div class="card reveal" data-aos="fade-up" data-aos-delay="300" style="padding: 0; overflow: hidden; display: flex; flex-direction: column;">
+<div class="img-h300" style="background-image: url('assets/right-mat.webp'); background-size: cover; position: relative;">
+<span style="position: absolute; top: 15px; left: 15px; background: #0f172a; color: #fff; padding: 4px 10px; border-radius: 4px; font-weight: 700; font-size: 0.8rem;">NEW</span>
+</div>
+<div style="padding: 25px; flex: 1; display: flex; flex-direction: column;">
+<h3 style="font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.3rem; margin-bottom: 10px;">Premium Yoga &amp; Fitness Mat</h3>
+<div style="color: #ff7a00; font-size: 0.9rem; margin-bottom: 10px;">
+<i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+<span style="color: #64748b; margin-left: 5px;">(72)</span>
+</div>
+<div style="margin-bottom: 20px;">
+<span style="color: #0f172a; font-weight: 800; font-size: 1.4rem;">$49.00</span>
+</div>
+<button class="btn-solid" onclick="window.location.href='404.html'" style="width: 100%; border-radius: 8px; margin-top: auto;"><i class="fa-solid fa-cart-shopping" style="margin-right: 8px;"></i> Add to Cart</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- New Section 1: Exclusive Pro Bundles & Flash Deals -->
+<section class="content-section bg-light reveal" data-aos="fade-up" style="position: relative; overflow: hidden;">
+<div class="container">
+<div data-aos="fade-up" style="text-align: center; max-width: 700px; margin: 0 auto 50px;">
+<span class="section-subtitle">Limited Time Offers</span>
+<h2 class="section-title">Exclusive Pro Bundles</h2>
+<p class="section-desc">Combine top-rated training gear with high-performance accessories and save up to 35% on curated fitness bundles.</p>
+</div>
+<div class="grid-3">
+<!-- Bundle 1 -->
+<div class="bundle-card reveal" data-aos="fade-up" data-aos-delay="100">
+<div class="bundle-img-wrapper">
+<img alt="Ultimate Strength Package" src="assets/strength-system.webp"/>
+<span class="bundle-badge">SAVE 30%</span>
+<div class="bundle-timer"><i class="fa-solid fa-clock"></i> Ends in: 05h 24m</div>
+</div>
+<div style="padding: 25px; flex: 1; display: flex; flex-direction: column;">
+<span style="color: #ff7a00; font-size: 0.8rem; font-weight: 700; text-transform: uppercase;">Strength &amp; Power</span>
+<h3 style="font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.25rem; margin: 8px 0 12px; color: #0f172a;">Ultimate Strength Package</h3>
+<p style="color: #64748b; font-size: 0.9rem; margin-bottom: 20px; line-height: 1.6;">Includes Power Rack, 100kg Bumper Plates, Barbell &amp; Adjustable Bench.</p>
+<div style="display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 15px; border-top: 1px solid #f1f5f9;">
+<div>
+<span style="color: #94a3b8; text-decoration: line-through; font-size: 1rem; margin-right: 8px;">$1,499</span>
+<span style="color: #0f172a; font-weight: 800; font-size: 1.4rem;">$1,049</span>
+</div>
+<button class="btn-solid" onclick="window.location.href='404.html'" style="padding: 10px 22px; font-size: 0.85rem; border-radius: 8px;"><i class="fa-solid fa-bolt" style="margin-right: 6px;"></i> Claim Bundle</button>
+</div>
+</div>
+</div>
+<!-- Bundle 2 -->
+<div class="bundle-card reveal" data-aos="fade-up" data-aos-delay="200">
+<div class="bundle-img-wrapper">
+<img alt="Pro Cardio Suite" src="assets/cardio-suites.webp"/>
+<span class="bundle-badge">HOT DEAL</span>
+<div class="bundle-timer"><i class="fa-solid fa-clock"></i> Ends in: 12h 10m</div>
+</div>
+<div style="padding: 25px; flex: 1; display: flex; flex-direction: column;">
+<span style="color: #ff7a00; font-size: 0.8rem; font-weight: 700; text-transform: uppercase;">Endurance &amp; Cardio</span>
+<h3 style="font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.25rem; margin: 8px 0 12px; color: #0f172a;">Pro Cardio &amp; Recovery Suite</h3>
+<p style="color: #64748b; font-size: 0.9rem; margin-bottom: 20px; line-height: 1.6;">Includes Commercial Treadmill, Heart Rate Monitor &amp; Massage Gun.</p>
+<div style="display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 15px; border-top: 1px solid #f1f5f9;">
+<div>
+<span style="color: #94a3b8; text-decoration: line-through; font-size: 1rem; margin-right: 8px;">$1,899</span>
+<span style="color: #0f172a; font-weight: 800; font-size: 1.4rem;">$1,399</span>
+</div>
+<button class="btn-solid" onclick="window.location.href='404.html'" style="padding: 10px 22px; font-size: 0.85rem; border-radius: 8px;"><i class="fa-solid fa-bolt" style="margin-right: 6px;"></i> Claim Bundle</button>
+</div>
+</div>
+</div>
+<!-- Bundle 3 -->
+<div class="bundle-card reveal" data-aos="fade-up" data-aos-delay="300">
+<div class="bundle-img-wrapper">
+<img alt="High Intensity HIIT Kit" src="assets/high-density-zone.webp"/>
+<span class="bundle-badge">BEST VALUE</span>
+<div class="bundle-timer"><i class="fa-solid fa-clock"></i> Ends in: 08h 45m</div>
+</div>
+<div style="padding: 25px; flex: 1; display: flex; flex-direction: column;">
+<span style="color: #ff7a00; font-size: 0.8rem; font-weight: 700; text-transform: uppercase;">HIIT &amp; Agility</span>
+<h3 style="font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.25rem; margin: 8px 0 12px; color: #0f172a;">High Intensity HIIT Kit</h3>
+<p style="color: #64748b; font-size: 0.9rem; margin-bottom: 20px; line-height: 1.6;">Includes Plyo Box, Kettlebells Set, Speed Ropes &amp; Slam Balls.</p>
+<div style="display: flex; justify-content: space-between; align-items: center; margin-top: auto; padding-top: 15px; border-top: 1px solid #f1f5f9;">
+<div>
+<span style="color: #94a3b8; text-decoration: line-through; font-size: 1rem; margin-right: 8px;">$650</span>
+<span style="color: #0f172a; font-weight: 800; font-size: 1.4rem;">$449</span>
+</div>
+<button class="btn-solid" onclick="window.location.href='404.html'" style="padding: 10px 22px; font-size: 0.85rem; border-radius: 8px;"><i class="fa-solid fa-bolt" style="margin-right: 6px;"></i> Claim Bundle</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 4: Promo Banner -->
+<section class="content-section promo-clearance-banner reveal" data-aos="zoom-in" style="background: linear-gradient(rgba(15,23,42,0.85), rgba(15,23,42,0.9)), url('assets/bodybuilding.webp') center/cover; color: #fff; text-align: center;">
+<div class="container" data-aos="fade-up">
+<h2 class="clearance-banner-title">Mid-Season <span style="color: #ff7a00;">Clearance</span></h2>
+<p style="font-size: 1.2rem; color: #cbd5e1; max-width: 600px; margin: 0 auto 40px; line-height: 1.7;">Upgrade your training facility with our commercial-grade hardware. Up to 50% off select squat racks, benches, and plates.</p>
+<a class="btn-solid" href="404.html" style="font-size: 1.1rem; padding: 16px 40px;">Shop The Sale</a>
+</div>
+</section>
+<!-- Section 5: Best Sellers -->
+<section class="content-section bg-light reveal" data-aos="fade-up">
+<div class="container">
+<div class="text-center" data-aos="fade-up" style="margin-bottom: 50px;">
+<span class="section-subtitle">Trending Now</span>
+<h2 class="section-title">Best Sellers</h2>
+</div>
+<div class="grid-4">
+<!-- Mini Product 1 -->
+<div class="card reveal" data-aos="fade-up" data-aos-delay="100" style="padding: 15px; text-align: center;">
+<div style="height: 200px; background: url('assets/kettlebell.webp') center/cover; border-radius: 8px; margin-bottom: 15px;"></div>
+<h4 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 8px;">Competition Kettlebell</h4>
+<p style="color: #ff7a00; font-weight: 800; font-size: 1.2rem; margin-bottom: 15px;">$85.00</p>
+<button class="btn-outline" onclick="window.location.href='404.html'" style="width: 100%; padding: 10px; border-radius: 6px; font-size: 0.9rem;">Add to Cart</button>
+</div>
+<!-- Mini Product 2 -->
+<div class="card reveal" data-aos="fade-up" data-aos-delay="200" style="padding: 15px; text-align: center;">
+<div style="height: 200px; background: url('assets/power-lifting-belt.webp') center/cover; border-radius: 8px; margin-bottom: 15px;"></div>
+<h4 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 8px;">Powerlifting Belt</h4>
+<p style="color: #ff7a00; font-weight: 800; font-size: 1.2rem; margin-bottom: 15px;">$120.00</p>
+<button class="btn-outline" onclick="window.location.href='404.html'" style="width: 100%; padding: 10px; border-radius: 6px; font-size: 0.9rem;">Add to Cart</button>
+</div>
+<!-- Mini Product 3 -->
+<div class="card reveal" data-aos="fade-up" data-aos-delay="300" style="padding: 15px; text-align: center;">
+<div style="height: 200px; background: url('assets/comparsion-shirt.webp') center/cover; border-radius: 8px; margin-bottom: 15px;"></div>
+<h4 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 8px;">Compression Shirt</h4>
+<p style="color: #ff7a00; font-weight: 800; font-size: 1.2rem; margin-bottom: 15px;">$45.00</p>
+<button class="btn-outline" onclick="window.location.href='404.html'" style="width: 100%; padding: 10px; border-radius: 6px; font-size: 0.9rem;">Add to Cart</button>
+</div>
+<!-- Mini Product 4 -->
+<div class="card reveal" data-aos="fade-up" data-aos-delay="400" style="padding: 15px; text-align: center;">
+<div style="height: 200px; background: url('assets/whey-protein-home.webp') center/cover; border-radius: 8px; margin-bottom: 15px;"></div>
+<h4 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 8px;">Whey Protein Isolate</h4>
+<p style="color: #ff7a00; font-weight: 800; font-size: 1.2rem; margin-bottom: 15px;">$55.00</p>
+<button class="btn-outline" onclick="window.location.href='404.html'" style="width: 100%; padding: 10px; border-radius: 6px; font-size: 0.9rem;">Add to Cart</button>
+</div>
+</div>
+</div>
+</section>
+<!-- New Section 2: Equipment Buying & Setup Guide -->
+<section class="content-section reveal" data-aos="fade-up">
+<div class="container">
+<div data-aos="fade-up" style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 50px; flex-wrap: wrap; gap: 20px;">
+<div>
+<span class="section-subtitle">Expert Advisory</span>
+<h2 class="section-title" style="margin-bottom: 0;">Equipment Buying Guide</h2>
+</div>
+<p style="color: #64748b; max-width: 500px; font-size: 0.95rem; margin: 0;">Choose the right gear engineered specifically for your training goal, space constraints, and budget.</p>
+</div>
+<div class="grid-3">
+<!-- Guide Card 1 -->
+<div class="guide-card reveal" data-aos="fade-up" data-aos-delay="100">
+<div class="guide-icon">
+<i class="fa-solid fa-dumbbell"></i>
+</div>
+<h3 style="font-family: 'Montserrat', sans-serif; font-size: 1.3rem; font-weight: 800; margin-bottom: 12px; color: #0f172a;">Commercial Gym Setup</h3>
+<p style="color: #64748b; font-size: 0.9rem; margin-bottom: 22px; line-height: 1.6;">Heavy-duty 11-gauge steel equipment certified for 24/7 continuous high-traffic facility performance.</p>
+<ul class="guide-feature-list" style="margin-bottom: 25px;">
+<li><i class="fa-solid fa-circle-check"></i> ASTM Certified Structural Steel</li>
+<li><i class="fa-solid fa-circle-check"></i> High-Density Ergonomic Padding</li>
+<li><i class="fa-solid fa-circle-check"></i> Full Commercial Lifetime Frame Warranty</li>
+</ul>
+<a class="btn-outline" href="404.html" style="width: 100%; text-align: center; border-radius: 8px; font-size: 0.9rem; padding: 10px 0;">Consult Specialist</a>
+</div>
+<!-- Guide Card 2 -->
+<div class="guide-card reveal" data-aos="fade-up" data-aos-delay="200">
+<div class="guide-icon">
+<i class="fa-solid fa-house-laptop"></i>
+</div>
+<h3 style="font-family: 'Montserrat', sans-serif; font-size: 1.3rem; font-weight: 800; margin-bottom: 12px; color: #0f172a;">Home Studio Essentials</h3>
+<p style="color: #64748b; font-size: 0.9rem; margin-bottom: 22px; line-height: 1.6;">Space-saving foldaway technology designed for noise reduction and quick compact storage.</p>
+<ul class="guide-feature-list" style="margin-bottom: 25px;">
+<li><i class="fa-solid fa-circle-check"></i> Ultra-Quiet Magnetic Resistance</li>
+<li><i class="fa-solid fa-circle-check"></i> Foldable &amp; Integrated Wheel Mounts</li>
+<li><i class="fa-solid fa-circle-check"></i> Modular Expansion Attachments</li>
+</ul>
+<a class="btn-outline" href="404.html" style="width: 100%; text-align: center; border-radius: 8px; font-size: 0.9rem; padding: 10px 0;">View Home Gear</a>
+</div>
+<!-- Guide Card 3 -->
+<div class="guide-card reveal" data-aos="fade-up" data-aos-delay="300">
+<div class="guide-icon">
+<i class="fa-solid fa-person-running"></i>
+</div>
+<h3 style="font-family: 'Montserrat', sans-serif; font-size: 1.3rem; font-weight: 800; margin-bottom: 12px; color: #0f172a;">Tactical &amp; Athletic Gear</h3>
+<p style="color: #64748b; font-size: 0.9rem; margin-bottom: 22px; line-height: 1.6;">Professional competition-grade gear tested by elite athletes for speed, power, and agility training.</p>
+<ul class="guide-feature-list" style="margin-bottom: 25px;">
+<li><i class="fa-solid fa-circle-check"></i> Weatherproof Kevlar Reinforced</li>
+<li><i class="fa-solid fa-circle-check"></i> Precise Match Weight Calibration</li>
+<li><i class="fa-solid fa-circle-check"></i> Pro League Approved Standards</li>
+</ul>
+<a class="btn-outline" href="404.html" style="width: 100%; text-align: center; border-radius: 8px; font-size: 0.9rem; padding: 10px 0;">Explore Tech Spec</a>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 6: Redesigned Store Benefits (The Stackly Guarantee) -->
+<section class="content-section bg-light reveal" data-aos="fade-up" style="position: relative; padding: 90px 0;">
+<div class="container">
+<div data-aos="fade-up" style="text-align: center; max-width: 650px; margin: 0 auto 55px;">
+<span class="section-subtitle">Uncompromising Standard</span>
+<h2 class="section-title">The Stackly Guarantee</h2>
+<p style="color: #64748b; font-size: 1.05rem;">We build high-performance hardware and support your training with industry-leading service policies.</p>
+</div>
+<div class="grid-4">
+<!-- Benefit 1 -->
+<div class="benefit-card-new reveal" data-aos="fade-up" data-aos-delay="100">
+<span class="benefit-badge-tag">FAST &amp; FREE</span>
+<div class="benefit-icon-badge">
+<i class="fa-solid fa-truck-fast"></i>
+</div>
+<h4 class="benefit-title">Free Shipping</h4>
+<p class="benefit-desc">On all heavy equipment and commercial rack orders over $500 nationwide.</p>
+</div>
+<!-- Benefit 2 -->
+<div class="benefit-card-new reveal" data-aos="fade-up" data-aos-delay="200">
+<span class="benefit-badge-tag">RISK-FREE</span>
+<div class="benefit-icon-badge">
+<i class="fa-solid fa-rotate-left"></i>
+</div>
+<h4 class="benefit-title">30-Day Returns</h4>
+<p class="benefit-desc">Hassle-free money-back guarantee on all apparel, footwear and accessories.</p>
+</div>
+<!-- Benefit 3 -->
+<div class="benefit-card-new reveal" data-aos="fade-up" data-aos-delay="300">
+<span class="benefit-badge-tag">BUILT TO LAST</span>
+<div class="benefit-icon-badge">
+<i class="fa-solid fa-shield-halved"></i>
+</div>
+<h4 class="benefit-title">Lifetime Warranty</h4>
+<p class="benefit-desc">Guaranteed structural steel frame durability on all our commercial power racks.</p>
+</div>
+<!-- Benefit 4 -->
+<div class="benefit-card-new reveal" data-aos="fade-up" data-aos-delay="400">
+<span class="benefit-badge-tag">ALWAYS ON</span>
+<div class="benefit-icon-badge">
+<i class="fa-solid fa-headset"></i>
+</div>
+<h4 class="benefit-title">24/7 Expert Support</h4>
+<p class="benefit-desc">Dedicated equipment specialists available around the clock for advice &amp; service.</p>
+</div>
+</div>
+</div>
+</section>
+<footer class="footer" style="margin-top: 0;">
+<div class="container footer-grid">
+<div class="footer-brand">
+<a class="logo" href="index.html">
+<img alt="Stackly Logo" class="brand-logo-img" src="assets/logo.webp"/>
+</a>
+<p>Your ultimate destination for premium sports gear, fitness equipment, and athletic apparel.</p>
+<div class="social-links">
+<a href="404.html"><i class="fa-brands fa-facebook-f"></i></a>
+<a href="404.html"><i class="fa-brands fa-instagram"></i></a>
+<a href="404.html"><i class="fa-brands fa-youtube"></i></a>
+<a href="404.html"><i class="fa-brands fa-linkedin-in"></i></a>
+</div>
+</div>
+<div class="footer-links">
+<h3>Quick Navigation</h3>
+<ul>
+<li><a href="index.html">Home</a></li>
+<li><a href="products.html">Products</a></li>
+<li><a href="about.html">About</a></li>
+<li><a href="services.html">Services</a></li>
+<li><a href="blog.html">Blog</a></li>
+</ul>
+</div>
+<div class="footer-links">
+<h3>Support Hub</h3>
+<ul>
+<li><a href="404.html">Privacy Matrix</a></li>
+<li><a href="404.html">Terms &amp; Licensing</a></li>
+<li><a href="404.html">Member Portal</a></li>
+<li><a href="contact.html">Contact Desk</a></li>
+</ul>
+</div>
+<div class="footer-links">
+<h3>Contact Us</h3>
+<ul>
+<li><i class="fa-solid fa-envelope" style="margin-right: 8px; color: #ff7a00;"></i> <a href="mailto:info@stackly.com" style="color:inherit;">info@stackly.com</a></li>
+<li><i class="fa-solid fa-phone" style="margin-right: 8px; color: #ff7a00;"></i> <a href="tel:9876543210" style="color:inherit;">9876543210</a></li>
+<li><i class="fa-solid fa-location-dot" style="margin-right: 8px; color: #ff7a00;"></i> <a href="https://www.google.com/maps/place/Stackly/@11.6829566,78.1739798,17z/data=!3m1!4b1!4m6!3m5!1s0x3babefef7fd970bb:0xe11aef1a71994f9!8m2!3d11.6829566!4d78.1739798!16s%2Fg%2F11l660s35r?entry=ttu&amp;g_ep=EgoyMDI2MDcwNy4wIKXMDSoASAFQAw%3D%3D" style="color:inherit;" target="_blank">MMR Complex, Chinna Thirupathi, near Chinna Muniyappan Kovil, Salem, Tamil Nadu 636008</a></li>
+<li><i class="fa-solid fa-clock" style="margin-right: 8px; color: #ff7a00;"></i> 24/7 Store Support</li>
+</ul>
+</div>
+</div>
+<div class="footer-bottom text-center">
+<p>© 2026 Stackly Store Inc. Designed for elite athletes worldwide.</p>
+</div>
+</footer>
+<script src="js/main.js"></script>
+<script src="js/form-validation.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script>
+        document.addEventListener("DOMContentLoaded", function() {
+            if (typeof AOS !== 'undefined') {
+                AOS.init({ duration: 800, once: true });
+            }
+        });
+    </script>
+</body>
+</html>

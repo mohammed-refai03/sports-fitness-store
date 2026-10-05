@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>About Us | Stackly Sports Store</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&amp;family=Poppins:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet"/>
+<link href="css/main.css" rel="stylesheet"/>
+<style>
+        .page-header { padding: 180px 0 100px; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: #fff; text-align: center; }
+        .page-header h1 { font-size: 4rem; margin-bottom: 20px; font-family: 'Montserrat', sans-serif; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; }
+        .page-header h1 span { color: #ff7a00; }
+        .page-header p { font-size: 1.2rem; color: #cbd5e1; max-width: 700px; margin: 0 auto; line-height: 1.8; }
+        
+        .content-section { padding: 80px 0; }
+        .bg-light { background-color: #f8fafc; }
+        
+        /* Modular UI Components */
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+        .grid-2-asym { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 50px; align-items: center; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+        
+        .card { background: #fff; border-radius: 16px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.04); transition: transform 0.3s; border: 1px solid #f1f5f9; }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
+        
+        .img-placeholder { background: #e2e8f0; border-radius: 16px; background-size: cover; background-position: center; }
+        .img-h300 { height: 300px; }
+        .img-h400 { height: 400px; }
+        
+        .section-title { font-size: 2.5rem; margin-bottom: 20px; color: #0f172a; font-family: 'Montserrat', sans-serif; font-weight: 800; }
+        .section-subtitle { color: #ff7a00; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; margin-bottom: 10px; display: block; }
+        .section-desc { color: #64748b; font-size: 1.1rem; line-height: 1.7; margin-bottom: 30px; }
+        
+        .btn-solid { background: #ff7a00; color: #fff; padding: 14px 32px; border-radius: 50px; font-weight: 600; display: inline-block; transition: 0.3s; border: none; cursor: pointer; }
+        .btn-solid:hover { background: #ea580c; color: #fff; transform: translateY(-2px); }
+        
+        .btn-outline { background: transparent; color: #0f172a; padding: 12px 30px; border-radius: 50px; font-weight: 600; display: inline-block; transition: 0.3s; border: 2px solid #0f172a; }
+        .btn-outline:hover { background: #0f172a; color: #fff; }
+        
+        .icon-box { width: 60px; height: 60px; border-radius: 12px; background: #fff7ed; color: #ff7a00; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 20px; }
+        
+        .faq-item { border-bottom: 1px solid #e2e8f0; padding: 20px 0; }
+        .faq-q { font-weight: 700; font-size: 1.1rem; color: #0f172a; margin-bottom: 10px; }
+        .faq-a { color: #64748b; line-height: 1.6; }
+    </style>
+</head>
+<body>
+<nav class="navbar scrolled" style="background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(20px); padding: 16px 0; box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05); color: #111; position: fixed; top: 0; width: 100%; z-index: 9999;">
+<div class="nav-container">
+<a class="logo" href="index.html">
+<img alt="Stackly Logo" class="brand-logo-img" src="assets/logo.webp"/>
+</a>
+<ul class="nav-links">
+<li class="mobile-menu-logo">
+<a href="index.html"><img alt="Stackly Logo" class="brand-logo-img" src="assets/logo.webp"/></a>
+</li>
+<li><a class="nav-link" href="index.html">Home</a></li>
+<li><a class="nav-link" href="products.html">Products</a></li>
+<li><a class="nav-link active" href="about.html">About</a></li>
+<li><a class="nav-link" href="services.html">Services</a></li>
+<li><a class="nav-link" href="blog.html">Blog</a></li>
+<li><a class="nav-link" href="contact.html">Contact</a></li>
+<li class="mobile-menu-btn">
+<a class="btn-nav mobile-btn-login" href="login.html">Login</a>
+</li>
+</ul>
+<div class="nav-actions">
+<a class="btn-nav" href="login.html">Login</a>
+<div class="hamburger">
+<span class="bar"></span>
+<span class="bar"></span>
+<span class="bar"></span>
+</div>
+</div>
+</div>
+</nav>
+<header class="page-header page-header-about reveal" data-aos="fade-down">
+<div class="container" data-aos="fade-up">
+<h1>About <span>Stackly Store</span></h1>
+<p>Discover the story behind the world's leading sports equipment retailer.</p>
+</div>
+</header>
+<!-- BALANCE / ABOUT SECTION -->
+<section class="balance-section reveal" data-aos="fade-up">
+<div class="container balance-container reveal">
+<!-- Left Text Column -->
+<div class="balance-text-col" data-aos="fade-right">
+<span class="balance-subtitle">We Are Stackly</span>
+<h2 class="balance-title">Adjust Your Body Get A Perfect Balance</h2>
+<p class="balance-desc">Equip your facility with premium gear designed for absolute durability and biomechanical perfection. Join elite athletes who trust our platform for their daily performance needs.</p>
+<div class="balance-inner-grid">
+<ul class="balance-list">
+<li><i class="fa-solid fa-check"></i> Learn from customer feedback</li>
+<li><i class="fa-solid fa-check"></i> Best User Satisfaction</li>
+<li><i class="fa-solid fa-check"></i> Premium Equipment Info</li>
+<li><i class="fa-solid fa-check"></i> Professional Team</li>
+<li><i class="fa-solid fa-check"></i> Train Anywhere Anytime</li>
+<li><i class="fa-solid fa-check"></i> 24/7 customer support</li>
+</ul>
+<div class="balance-box">
+<i class="fa-solid fa-users-viewfinder"></i>
+<h4>You Run Your Training, We Will Handle Your Equipment</h4>
+</div>
+</div>
+<a class="balance-btn" href="404.html">Learn About Us</a>
+</div>
+<!-- Right Image Column -->
+<div class="balance-img-wrap" data-aos="fade-left">
+<div class="circle-rings"></div>
+<div class="bal-img-1"></div>
+<div class="bal-img-2"></div>
+<div class="track-badge">
+<i class="fa-solid fa-stopwatch"></i>
+<span>Track<br/>Everything</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 2: Store Stats -->
+<section class="content-section bg-light text-center reveal" data-aos="fade-up">
+<div class="container grid-4">
+<div data-aos="zoom-in" data-aos-delay="100"><h2 class="stat-number" style="font-size: 3.5rem; color: #ff7a00; margin-bottom: 10px;">50+</h2><p class="section-desc">Top Brands Stocked</p></div>
+<div data-aos="zoom-in" data-aos-delay="200"><h2 class="stat-number" style="font-size: 3.5rem; color: #ff7a00; margin-bottom: 10px;">2M+</h2><p class="section-desc">Orders Shipped</p></div>
+<div data-aos="zoom-in" data-aos-delay="300"><h2 class="stat-number" style="font-size: 3.5rem; color: #ff7a00; margin-bottom: 10px;">12</h2><p class="section-desc">Retail Megastores</p></div>
+<div data-aos="zoom-in" data-aos-delay="400"><h2 class="stat-number" style="font-size: 3.5rem; color: #ff7a00; margin-bottom: 10px;">99%</h2><p class="section-desc">Five-Star Reviews</p></div>
+</div>
+</section>
+<!-- Section 3: Core Values -->
+<section class="content-section reveal" data-aos="fade-up">
+<div class="container">
+<div class="text-center" data-aos="fade-up" style="margin-bottom: 50px;">
+<span class="section-subtitle">What Drives Us</span>
+<h2 class="section-title">Our Core Values</h2>
+</div>
+<div class="grid-3">
+<div class="card reveal" data-aos="fade-up" data-aos-delay="100">
+<div class="icon-box"><i class="fa-solid fa-shield-halved"></i></div>
+<h3>Uncompromising Quality</h3>
+<p class="section-desc" style="margin-top: 15px;">We test every piece of equipment and supplement we sell. If it doesn't survive our gauntlet, it doesn't make it to our store.</p>
+</div>
+<div class="card reveal" data-aos="fade-up" data-aos-delay="200">
+<div class="icon-box"><i class="fa-solid fa-handshake"></i></div>
+<h3>Athlete First</h3>
+<p class="section-desc" style="margin-top: 15px;">Customer service isn't a department; it's our philosophy. We offer hassle-free returns and lifetime support on hardware.</p>
+</div>
+<div class="card reveal" data-aos="fade-up" data-aos-delay="300">
+<div class="icon-box"><i class="fa-solid fa-leaf"></i></div>
+<h3>Sustainable Sourcing</h3>
+<p class="section-desc" style="margin-top: 15px;">Our apparel lines are crafted from recycled materials, and our packaging is 100% biodegradable.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- WHY WE ARE DIFFERENT -->
+<section class="content-section bg-light reveal" data-aos="fade-up">
+<div class="container grid-2">
+<div class="img-placeholder img-h400" data-aos="fade-right" style="background-image: url('assets/slide1.webp'); box-shadow: 20px 20px 0 #ff7a00; position: relative; z-index: 1;"></div>
+<div class="diff-text-content" data-aos="fade-left" style="padding-left: 20px; padding-top: 20px;">
+<span class="section-subtitle" style="display: block; margin-bottom: 12px;">Why We Are Different</span>
+<h2 class="section-title">Engineered for Excellence</h2>
+<p class="section-desc">We refuse to compromise. While others cut corners to save margins, we double down on material science and biomechanical engineering.</p>
+<div class="diff-feature">
+<h4 style="font-size:1.25rem; color:#0f172a; margin-bottom:8px; font-family:'Montserrat', sans-serif;">Zero White-Labeling</h4>
+<p style="color:#64748b; font-size:0.95rem; margin:0; line-height:1.6;">Every product is conceptualized, designed, and stress-tested in-house by our own engineers.</p>
+</div>
+<div class="diff-feature">
+<h4 style="font-size:1.25rem; color:#0f172a; margin-bottom:8px; font-family:'Montserrat', sans-serif;">Medical-Grade Testing</h4>
+<p style="color:#64748b; font-size:0.95rem; margin:0; line-height:1.6;">Our supplements undergo rigorous HPLC testing for absolute purity and zero contamination.</p>
+</div>
+<div class="diff-feature">
+<h4 style="font-size:1.25rem; color:#0f172a; margin-bottom:8px; font-family:'Montserrat', sans-serif;">Lifter-First Warranty</h4>
+<p style="color:#64748b; font-size:0.95rem; margin:0; line-height:1.6;">Bend a barbell? We replace it. Our ironclad lifetime guarantee covers all heavy hardware.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- TIMELINE / JOURNEY -->
+<section class="content-section reveal" data-aos="fade-up">
+<div class="container">
+<div class="text-center" data-aos="fade-up" style="margin-bottom: 60px;">
+<span class="section-subtitle">Timeline &amp; Journey</span>
+<h2 class="section-title">How We Got Here</h2>
+</div>
+<div class="timeline-wrap">
+<div class="timeline-item reveal" data-aos="fade-up" data-aos-delay="100">
+<div class="timeline-dot"></div>
+<div class="timeline-content">
+<div class="timeline-year">2010</div>
+<h3 style="color:#0f172a; margin-bottom:12px; font-family:'Montserrat', sans-serif;">The Garage Days</h3>
+<p style="color:#64748b; font-size:1rem; margin:0; line-height:1.6;">Started by welding custom squat racks in a small garage for local competitive powerlifters.</p>
+</div>
+</div>
+<div class="timeline-item reveal" data-aos="fade-up" data-aos-delay="200">
+<div class="timeline-dot"></div>
+<div class="timeline-content">
+<div class="timeline-year">2015</div>
+<h3 style="color:#0f172a; margin-bottom:12px; font-family:'Montserrat', sans-serif;">National Expansion</h3>
+<p style="color:#64748b; font-size:1rem; margin:0; line-height:1.6;">Opened our first major warehouse facility and launched our high-speed e-commerce platform.</p>
+</div>
+</div>
+<div class="timeline-item reveal" data-aos="fade-up" data-aos-delay="300">
+<div class="timeline-dot"></div>
+<div class="timeline-content">
+<div class="timeline-year">2020</div>
+<h3 style="color:#0f172a; margin-bottom:12px; font-family:'Montserrat', sans-serif;">Apparel &amp; Nutrition</h3>
+<p style="color:#64748b; font-size:1rem; margin:0; line-height:1.6;">Diversified our offerings, launching AERO-KNIT compression apparel and APEX clinical supplements.</p>
+</div>
+</div>
+<div class="timeline-item reveal" data-aos="fade-up" data-aos-delay="400">
+<div class="timeline-dot"></div>
+<div class="timeline-content">
+<div class="timeline-year">2026</div>
+<h3 style="color:#0f172a; margin-bottom:12px; font-family:'Montserrat', sans-serif;">Global Retailer</h3>
+<p style="color:#64748b; font-size:1rem; margin:0; line-height:1.6;">Shipping to 100+ countries with 12 flagship experiential megastores worldwide.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- OUR PROMISE -->
+<section class="content-section bg-light reveal" data-aos="fade-up">
+<div class="container text-center">
+<span class="section-subtitle">Our Promise</span>
+<h2 class="section-title" style="margin-bottom: 60px;">A Commitment to the Athlete</h2>
+<div class="grid-3">
+<div class="promise-card reveal" data-aos="fade-up" data-aos-delay="100">
+<i class="fa-solid fa-medal promise-icon"></i>
+<h3 style="margin-bottom: 15px; font-family:'Montserrat', sans-serif;">Elite Quality</h3>
+<p style="color: #cbd5e1; font-size: 0.95rem; line-height: 1.7;">We build equipment that lasts generations. No planned obsolescence, just pure durability and performance.</p>
+</div>
+<div class="promise-card reveal" data-aos="fade-up" data-aos-delay="200">
+<i class="fa-solid fa-bolt promise-icon"></i>
+<h3 style="margin-bottom: 15px; font-family:'Montserrat', sans-serif;">Lightning Delivery</h3>
+<p style="color: #cbd5e1; font-size: 0.95rem; line-height: 1.7;">99% of our orders ship within 12 hours from our fully automated, next-gen global fulfillment centers.</p>
+</div>
+<div class="promise-card reveal" data-aos="fade-up" data-aos-delay="300">
+<i class="fa-solid fa-handshake-angle promise-icon"></i>
+<h3 style="margin-bottom: 15px; font-family:'Montserrat', sans-serif;">Human Support</h3>
+<p style="color: #cbd5e1; font-size: 0.95rem; line-height: 1.7;">No frustrating chatbots. Call us anytime and speak directly to a certified fitness gear expert.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- GUARANTEE SECTION -->
+<section class="guarantee-section">
+<div class="g-grid-2 reveal">
+<!-- Left Image Column -->
+<div class="guarantee-img-wrap">
+<div class="guarantee-main-img" style="background-image: url('assets/slide2.webp');"></div>
+<div class="guarantee-quote-card">
+<p class="quote-text">"Premium quality equipment that completely transformed my daily training routine. The durability is unmatched in the industry."</p>
+<h5 class="quote-author">Izaac Mcbride</h5>
+</div>
+</div>
+<!-- Right Content Column -->
+<div>
+<span class="g-subtitle">The Sport Solution</span>
+<h2 class="g-title">Guarantee Feel Free From Pain Again</h2>
+<p class="g-desc">Train harder and recover faster. Our ergonomically designed equipment ensures you maintain perfect form, reducing the risk of injury while maximizing your performance gains.</p>
+<div class="g-feature-list">
+<!-- Item 1 (Active by default to match image) -->
+<div class="g-feature-item active">
+<div class="g-icon"><i class="fa-solid fa-hand-holding-dollar"></i></div>
+<div class="g-text">
+<h4>Affordable Price</h4>
+<p>Premium commercial-grade hardware priced directly and fairly for the consumer.</p>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="g-feature-item">
+<div class="g-icon"><i class="fa-solid fa-mobile-screen"></i></div>
+<div class="g-text">
+<h4>Do it Online</h4>
+<p>Consult with our experts and design your perfect gym layout virtually from anywhere.</p>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="g-feature-item">
+<div class="g-icon"><i class="fa-regular fa-clock"></i></div>
+<div class="g-text">
+<h4>Flexible Time</h4>
+<p>24/7 customer support ready to assist you anywhere in the world on your schedule.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 4: Awards & Certificates -->
+<section class="content-section bg-light reveal" data-aos="fade-up">
+<div class="container">
+<div class="text-center" data-aos="fade-up" style="max-width: 750px; margin: 0 auto 50px;">
+<span class="section-subtitle">RECOGNITION OF EXCELLENCE</span>
+<h2 class="section-title">Awards &amp; Industry Certifications</h2>
+<p class="section-desc">Our commitment to commercial safety standards, engineering precision, and customer satisfaction has earned top industry accolades worldwide.</p>
+</div>
+<div class="grid-4">
+<!-- Award 1 -->
+<div class="card text-center reveal" data-aos="fade-up" data-aos-delay="100" style="padding: 35px 24px;">
+<div class="icon-box" style="margin: 0 auto 20px; width: 65px; height: 65px; font-size: 1.8rem; background: #fff7ed; color: #ff7a00; border-radius: 18px;">
+<i class="fa-solid fa-trophy"></i>
+</div>
+<span style="color: #ff7a00; font-size: 0.8rem; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase;">GLOBAL FITNESS 2025</span>
+<h3 style="font-size: 1.15rem; font-family: 'Montserrat', sans-serif; font-weight: 800; color: #0f172a; margin: 8px 0 10px;">Best Strength Manufacturer</h3>
+<p style="color: #64748b; font-size: 0.88rem; line-height: 1.55; margin: 0;">Awarded for 11-gauge power rack structural integrity &amp; engineering design.</p>
+</div>
+<!-- Award 2 -->
+<div class="card text-center reveal" data-aos="fade-up" data-aos-delay="200" style="padding: 35px 24px;">
+<div class="icon-box" style="margin: 0 auto 20px; width: 65px; height: 65px; font-size: 1.8rem; background: #fff7ed; color: #ff7a00; border-radius: 18px;">
+<i class="fa-solid fa-certificate"></i>
+</div>
+<span style="color: #ff7a00; font-size: 0.8rem; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase;">ISO 9001 CERTIFIED</span>
+<h3 style="font-size: 1.15rem; font-family: 'Montserrat', sans-serif; font-weight: 800; color: #0f172a; margin: 8px 0 10px;">Quality Management</h3>
+<p style="color: #64748b; font-size: 0.88rem; line-height: 1.55; margin: 0;">International certification for strict manufacturing &amp; stress-testing protocols.</p>
+</div>
+<!-- Award 3 -->
+<div class="card text-center reveal" data-aos="fade-up" data-aos-delay="300" style="padding: 35px 24px;">
+<div class="icon-box" style="margin: 0 auto 20px; width: 65px; height: 65px; font-size: 1.8rem; background: #fff7ed; color: #ff7a00; border-radius: 18px;">
+<i class="fa-solid fa-award"></i>
+</div>
+<span style="color: #ff7a00; font-size: 0.8rem; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase;">ISSS-11 COMPLIANT</span>
+<h3 style="font-size: 1.15rem; font-family: 'Montserrat', sans-serif; font-weight: 800; color: #0f172a; margin: 8px 0 10px;">Safety Standard Seal</h3>
+<p style="color: #64748b; font-size: 0.88rem; line-height: 1.55; margin: 0;">Certified compliance for high-capacity weight loads in commercial facilities.</p>
+</div>
+<!-- Award 4 -->
+<div class="card text-center reveal" data-aos="fade-up" data-aos-delay="400" style="padding: 35px 24px;">
+<div class="icon-box" style="margin: 0 auto 20px; width: 65px; height: 65px; font-size: 1.8rem; background: #fff7ed; color: #ff7a00; border-radius: 18px;">
+<i class="fa-solid fa-medal"></i>
+</div>
+<span style="color: #ff7a00; font-size: 0.8rem; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase;">EXCELLENCE AWARD 2026</span>
+<h3 style="font-size: 1.15rem; font-family: 'Montserrat', sans-serif; font-weight: 800; color: #0f172a; margin: 8px 0 10px;">Top Customer Choice</h3>
+<p style="color: #64748b; font-size: 0.88rem; line-height: 1.55; margin: 0;">Voted #1 online sports equipment retailer for 24/7 support &amp; fast freight dispatch.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 7: Media Mentions -->
+<section class="media-mentions-section">
+<div class="container text-center">
+<span class="section-subtitle">As Seen In</span>
+<h2 class="section-title" style="margin-bottom: 40px;">Trusted by the Best</h2>
+</div>
+<div class="marquee-wrapper">
+<div class="marquee-track">
+<!-- Set 1 -->
+<div class="marquee-content">
+<h2 class="brand-logo-text" style="font-family: serif;">FITNESS MAG</h2>
+<h2 class="brand-logo-text" style="font-family: monospace;">GEAR PATROL</h2>
+<h2 class="brand-logo-text" style="font-family: sans-serif; font-weight: 900;">IRON WORLD</h2>
+<h2 class="brand-logo-text" style="font-family: serif; font-style: italic;">The Athlete</h2>
+<!-- Additional Brands -->
+<h2 class="brand-logo-text" style="font-family: 'Arial Black', sans-serif;">PRO BUILD</h2>
+<h2 class="brand-logo-text" style="font-family: 'Courier New', Courier, monospace; font-weight: bold; letter-spacing: -1px;">LIFTER'S DIGEST</h2>
+<h2 class="brand-logo-text" style="font-family: Impact, sans-serif; font-style: italic; letter-spacing: 2px;">VIGOR</h2>
+<h2 class="brand-logo-text" style="font-family: 'Times New Roman', serif; font-weight: 700; text-transform: uppercase;">Health &amp; Power</h2>
+</div>
+<!-- Set 2 (Duplicate for infinite scroll) -->
+<div class="marquee-content">
+<h2 class="brand-logo-text" style="font-family: serif;">FITNESS MAG</h2>
+<h2 class="brand-logo-text" style="font-family: monospace;">GEAR PATROL</h2>
+<h2 class="brand-logo-text" style="font-family: sans-serif; font-weight: 900;">IRON WORLD</h2>
+<h2 class="brand-logo-text" style="font-family: serif; font-style: italic;">The Athlete</h2>
+<h2 class="brand-logo-text" style="font-family: 'Arial Black', sans-serif;">PRO BUILD</h2>
+<h2 class="brand-logo-text" style="font-family: 'Courier New', Courier, monospace; font-weight: bold; letter-spacing: -1px;">LIFTER'S DIGEST</h2>
+<h2 class="brand-logo-text" style="font-family: Impact, sans-serif; font-style: italic; letter-spacing: 2px;">VIGOR</h2>
+<h2 class="brand-logo-text" style="font-family: 'Times New Roman', serif; font-weight: 700; text-transform: uppercase;">Health &amp; Power</h2>
+</div>
+</div>
+</div>
+</section>
+<!-- BEHIND THE SCENES -->
+<section class="content-section bg-light reveal" data-aos="fade-up">
+<div class="container">
+<div class="text-center" data-aos="fade-up" style="margin-bottom: 60px;">
+<span class="section-subtitle">Behind The Scenes</span>
+<h2 class="section-title">Inside Stackly HQ</h2>
+</div>
+<div class="bts-grid">
+<div class="bts-item reveal" data-aos="zoom-in" data-aos-delay="100">
+<div class="bts-bg" style="background-image: url('assets/RandD.webp');"></div>
+<div class="bts-overlay"><h3>R&amp;D Facility</h3></div>
+</div>
+<div class="bts-item reveal" data-aos="zoom-in" data-aos-delay="200">
+<div class="bts-bg" style="background-image: url('assets/apparel-design.webp');"></div>
+<div class="bts-overlay"><h3>Apparel Design</h3></div>
+</div>
+<div class="bts-item reveal" data-aos="zoom-in" data-aos-delay="300">
+<div class="bts-bg" style="background-image: url('assets/iron-forging.webp');"></div>
+<div class="bts-overlay"><h3>Iron Forging</h3></div>
+</div>
+<div class="bts-item reveal" data-aos="zoom-in" data-aos-delay="400">
+<div class="bts-bg" style="background-image: url('assets/global-logistics.webp');"></div>
+<div class="bts-overlay"><h3>Global Logistics</h3></div>
+</div>
+</div>
+</div>
+</section>
+<!-- EXPERTS / TRAINERS SECTION -->
+<section class="experts-section reveal" data-aos="fade-up">
+<div class="container experts-layout reveal">
+<!-- Left: Text Content -->
+<div class="experts-text" data-aos="fade-right">
+<span class="exp-subtitle">EQUIPMENT SPECIALISTS</span>
+<h2 class="exp-title">Fitness Equipment Consultants</h2>
+<p class="exp-desc">Consult with our certified sports equipment specialists and facility engineers to plan, customize, and outfit your home gym or commercial fitness studio.</p>
+<a class="exp-btn" href="404.html">Consult Our Specialists</a>
+</div>
+<!-- Right: 3 Cards -->
+<div class="experts-cards">
+<!-- Card 1 -->
+<div class="exp-card reveal" data-aos="fade-up" data-aos-delay="100" style="background-image: url('assets/trainer1.webp');">
+<div class="exp-overlay">
+<div class="exp-info">
+<h3>Marie Sims</h3>
+<p>Commercial Gym Specialist</p>
+<div class="exp-socials">
+<a href="404.html"><i class="fa-brands fa-facebook-f"></i></a>
+<a href="404.html"><i class="fa-brands fa-twitter"></i></a>
+<a href="404.html"><i class="fa-brands fa-instagram"></i></a>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="exp-card reveal" data-aos="fade-up" data-aos-delay="200" style="background-image: url('assets/trainer2.webp');">
+<div class="exp-overlay">
+<div class="exp-info">
+<h3>John Doe</h3>
+<p>Strength &amp; Rig Consultant</p>
+<div class="exp-socials">
+<a href="404.html"><i class="fa-brands fa-facebook-f"></i></a>
+<a href="404.html"><i class="fa-brands fa-twitter"></i></a>
+<a href="404.html"><i class="fa-brands fa-instagram"></i></a>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="exp-card reveal" data-aos="fade-up" data-aos-delay="300" style="background-image: url('assets/trainer3.webp');">
+<div class="exp-overlay">
+<div class="exp-info">
+<h3>Alex Smith</h3>
+<p>Spatial &amp; Cardio Engineer</p>
+<div class="exp-socials">
+<a href="404.html"><i class="fa-brands fa-facebook-f"></i></a>
+<a href="404.html"><i class="fa-brands fa-twitter"></i></a>
+<a href="404.html"><i class="fa-brands fa-instagram"></i></a>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 6: Global Reach -->
+<section class="content-section bg-light text-center reveal" data-aos="fade-up">
+<div class="container">
+<h2 class="section-title" data-aos="fade-up">Shipping to 100+ Countries</h2>
+<p class="section-desc" data-aos="fade-up" data-aos-delay="100" style="max-width: 600px; margin: 0 auto 40px;">No matter where you train, we deliver the best equipment right to your door.</p>
+<div class="img-placeholder reveal" data-aos="zoom-in" data-aos-delay="200" style="height: 400px; background-color: #e2e8f0; display:flex; align-items:center; justify-content:center;">
+<i class="fa-solid fa-earth-americas fa-5x" style="color: #94a3b8;"></i>
+</div>
+</div>
+</section>
+<!-- Section 5: Logistics & Warehousing -->
+<section class="content-section reveal" data-aos="fade-up">
+<div class="container grid-2-asym">
+<div data-aos="fade-right">
+<h2 class="section-title">Next-Gen Warehousing</h2>
+<p class="section-desc">Our massive automated fulfillment centers across the country ensure that when you click 'Buy', your gear is packed and shipped within hours, not days. We utilize advanced robotics to maintain 99.9% inventory accuracy.</p>
+</div>
+<div class="img-placeholder img-h300" data-aos="fade-left" style="background-image: url('assets/warehousing.webp');"></div>
+</div>
+</section>
+<footer class="footer" style="margin-top: 80px;">
+<div class="container footer-grid">
+<div class="footer-brand">
+<a class="logo" href="index.html">
+<img alt="Stackly Logo" class="brand-logo-img" src="assets/logo.webp"/>
+</a>
+<p>Your ultimate destination for premium sports gear, fitness equipment, and athletic apparel.</p>
+<div class="social-links">
+<a href="404.html"><i class="fa-brands fa-facebook-f"></i></a>
+<a href="404.html"><i class="fa-brands fa-instagram"></i></a>
+<a href="404.html"><i class="fa-brands fa-youtube"></i></a>
+<a href="404.html"><i class="fa-brands fa-linkedin-in"></i></a>
+</div>
+</div>
+<div class="footer-links">
+<h3>Quick Navigation</h3>
+<ul>
+<li><a href="index.html">Home</a></li>
+<li><a href="products.html">Products</a></li>
+<li><a href="about.html">About</a></li>
+<li><a href="services.html">Services</a></li>
+<li><a href="blog.html">Blog</a></li>
+</ul>
+</div>
+<div class="footer-links">
+<h3>Support Hub</h3>
+<ul>
+<li><a href="404.html">Privacy Matrix</a></li>
+<li><a href="404.html">Terms &amp; Licensing</a></li>
+<li><a href="404.html">Member Portal</a></li>
+<li><a href="contact.html">Contact Desk</a></li>
+</ul>
+</div>
+<div class="footer-links">
+<h3>Contact Us</h3>
+<ul>
+<li><i class="fa-solid fa-envelope" style="margin-right: 8px; color: #ff7a00;"></i> <a href="mailto:info@stackly.com" style="color:inherit;">info@stackly.com</a></li>
+<li><i class="fa-solid fa-phone" style="margin-right: 8px; color: #ff7a00;"></i> <a href="tel:9876543210" style="color:inherit;">9876543210</a></li>
+<li><i class="fa-solid fa-location-dot" style="margin-right: 8px; color: #ff7a00;"></i> <a href="https://www.google.com/maps/place/Stackly/@11.6829566,78.1739798,17z/data=!3m1!4b1!4m6!3m5!1s0x3babefef7fd970bb:0xe11aef1a71994f9!8m2!3d11.6829566!4d78.1739798!16s%2Fg%2F11l660s35r?entry=ttu&amp;g_ep=EgoyMDI2MDcwNy4wIKXMDSoASAFQAw%3D%3D" style="color:inherit;" target="_blank">MMR Complex, Chinna Thirupathi, near Chinna Muniyappan Kovil, Salem, Tamil Nadu 636008</a></li>
+<li><i class="fa-solid fa-clock" style="margin-right: 8px; color: #ff7a00;"></i> 24/7 Store Support</li>
+</ul>
+</div>
+</div>
+<div class="footer-bottom text-center">
+<p>© 2026 Stackly Store Inc. Designed for elite athletes worldwide.</p>
+</div>
+</footer>
+<script src="js/main.js"></script>
+<script src="js/form-validation.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script>
+        document.addEventListener("DOMContentLoaded", function() {
+            if (typeof AOS !== 'undefined') {
+                AOS.init({ duration: 800, once: true });
+            }
+        });
+    </script>
+</body>
+</html>

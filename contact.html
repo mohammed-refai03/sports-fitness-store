@@ -1,0 +1,1526 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Contact | Stackly Sports Store</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&amp;family=Poppins:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet"/>
+<link href="css/main.css" rel="stylesheet"/>
+<style>
+        .page-header { padding: 180px 0 100px; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: #fff; text-align: center; }
+        .page-header h1 { font-size: 4rem; margin-bottom: 20px; font-family: 'Montserrat', sans-serif; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; }
+        .page-header h1 span { color: #ff7a00; }
+        .page-header p { font-size: 1.2rem; color: #cbd5e1; max-width: 700px; margin: 0 auto; line-height: 1.8; }
+        
+        .content-section { padding: 80px 0; }
+        .bg-light { background-color: #f8fafc; }
+        
+        /* Modular UI Components */
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+        .grid-2-asym { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 50px; align-items: center; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+        
+        .card { background: #fff; border-radius: 16px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.04); transition: transform 0.3s; border: 1px solid #f1f5f9; }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
+        
+        .img-placeholder { background: #e2e8f0; border-radius: 16px; background-size: cover; background-position: center; }
+        .img-h300 { height: 300px; }
+        .img-h400 { height: 400px; }
+        
+        .section-title { font-size: 2.5rem; margin-bottom: 20px; color: #0f172a; font-family: 'Montserrat', sans-serif; font-weight: 800; }
+        .section-subtitle { color: #ff7a00; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; margin-bottom: 10px; display: block; }
+        .section-desc { color: #64748b; font-size: 1.1rem; line-height: 1.7; margin-bottom: 30px; }
+        
+        .btn-solid { background: #ff7a00; color: #fff; padding: 14px 32px; border-radius: 50px; font-weight: 600; display: inline-block; transition: 0.3s; border: none; cursor: pointer; }
+        .btn-solid:hover { background: #ea580c; color: #fff; transform: translateY(-2px); }
+        
+        .btn-outline { background: transparent; color: #0f172a; padding: 12px 30px; border-radius: 50px; font-weight: 600; display: inline-block; transition: 0.3s; border: 2px solid #0f172a; }
+        .btn-outline:hover { background: #0f172a; color: #fff; }
+        
+        .icon-box { width: 60px; height: 60px; border-radius: 12px; background: #fff7ed; color: #ff7a00; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 20px; }
+        
+        .faq-item { border-bottom: 1px solid #e2e8f0; padding: 20px 0; }
+        .faq-q { font-weight: 700; font-size: 1.1rem; color: #0f172a; margin-bottom: 10px; }
+        .faq-a { color: #64748b; line-height: 1.6; }
+
+        /* Contact Page Custom Animations & Hover State Styles */
+        @keyframes statPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.06); }
+        }
+
+        /* Location Hub Cards */
+        .hub-card {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 35px 28px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .hub-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #ff7a00, #ea580c);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .hub-card:hover {
+            transform: translateY(-10px);
+            border-color: #ff7a00;
+            box-shadow: 0 20px 40px rgba(255, 122, 0, 0.14);
+        }
+        .hub-card:hover::before {
+            opacity: 1;
+        }
+        .hub-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 18px;
+            background: #fff7ed;
+            color: #ff7a00;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 22px;
+            transition: all 0.4s ease;
+        }
+        .hub-card:hover .hub-icon {
+            background: linear-gradient(135deg, #ff7a00, #ea580c);
+            color: #ffffff;
+            transform: rotate(-6deg) scale(1.1);
+            box-shadow: 0 10px 20px rgba(255, 122, 0, 0.3);
+        }
+
+        /* Support Tier Cards */
+        .tier-card {
+            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+            border-radius: 20px;
+            padding: 35px 28px;
+            border: 1px solid #e2e8f0;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        .tier-card:hover {
+            transform: translateY(-8px);
+            border-color: #ff7a00;
+            box-shadow: 0 20px 40px rgba(15, 23, 42, 0.08);
+        }
+        .tier-badge {
+            display: inline-block;
+            background: #fff7ed;
+            color: #ff7a00;
+            font-size: 0.75rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            padding: 5px 14px;
+            border-radius: 30px;
+            margin-bottom: 15px;
+            width: fit-content;
+        }
+        .tier-list { list-style: none; padding: 0; margin-bottom: 25px; }
+        .tier-list li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #475569;
+            font-size: 0.92rem;
+            margin-bottom: 12px;
+            transition: transform 0.2s ease;
+        }
+        .tier-card:hover .tier-list li {
+            transform: translateX(4px);
+        }
+        .tier-list li i {
+            color: #22c55e;
+            font-size: 0.9rem;
+        }
+
+        /* Metric Stat Cards */
+        .stat-card-contact {
+            background: #0f172a;
+            color: #ffffff;
+            border-radius: 20px;
+            padding: 35px 24px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .stat-card-contact:hover {
+            transform: translateY(-8px);
+            border-color: #ff7a00;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+        .stat-num {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 2.8rem;
+            color: #ff7a00;
+            margin-bottom: 8px;
+            line-height: 1.1;
+        }
+
+        /* Emergency Tech Cards */
+        .tech-card {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 30px 24px;
+            border: 1px solid #e2e8f0;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+        }
+        .tech-card:hover {
+            transform: translateY(-6px);
+            border-color: #ff7a00;
+            box-shadow: 0 15px 35px rgba(255, 122, 0, 0.12);
+        }
+        .tech-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 14px;
+            background: #fff7ed;
+            color: #ff7a00;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+        }
+        .tech-card:hover .tech-icon {
+            background: #ff7a00;
+            color: #ffffff;
+            transform: scale(1.1);
+        }
+
+        /* Media Queries */
+        @media (max-width: 992px) {
+            .grid-3 { grid-template-columns: repeat(2, 1fr) !important; }
+            .grid-4 { grid-template-columns: repeat(2, 1fr) !important; }
+        }
+        @media (max-width: 640px) {
+            .grid-3 { grid-template-columns: 1fr !important; }
+            .grid-4 { grid-template-columns: 1fr !important; }
+            .hub-card { padding: 25px 20px; }
+            .tier-card { padding: 25px 20px; }
+            .tech-card { flex-direction: column; text-align: center; align-items: center; }
+        }
+
+        /* Contact Page 3 New Image Sections Styling */
+        
+        /* Image Section 1: Virtual Showroom Tour */
+        .showroom-wrap {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 40px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 15px 35px rgba(15, 23, 42, 0.05);
+            transition: all 0.4s ease;
+        }
+        .showroom-wrap:hover {
+            box-shadow: 0 25px 50px rgba(255, 122, 0, 0.12);
+            border-color: rgba(255, 122, 0, 0.4);
+        }
+        .showroom-img-frame {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            height: 380px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        .showroom-img-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .showroom-wrap:hover .showroom-img-frame img {
+            transform: scale(1.08);
+        }
+        .showroom-overlay-badge {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(10px);
+            color: #ffffff;
+            padding: 12px 20px;
+            border-radius: 14px;
+            border: 1px solid rgba(255, 122, 0, 0.4);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        .showroom-overlay-badge i {
+            color: #ff7a00;
+            font-size: 1.2rem;
+            animation: statPulse 2s infinite ease-in-out;
+        }
+
+        /* Image Section 2: Certified Field Engineers Card Grid */
+        .engineer-card {
+            background: #ffffff;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.04);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+        }
+        .engineer-card:hover {
+            transform: translateY(-10px);
+            border-color: #ff7a00;
+            box-shadow: 0 20px 40px rgba(255, 122, 0, 0.15);
+        }
+        .engineer-img-box {
+            position: relative;
+            height: 260px;
+            overflow: hidden;
+            background: #0f172a;
+        }
+        .engineer-img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top center;
+            transition: transform 0.5s ease, filter 0.5s ease;
+        }
+        .engineer-card:hover .engineer-img-box img {
+            transform: scale(1.06);
+            filter: brightness(1.05);
+        }
+        .engineer-region-tag {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 122, 0, 0.9);
+            color: #ffffff;
+            font-size: 0.75rem;
+            font-weight: 800;
+            padding: 5px 12px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            backdrop-filter: blur(4px);
+        }
+        .engineer-body {
+            padding: 24px 20px;
+            text-align: center;
+        }
+        .engineer-name {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: #0f172a;
+            margin-bottom: 4px;
+        }
+        .engineer-role {
+            color: #ff7a00;
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-bottom: 12px;
+        }
+        .engineer-meta {
+            font-size: 0.82rem;
+            color: #64748b;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            border-top: 1px dashed #e2e8f0;
+            padding-top: 12px;
+            margin-top: 12px;
+        }
+
+        /* Image Section 3: Global Logistics & Assembly Hub Gallery */
+        .hub-gallery-card {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            height: 360px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .hub-gallery-card:hover {
+            transform: translateY(-8px) scale(1.01);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+        }
+        .hub-gallery-bg {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .hub-gallery-card:hover .hub-gallery-bg {
+            transform: scale(1.1);
+        }
+        .hub-gallery-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(15, 23, 42, 0.1) 0%, rgba(15, 23, 42, 0.92) 80%);
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            transition: opacity 0.3s ease;
+        }
+        .hub-gallery-card:hover .hub-gallery-overlay {
+            background: linear-gradient(180deg, rgba(15, 23, 42, 0.2) 0%, rgba(15, 23, 42, 0.96) 75%);
+        }
+        .hub-gallery-tag {
+            background: #ff7a00;
+            color: #ffffff;
+            font-size: 0.75rem;
+            font-weight: 800;
+            padding: 4px 12px;
+            border-radius: 20px;
+            width: fit-content;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .hub-gallery-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: #ffffff;
+            margin-bottom: 8px;
+            transition: transform 0.3s ease;
+        }
+        .hub-gallery-card:hover .hub-gallery-title {
+            transform: translateY(-4px);
+        }
+        .hub-gallery-desc {
+            color: #cbd5e1;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 16px;
+        }
+        .hub-gallery-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #ff7a00;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: gap 0.3s ease;
+        }
+        .hub-gallery-card:hover .hub-gallery-btn {
+            gap: 14px;
+            color: #ffffff;
+        }
+
+        /* Responsive Breakpoints for 3 New Image Sections */
+        @media (max-width: 992px) {
+            .showroom-wrap { grid-template-columns: 1fr; gap: 30px; }
+            .showroom-img-frame { height: 300px; }
+        }
+        @media (max-width: 640px) {
+            .showroom-wrap { padding: 24px; }
+            .hub-gallery-card { height: 300px; }
+        }
+
+        /* Redesigned Social Media Follow Section Styling */
+        .social-follow-section {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #ffffff;
+            position: relative;
+            overflow: hidden;
+            border-radius: 24px;
+            padding: 60px 40px;
+            box-shadow: 0 20px 40px rgba(15, 23, 42, 0.12);
+        }
+        .social-follow-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 32px 24px;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+        .social-follow-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.09);
+            border-color: #ff7a00;
+            box-shadow: 0 20px 40px rgba(255, 122, 0, 0.25);
+        }
+        .social-follow-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: rgba(255, 122, 0, 0.15);
+            color: #ff7a00;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            transition: all 0.4s ease;
+        }
+        .social-follow-card:hover .social-follow-icon {
+            background: linear-gradient(135deg, #ff7a00, #ea580c);
+            color: #ffffff;
+            transform: scale(1.15) rotate(10deg);
+            box-shadow: 0 10px 20px rgba(255, 122, 0, 0.4);
+        }
+        .social-follow-handle {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: #ffffff;
+            margin-bottom: 4px;
+        }
+        .social-follow-stat {
+            color: #ff7a00;
+            font-weight: 700;
+            font-size: 0.88rem;
+            margin-bottom: 12px;
+            letter-spacing: 0.5px;
+        }
+        .social-follow-desc {
+            color: #94a3b8;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+        .social-follow-btn {
+            background: transparent;
+            color: #ffffff;
+            border: 1px solid rgba(255, 122, 0, 0.6);
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            margin-top: auto;
+        }
+        .social-follow-card:hover .social-follow-btn {
+            background: #ff7a00;
+            border-color: #ff7a00;
+            color: #ffffff;
+            box-shadow: 0 5px 15px rgba(255, 122, 0, 0.3);
+        }
+
+        /* FAQ Accordion Section Styling */
+        .faq-accordion-wrap {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .faq-category-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        .faq-tab-btn {
+            background: #ffffff;
+            color: #475569;
+            border: 1px solid #e2e8f0;
+            padding: 10px 22px;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .faq-tab-btn.active, .faq-tab-btn:hover {
+            background: #ff7a00;
+            color: #ffffff;
+            border-color: #ff7a00;
+            box-shadow: 0 4px 15px rgba(255, 122, 0, 0.25);
+        }
+        .faq-accordion-item {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            margin-bottom: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.03);
+            transition: all 0.3s ease;
+        }
+        .faq-accordion-item:hover {
+            border-color: rgba(255, 122, 0, 0.4);
+            box-shadow: 0 8px 25px rgba(15, 23, 42, 0.06);
+        }
+        .faq-accordion-item.active {
+            border-color: #ff7a00;
+            box-shadow: 0 10px 30px rgba(255, 122, 0, 0.1);
+        }
+        .faq-accordion-header {
+            padding: 22px 28px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+        }
+        .faq-accordion-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 1.05rem;
+            color: #0f172a;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin: 0;
+            transition: color 0.3s ease;
+        }
+        .faq-accordion-item.active .faq-accordion-title {
+            color: #ff7a00;
+        }
+        .faq-accordion-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #fff7ed;
+            color: #ff7a00;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            transition: transform 0.4s ease, background 0.3s ease, color 0.3s ease;
+            flex-shrink: 0;
+        }
+        .faq-accordion-item.active .faq-accordion-icon {
+            transform: rotate(180deg);
+            background: #ff7a00;
+            color: #ffffff;
+        }
+        .faq-accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0, 1, 0, 1), padding 0.3s ease;
+            padding: 0 28px;
+        }
+        .faq-accordion-item.active .faq-accordion-content {
+            max-height: 500px;
+            padding: 0 28px 24px;
+            transition: max-height 0.4s cubic-bezier(1, 0, 1, 0), padding 0.3s ease;
+        }
+        .faq-accordion-body {
+            color: #64748b;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            border-top: 1px dashed #e2e8f0;
+            padding-top: 16px;
+        }
+
+        /* Redesigned How Can We Help Contact Channels Section */
+        .help-channels-wrap {
+            padding: 60px 0;
+        }
+        .contact-channel-card {
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 40px 30px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .contact-channel-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, #ff7a00, #ea580c);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .contact-channel-card:hover {
+            transform: translateY(-12px);
+            border-color: rgba(255, 122, 0, 0.4);
+            box-shadow: 0 25px 50px rgba(255, 122, 0, 0.15);
+        }
+        .contact-channel-card:hover::before {
+            opacity: 1;
+        }
+        .contact-channel-icon {
+            width: 75px;
+            height: 75px;
+            border-radius: 20px;
+            background: #fff7ed;
+            color: #ff7a00;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.9rem;
+            margin-bottom: 24px;
+            transition: all 0.4s ease;
+        }
+        .contact-channel-card:hover .contact-channel-icon {
+            background: linear-gradient(135deg, #ff7a00, #ea580c);
+            color: #ffffff;
+            transform: scale(1.12) rotate(-6deg);
+            box-shadow: 0 12px 25px rgba(255, 122, 0, 0.35);
+        }
+        .contact-channel-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 1.3rem;
+            color: #0f172a;
+            margin-bottom: 8px;
+        }
+        .contact-channel-value {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #ff7a00;
+            margin-bottom: 14px;
+        }
+        .contact-channel-badge {
+            background: #f8fafc;
+            color: #64748b;
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 6px 14px;
+            border-radius: 20px;
+            border: 1px solid #e2e8f0;
+            margin-bottom: 24px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .contact-channel-btn {
+            background: transparent;
+            color: #0f172a;
+            border: 2px solid #0f172a;
+            padding: 10px 24px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            width: 100%;
+            margin-top: auto;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .contact-channel-card:hover .contact-channel-btn {
+            background: #ff7a00;
+            border-color: #ff7a00;
+            color: #ffffff;
+            box-shadow: 0 6px 20px rgba(255, 122, 0, 0.3);
+        }
+        .btn-solid-channel {
+            background: #ff7a00 !important;
+            border-color: #ff7a00 !important;
+            color: #ffffff !important;
+        }
+        .btn-solid-channel:hover {
+            background: #ea580c !important;
+            border-color: #ea580c !important;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar scrolled" style="background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(20px); padding: 16px 0; box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05); color: #111; position: fixed; top: 0; width: 100%; z-index: 9999;">
+<div class="nav-container">
+<a class="logo" href="index.html">
+<img alt="Stackly Logo" class="brand-logo-img" src="assets/logo.webp"/>
+</a>
+<ul class="nav-links">
+<li class="mobile-menu-logo">
+<a href="index.html"><img alt="Stackly Logo" class="brand-logo-img" src="assets/logo.webp"/></a>
+</li>
+<li><a class="nav-link" href="index.html">Home</a></li>
+<li><a class="nav-link" href="products.html">Products</a></li>
+<li><a class="nav-link" href="about.html">About</a></li>
+<li><a class="nav-link" href="services.html">Services</a></li>
+<li><a class="nav-link" href="blog.html">Blog</a></li>
+<li><a class="nav-link active" href="contact.html">Contact</a></li>
+<li class="mobile-menu-btn">
+<a class="btn-nav mobile-btn-login" href="login.html">Login</a>
+</li>
+</ul>
+<div class="nav-actions">
+<a class="btn-nav" href="login.html">Login</a>
+<div class="hamburger">
+<span class="bar"></span>
+<span class="bar"></span>
+<span class="bar"></span>
+</div>
+</div>
+</div>
+</nav>
+<header class="page-header page-header-contact reveal" data-aos="fade-down">
+<div class="container">
+<h1>Contact <span>Support</span></h1>
+<p>Need help with an order or gear recommendations? Get in touch 24/7.</p>
+</div>
+</header>
+<!-- Section 1: Intro / Quick Contact (Redesigned) -->
+<section class="content-section bg-light help-channels-wrap reveal" data-aos="fade-up">
+<div class="container">
+<div class="text-center" data-aos="fade-up" style="max-width: 700px; margin: 0 auto 50px;">
+<span class="section-subtitle">24/7 ATHLETE &amp; CUSTOMER DESK</span>
+<h2 class="section-title">How Can We Help You?</h2>
+<p class="section-desc">Need order tracking info, equipment assembly help, or product returns? Choose your preferred channel below for instant assistance.</p>
+</div>
+<div class="grid-3">
+<!-- Channel 1: Call Hotline -->
+<div class="contact-channel-card reveal" data-aos="fade-up" data-aos-delay="100">
+<div class="contact-channel-icon">
+<i class="fa-solid fa-phone-volume"></i>
+</div>
+<h3 class="contact-channel-title">Direct Call Support</h3>
+<div class="contact-channel-value">9876543210</div>
+<div class="contact-channel-badge"><i class="fa-solid fa-headset" style="color: #ff7a00;"></i> Toll-Free 24/7 Hotline</div>
+<a class="contact-channel-btn" href="404.html"><i class="fa-solid fa-phone"></i> Call Hotline</a>
+</div>
+<!-- Channel 2: Email Support -->
+<div class="contact-channel-card reveal" data-aos="fade-up" data-aos-delay="200">
+<div class="contact-channel-icon">
+<i class="fa-solid fa-envelope-open-text"></i>
+</div>
+<h3 class="contact-channel-title">Priority Email Desk</h3>
+<div class="contact-channel-value">info@stackly.com</div>
+<div class="contact-channel-badge"><i class="fa-solid fa-bolt" style="color: #ff7a00;"></i> Response &lt; 15 Mins</div>
+<a class="contact-channel-btn" href="404.html"><i class="fa-solid fa-paper-plane"></i> Email Support</a>
+</div>
+<!-- Channel 3: Live Chat -->
+<div class="contact-channel-card reveal" data-aos="fade-up" data-aos-delay="300">
+<div class="contact-channel-icon">
+<i class="fa-solid fa-comments"></i>
+</div>
+<h3 class="contact-channel-title">Instant Live Chat</h3>
+<div class="contact-channel-value">Chat With Engineers</div>
+<div class="contact-channel-badge"><i class="fa-solid fa-circle" style="color: #22c55e; font-size: 0.6rem;"></i> Active Now (9AM - 9PM EST)</div>
+<a class="contact-channel-btn btn-solid-channel" href="404.html"><i class="fa-solid fa-message"></i> Start Live Chat</a>
+</div>
+</div>
+</div>
+</section>
+<!-- CONTACT APPOINTMENT SECTION -->
+<section class="contact-appt-section">
+<div class="container appt-container">
+<!-- Left Info Card -->
+<div class="appt-info-card reveal" data-aos="fade-right">
+<h2>Not Just Giving Good Life, but Experienced</h2>
+<p>Premium quality gear, trusted by elite athletes. We provide personalized consultations to build the perfect commercial or home gym for your exact needs.</p>
+<ul class="appt-features">
+<li><i class="fa-solid fa-circle-check"></i> Unmatched Equipment Durability</li>
+<li><i class="fa-solid fa-circle-check"></i> Expert Installation &amp; Layout Planning</li>
+</ul>
+<a class="appt-btn" href="404.html">Contact Us</a>
+<ul class="appt-details">
+<li><i class="fa-solid fa-location-dot"></i> MMR Complex, Chinna Thirupathi, near Chinna Muniyappan Kovil, Salem, Tamil Nadu 636008</li>
+<li><i class="fa-regular fa-clock"></i> Mon - Fri : 9:00 am - 5:00 pm</li>
+<li><i class="fa-solid fa-phone"></i> 9876543210</li>
+</ul>
+</div>
+<!-- Right Form -->
+<div class="appt-form-wrap reveal" data-aos="fade-left">
+<div class="appt-alert" id="apptAlert">
+<i class="fa-solid fa-circle-exclamation"></i>
+<span id="apptAlertMsg">Please fill out all required fields.</span>
+</div>
+<form id="apptForm">
+<div class="appt-form-grid">
+<div class="appt-form-group">
+<label class="appt-label">Name</label>
+<input class="appt-input" id="appName" placeholder="Full Name" type="text"/>
+</div>
+<div class="appt-form-group">
+<label class="appt-label">Email</label>
+<input class="appt-input" id="appEmail" placeholder="Email Address" type="email"/>
+</div>
+<div class="appt-form-group">
+<label class="appt-label">Telephone</label>
+<input class="appt-input" id="appPhone" placeholder="Telephone" type="tel"/>
+</div>
+<div class="appt-form-group">
+<label class="appt-label">Date</label>
+<input class="appt-input" id="appDate" placeholder="Date" type="date"/>
+</div>
+<div class="appt-form-group full">
+<label class="appt-label">Select Service</label>
+<select class="appt-input" id="appService">
+<option value="">Services</option>
+<option value="consultation">Equipment Consultation</option>
+<option value="layout">Gym Layout Planning</option>
+<option value="support">Technical Support</option>
+</select>
+</div>
+<div class="appt-form-group full">
+<label class="appt-label">Message</label>
+<textarea class="appt-input" id="appMessage" placeholder="Your Message"></textarea>
+</div>
+</div>
+<div>
+<button class="appt-submit" id="apptSubmitBtn" onclick="window.location.href='404.html'; return false;" type="submit">
+<span class="btn-text">Make Appointment</span>
+<i class="fa-solid fa-spinner fa-spin" id="apptSpinner" style="display:none;"></i>
+</button>
+</div>
+</form>
+</div>
+</div>
+</section>
+<!-- Section 3: Headquarters Map -->
+<section class="content-section bg-light reveal" data-aos="fade-up">
+<div class="container text-center">
+<h2 class="section-title" style="margin-bottom: 15px;">Visit Our Flagship Store &amp; Headquarters</h2>
+<p class="section-desc" style="margin-bottom: 30px; font-weight: 600; color: #334155;">MMR Complex, Chinna Thirupathi, near Chinna Muniyappan Kovil, Salem, Tamil Nadu 636008</p>
+<div style="width:100%; height:450px; border-radius:16px; overflow:hidden; border: 4px solid #fff; box-shadow: 0 10px 30px rgba(0,0,0,0.1); position:relative;">
+<iframe allowfullscreen="" height="100%" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3907.188448373305!2d78.17140487588072!3d11.68296184255767!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3babefef7fd970bb%3A0xe11aef1a71994f9!2sStackly!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" style="border:0;" width="100%"></iframe>
+</div>
+<div style="margin-top: 25px;">
+<a class="btn-solid" href="404.html" style="display: inline-flex; align-items: center; gap: 8px;" target="_blank">
+<i class="fa-solid fa-map-location-dot"></i> View Stackly Location on Google Maps
+            </a>
+</div>
+</div>
+</section>
+<!-- New Section A: Global Operations & Experience Centers -->
+<section class="content-section reveal" data-aos="fade-up">
+<div class="container">
+<div data-aos="fade-up" style="text-align: center; max-width: 650px; margin: 0 auto 50px;">
+<span class="section-subtitle">Worldwide Reach</span>
+<h2 class="section-title">Global Experience Hubs</h2>
+<p style="color: #64748b; font-size: 1.05rem;">Visit our state-of-the-art showrooms and regional distribution fulfillment hubs across three continents.</p>
+</div>
+<div class="grid-3">
+<!-- Hub 1 -->
+<div class="hub-card reveal" data-aos="fade-up" data-aos-delay="100">
+<div class="hub-icon">
+<i class="fa-solid fa-building-flag"></i>
+</div>
+<span style="color: #ff7a00; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; margin-bottom: 6px;">India Flagship HQ</span>
+<h3 style="font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.25rem; margin-bottom: 12px; color: #0f172a;">Stackly Salem Retail &amp; Showroom</h3>
+<p style="color: #64748b; font-size: 0.9rem; line-height: 1.6; margin-bottom: 20px;">MMR Complex, Chinna Thirupathi, near Chinna Muniyappan Kovil, Salem, Tamil Nadu 636008.</p>
+<div style="margin-top: auto; display: flex; justify-content: space-between; align-items: center; padding-top: 15px; border-top: 1px solid #f1f5f9;">
+<span style="color: #22c55e; font-weight: 700; font-size: 0.82rem;"><i class="fa-solid fa-circle" style="font-size: 0.5rem; vertical-align: middle; margin-right: 4px;"></i> Open Now</span>
+<a href="404.html" style="color: #ff7a00; font-weight: 700; font-size: 0.88rem;" target="_blank">Get Directions <i class="fa-solid fa-arrow-up-right-from-square" style="margin-left: 4px;"></i></a>
+</div>
+</div>
+<!-- Hub 2 -->
+<div class="hub-card reveal" data-aos="fade-up" data-aos-delay="200">
+<div class="hub-icon">
+<i class="fa-solid fa-warehouse"></i>
+</div>
+<span style="color: #ff7a00; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; margin-bottom: 6px;">European Logistics</span>
+<h3 style="font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.25rem; margin-bottom: 12px; color: #0f172a;">Frankfurt Distribution Hub</h3>
+<p style="color: #64748b; font-size: 0.9rem; line-height: 1.6; margin-bottom: 20px;">Cargo City South, Building 452, 60549 Frankfurt am Main, Germany.</p>
+<div style="margin-top: auto; display: flex; justify-content: space-between; align-items: center; padding-top: 15px; border-top: 1px solid #f1f5f9;">
+<span style="color: #22c55e; font-weight: 700; font-size: 0.82rem;"><i class="fa-solid fa-circle" style="font-size: 0.5rem; vertical-align: middle; margin-right: 4px;"></i> 24/7 Dispatch</span>
+<a href="404.html" style="color: #ff7a00; font-weight: 700; font-size: 0.88rem;" target="_blank">Get Directions <i class="fa-solid fa-arrow-up-right-from-square" style="margin-left: 4px;"></i></a>
+</div>
+</div>
+<!-- Hub 3 -->
+<div class="hub-card reveal" data-aos="fade-up" data-aos-delay="300">
+<div class="hub-icon">
+<i class="fa-solid fa-microchip"></i>
+</div>
+<span style="color: #ff7a00; font-size: 0.8rem; font-weight: 700; text-transform: uppercase; margin-bottom: 6px;">Asia-Pacific Tech Hub</span>
+<h3 style="font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.25rem; margin-bottom: 12px; color: #0f172a;">Singapore R&amp;D Center</h3>
+<p style="color: #64748b; font-size: 0.9rem; line-height: 1.6; margin-bottom: 20px;">12 Marina Boulevard, Tower 3 Level 24, Financial District, Singapore 018982.</p>
+<div style="margin-top: auto; display: flex; justify-content: space-between; align-items: center; padding-top: 15px; border-top: 1px solid #f1f5f9;">
+<span style="color: #22c55e; font-weight: 700; font-size: 0.82rem;"><i class="fa-solid fa-circle" style="font-size: 0.5rem; vertical-align: middle; margin-right: 4px;"></i> Open Now</span>
+<a href="404.html" style="color: #ff7a00; font-weight: 700; font-size: 0.88rem;" target="_blank">Get Directions <i class="fa-solid fa-arrow-up-right-from-square" style="margin-left: 4px;"></i></a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- New Section B: Support Excellence Metrics & SLA Counter -->
+<section class="content-section reveal" data-aos="fade-up" style="background: #0f172a; padding: 90px 0; color: #ffffff;">
+<div class="container">
+<div data-aos="fade-up" style="text-align: center; max-width: 650px; margin: 0 auto 55px;">
+<span class="section-subtitle" style="color: #ff7a00;">Proven Standards</span>
+<h2 class="section-title" style="color: #ffffff;">Industry-Leading Service Metrics</h2>
+<p style="color: #94a3b8; font-size: 1.05rem;">We hold our support infrastructure to the same rigorous performance standards as our commercial gym hardware.</p>
+</div>
+<div class="grid-4">
+<!-- Stat 1 -->
+<div class="stat-card-contact reveal" data-aos="zoom-in" data-aos-delay="100">
+<div class="stat-num">&lt; 15m</div>
+<h4 style="font-size: 1.1rem; font-weight: 800; color: #ffffff; margin-bottom: 6px;">Avg Response Time</h4>
+<p style="color: #94a3b8; font-size: 0.88rem;">Rapid response for all email &amp; chat inquiries.</p>
+</div>
+<!-- Stat 2 -->
+<div class="stat-card-contact reveal" data-aos="zoom-in" data-aos-delay="200">
+<div class="stat-num">99.4%</div>
+<h4 style="font-size: 1.1rem; font-weight: 800; color: #ffffff; margin-bottom: 6px;">First-Contact Solved</h4>
+<p style="color: #94a3b8; font-size: 0.88rem;">Resolved directly without tier transfers.</p>
+</div>
+<!-- Stat 3 -->
+<div class="stat-card-contact reveal" data-aos="zoom-in" data-aos-delay="300">
+<div class="stat-num">24 / 7</div>
+<h4 style="font-size: 1.1rem; font-weight: 800; color: #ffffff; margin-bottom: 6px;">Live Specialist Coverage</h4>
+<p style="color: #94a3b8; font-size: 0.88rem;">Human equipment experts on call around the clock.</p>
+</div>
+<!-- Stat 4 -->
+<div class="stat-card-contact reveal" data-aos="zoom-in" data-aos-delay="400">
+<div class="stat-num">4.9/5</div>
+<h4 style="font-size: 1.1rem; font-weight: 800; color: #ffffff; margin-bottom: 6px;">Satisfaction Rating</h4>
+<p style="color: #94a3b8; font-size: 0.88rem;">Verified by 45,000+ customer reviews.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- New Section C: Dedicated Help Desk & Procurement Tiers -->
+<section class="content-section bg-light reveal" data-aos="fade-up">
+<div class="container">
+<div data-aos="fade-up" style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 45px; flex-wrap: wrap; gap: 20px;">
+<div>
+<span class="section-subtitle">Tailored Assistance</span>
+<h2 class="section-title" style="margin-bottom: 0;">Dedicated Help Desks</h2>
+</div>
+<p style="color: #64748b; max-width: 480px; font-size: 0.95rem; margin: 0;">Get connected instantly with specialized personnel equipped for your exact inquiry type.</p>
+</div>
+<div class="grid-3">
+<!-- Tier 1 -->
+<div class="tier-card reveal" data-aos="fade-up" data-aos-delay="100">
+<span class="tier-badge">INDIVIDUAL ATHLETES</span>
+<h3 style="font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.3rem; margin-bottom: 12px; color: #0f172a;">Consumer Support Desk</h3>
+<p style="color: #64748b; font-size: 0.9rem; line-height: 1.6; margin-bottom: 20px;">Help with order tracking, sizing recommendations, return authorizations, and product care guidance.</p>
+<ul class="tier-list">
+<li><i class="fa-solid fa-check"></i> Instant Order Tracking</li>
+<li><i class="fa-solid fa-check"></i> Sizing &amp; Fit Consultation</li>
+<li><i class="fa-solid fa-check"></i> 30-Day Hassle-Free Returns</li>
+</ul>
+<a class="btn-outline" href="404.html" style="width: 100%; text-align: center; border-radius: 8px; font-size: 0.9rem; padding: 10px 0; margin-top: auto;">Open Support Ticket</a>
+</div>
+<!-- Tier 2 -->
+<div class="tier-card reveal" data-aos="fade-up" data-aos-delay="200">
+<span class="tier-badge">COMMERCIAL FACILITIES</span>
+<h3 style="font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.3rem; margin-bottom: 12px; color: #0f172a;">B2B &amp; Gym Procurement</h3>
+<p style="color: #64748b; font-size: 0.9rem; line-height: 1.6; margin-bottom: 20px;">Dedicated account managers for commercial facility builds, custom branding, and bulk volume pricing.</p>
+<ul class="tier-list">
+<li><i class="fa-solid fa-check"></i> Dedicated Account Executive</li>
+<li><i class="fa-solid fa-check"></i> Volume Discount Structure</li>
+<li><i class="fa-solid fa-check"></i> Custom Laser-Cut Branding</li>
+</ul>
+<a class="btn-outline" href="404.html" style="width: 100%; text-align: center; border-radius: 8px; font-size: 0.9rem; padding: 10px 0; margin-top: auto;">Request B2B Quote</a>
+</div>
+<!-- Tier 3 -->
+<div class="tier-card reveal" data-aos="fade-up" data-aos-delay="300">
+<span class="tier-badge">TECHNICAL SERVICE</span>
+<h3 style="font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.3rem; margin-bottom: 12px; color: #0f172a;">Equipment Tech &amp; Assembly</h3>
+<p style="color: #64748b; font-size: 0.9rem; line-height: 1.6; margin-bottom: 20px;">Certified technicians for power rack assembly guidance, spare parts ordering, and warranty replacement.</p>
+<ul class="tier-list">
+<li><i class="fa-solid fa-check"></i> On-Site Technician Dispatch</li>
+<li><i class="fa-solid fa-check"></i> Lifetime Frame Warranty Claims</li>
+<li><i class="fa-solid fa-check"></i> Genuine Replacement Parts</li>
+</ul>
+<a class="btn-outline" href="404.html" style="width: 100%; text-align: center; border-radius: 8px; font-size: 0.9rem; padding: 10px 0; margin-top: auto;">Book Technician</a>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 6: Returns & Exchanges -->
+<section class="content-section reveal" data-aos="fade-up">
+<div class="container grid-2">
+<div class="img-placeholder img-h300 reveal" data-aos="fade-right" style="background-image: url('assets/returns-contact.webp');"></div>
+<div class="reveal" data-aos="fade-left">
+<h2 class="section-title">Returns &amp; Exchanges</h2>
+<p class="section-desc">We offer a 30-day no-questions-asked return policy on all apparel and unused supplements. Heavy equipment returns are subject to a restocking fee.</p>
+<a class="btn-solid" href="404.html">Start a Return</a>
+</div>
+</div>
+</section>
+<!-- New Image Section 2: Certified Field Technical Engineers -->
+<section class="content-section bg-light reveal" data-aos="fade-up">
+<div class="container">
+<div class="text-center" data-aos="fade-up" style="max-width: 750px; margin: 0 auto 50px;">
+<span class="section-subtitle">EXPERT TECHNICAL TEAM</span>
+<h2 class="section-title">Meet Your Dedicated Field Engineers</h2>
+<p class="section-desc">Direct access to certified master technicians and equipment specialists who oversee installation, commercial layout design, and warranty support in your region.</p>
+</div>
+<div class="grid-4">
+<div class="engineer-card reveal" data-aos="fade-up" data-aos-delay="100">
+<div class="engineer-img-box">
+<img alt="Marcus Vance - Lead Equipment Architect" src="assets/trainer1.webp"/>
+<span class="engineer-region-tag">NORTH AMERICA</span>
+</div>
+<div class="engineer-body">
+<h3 class="engineer-name">Marcus Vance</h3>
+<p class="engineer-role">Lead Power Rack Specialist</p>
+<p style="color: #64748b; font-size: 0.85rem; line-height: 1.5;">12+ years optimizing commercial power racks &amp; custom laser rigs.</p>
+<div class="engineer-meta">
+<span><i class="fa-solid fa-clock" style="color: #ff7a00;"></i> SLA: &lt; 10m</span>
+<span><i class="fa-solid fa-star" style="color: #ff7a00;"></i> 4.98 Rating</span>
+</div>
+</div>
+</div>
+<div class="engineer-card reveal" data-aos="fade-up" data-aos-delay="200">
+<div class="engineer-img-box">
+<img alt="Elena Rostova - Biomechanics Specialist" src="assets/trainer2.webp"/>
+<span class="engineer-region-tag">EUROPE HUB</span>
+</div>
+<div class="engineer-body">
+<h3 class="engineer-name">Elena Rostova</h3>
+<p class="engineer-role">Biomechanics &amp; Cardio Tech</p>
+<p style="color: #64748b; font-size: 0.85rem; line-height: 1.5;">Specializes in console diagnostics &amp; cable tension calibration.</p>
+<div class="engineer-meta">
+<span><i class="fa-solid fa-clock" style="color: #ff7a00;"></i> SLA: &lt; 15m</span>
+<span><i class="fa-solid fa-star" style="color: #ff7a00;"></i> 4.95 Rating</span>
+</div>
+</div>
+</div>
+<div class="engineer-card reveal" data-aos="fade-up" data-aos-delay="300">
+<div class="engineer-img-box">
+<img alt="Darius Thorne - B2B Layout Engineer" src="assets/trainer3.webp"/>
+<span class="engineer-region-tag">ASIA-PACIFIC</span>
+</div>
+<div class="engineer-body">
+<h3 class="engineer-name">Darius Thorne</h3>
+<p class="engineer-role">Commercial Facility Designer</p>
+<p style="color: #64748b; font-size: 0.85rem; line-height: 1.5;">Architect of over 250+ commercial strength centers globally.</p>
+<div class="engineer-meta">
+<span><i class="fa-solid fa-clock" style="color: #ff7a00;"></i> SLA: &lt; 12m</span>
+<span><i class="fa-solid fa-star" style="color: #ff7a00;"></i> 5.00 Rating</span>
+</div>
+</div>
+</div>
+<div class="engineer-card reveal" data-aos="fade-up" data-aos-delay="400">
+<div class="engineer-img-box">
+<img alt="Kai Rodriguez - Logistics Lead" src="assets/trainer4.webp"/>
+<span class="engineer-region-tag">GLOBAL LOGISTICS</span>
+</div>
+<div class="engineer-body">
+<h3 class="engineer-name">Kai Rodriguez</h3>
+<p class="engineer-role">Freight &amp; Assembly Lead</p>
+<p style="color: #64748b; font-size: 0.85rem; line-height: 1.5;">Manages white-glove delivery, crate tracking &amp; assembly crews.</p>
+<div class="engineer-meta">
+<span><i class="fa-solid fa-clock" style="color: #ff7a00;"></i> SLA: 24/7 Dispatch</span>
+<span><i class="fa-solid fa-star" style="color: #ff7a00;"></i> 4.97 Rating</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- New Image Section 1: Live Consultation & Virtual Showroom Tour -->
+<section class="content-section reveal" data-aos="fade-up">
+<div class="container">
+<div class="showroom-wrap">
+<div class="showroom-img-frame reveal" data-aos="fade-right">
+<img alt="Stackly Virtual Gym Showroom" src="assets/video-consult.webp"/>
+<div class="showroom-overlay-badge">
+<i class="fa-solid fa-vr-cardboard"></i>
+<span>Live 3D Equipment Walkthrough Available</span>
+</div>
+</div>
+<div class="reveal" data-aos="fade-left">
+<span class="section-subtitle">INTERACTIVE VIRTUAL SHOWROOM</span>
+<h2 class="section-title">Schedule a Live 1-on-1 Video Consultation</h2>
+<p class="section-desc">Can't visit our Bali or California experience centers in person? Connect directly with our equipment architects via live video tour to inspect build quality, test biomechanics, and plan your custom facility layout.</p>
+<div style="display: flex; gap: 15px; flex-wrap: wrap;">
+<a class="btn-solid" href="404.html"><i class="fa-solid fa-video" style="margin-right: 8px;"></i> Book Virtual Tour</a>
+<a class="btn-outline" href="404.html">Explore Facilities</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- New Image Section 3: Global Warehouse & Logistics Showcase -->
+<section class="content-section reveal" data-aos="fade-up">
+<div class="container">
+<div class="text-center" data-aos="fade-up" style="max-width: 750px; margin: 0 auto 50px;">
+<span class="section-subtitle">WORLDWIDE DISTRIBUTION</span>
+<h2 class="section-title">Behind the Scenes: Our Logistics Hubs</h2>
+<p class="section-desc">Take a glance inside our primary fulfillment centers, custom fabrication labs, and quality assurance testing facilities worldwide.</p>
+</div>
+<div class="grid-3">
+<div class="hub-gallery-card reveal" data-aos="fade-up" data-aos-delay="100">
+<img alt="Central Logistics Center USA" class="hub-gallery-bg" src="assets/slide1.webp"/>
+<div class="hub-gallery-overlay">
+<span class="hub-gallery-tag">USA FULFILLMENT</span>
+<h3 class="hub-gallery-title">Central Distribution Center</h3>
+<p class="hub-gallery-desc">85,000 sq ft automated logistics hub ensuring 24-hour dispatch for North American orders.</p>
+<a class="hub-gallery-btn" href="404.html">Explore USA Facility <i class="fa-solid fa-arrow-right"></i></a>
+</div>
+</div>
+<div class="hub-gallery-card reveal" data-aos="fade-up" data-aos-delay="200">
+<img alt="Quality Testing &amp; Custom Fab Hub" class="hub-gallery-bg" src="assets/slide2.webp"/>
+<div class="hub-gallery-overlay">
+<span class="hub-gallery-tag">GERMANY TESTING LAB</span>
+<h3 class="hub-gallery-title">Precision Testing &amp; Fab</h3>
+<p class="hub-gallery-desc">Steel stress-testing, custom laser branding, and biomechanical calibration workshop.</p>
+<a class="hub-gallery-btn" href="404.html">Explore Lab Specs <i class="fa-solid fa-arrow-right"></i></a>
+</div>
+</div>
+<div class="hub-gallery-card reveal" data-aos="fade-up" data-aos-delay="300">
+<img alt="APAC Logistics &amp; Experience Center" class="hub-gallery-bg" src="assets/sports.webp"/>
+<div class="hub-gallery-overlay">
+<span class="hub-gallery-tag">BALI EXPERIENCE HUB</span>
+<h3 class="hub-gallery-title">Asia-Pacific Flagship Hub</h3>
+<p class="hub-gallery-desc">Full equipment showroom, live customer testing floor, and regional technical support center.</p>
+<a class="hub-gallery-btn" href="404.html">Explore Bali Hub <i class="fa-solid fa-arrow-right"></i></a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 8: Interactive FAQ Accordion -->
+<section class="content-section bg-light reveal" data-aos="fade-up" id="faq-section">
+<div class="container">
+<div class="text-center" data-aos="fade-up" style="max-width: 750px; margin: 0 auto 40px;">
+<span class="section-subtitle">GOT QUESTIONS? WE'VE GOT ANSWERS</span>
+<h2 class="section-title">Frequently Asked Questions</h2>
+<p class="section-desc">Find quick answers to common inquiries regarding international shipping, commercial equipment warranties, assembly guides, and order tracking.</p>
+</div>
+<!-- Accordion Container -->
+<div class="faq-accordion-wrap">
+<!-- FAQ 1 -->
+<div class="faq-accordion-item active" data-cat="shipping">
+<div class="faq-accordion-header">
+<h3 class="faq-accordion-title">
+<i class="fa-solid fa-earth-americas" style="color: #ff7a00; font-size: 1rem;"></i>
+                        Do you ship commercial gym equipment internationally?
+                    </h3>
+<div class="faq-accordion-icon"><i class="fa-solid fa-chevron-down"></i></div>
+</div>
+<div class="faq-accordion-content">
+<div class="faq-accordion-body">
+                        Yes! We ship to over 100+ countries worldwide via trusted freight partners (FedEx Cargo, DHL Global Forwarding, and ocean freight for bulk gym setups). Customs duties, import taxes, and localized door-to-door delivery estimates are calculated automatically at checkout.
+                    </div>
+</div>
+</div>
+<!-- FAQ 2 -->
+<div class="faq-accordion-item" data-cat="equipment">
+<div class="faq-accordion-header">
+<h3 class="faq-accordion-title">
+<i class="fa-solid fa-shield-halved" style="color: #ff7a00; font-size: 1rem;"></i>
+                        What warranty coverage comes with Stackly power racks &amp; barbells?
+                    </h3>
+<div class="faq-accordion-icon"><i class="fa-solid fa-chevron-down"></i></div>
+</div>
+<div class="faq-accordion-content">
+<div class="faq-accordion-body">
+                        All heavy-duty steel power racks, squat stands, and Olympic barbells come with a <strong>Limited Lifetime Structural Frame Warranty</strong>. Pulley cables, sealed bearings, and vinyl upholstery carry a 2-year full replacement warranty under normal commercial or residential use.
+                    </div>
+</div>
+</div>
+<!-- FAQ 3 -->
+<div class="faq-accordion-item" data-cat="shipping">
+<div class="faq-accordion-header">
+<h3 class="faq-accordion-title">
+<i class="fa-solid fa-location-crosshairs" style="color: #ff7a00; font-size: 1rem;"></i>
+                        How do I track my freight order in real-time?
+                    </h3>
+<div class="faq-accordion-icon"><i class="fa-solid fa-chevron-down"></i></div>
+</div>
+<div class="faq-accordion-content">
+<div class="faq-accordion-body">
+                        As soon as your shipment leaves our central distribution hub, you will receive an automated dispatch email with your freight tracking bill of lading (BOL) number. You can track real-time transit status on our site or directly via your assigned logistics carrier portal.
+                    </div>
+</div>
+</div>
+<!-- FAQ 4 -->
+<div class="faq-accordion-item" data-cat="b2b">
+<div class="faq-accordion-header">
+<h3 class="faq-accordion-title">
+<i class="fa-solid fa-building" style="color: #ff7a00; font-size: 1rem;"></i>
+                        Do you offer custom laser logo branding &amp; bulk facility pricing?
+                    </h3>
+<div class="faq-accordion-icon"><i class="fa-solid fa-chevron-down"></i></div>
+</div>
+<div class="faq-accordion-content">
+<div class="faq-accordion-body">
+                        Absolutely. Commercial gyms, university athletic centers, and military facilities ordering bulk quantities qualify for tier-based volume discounts. We also provide custom laser-etched stainless steel branding plates and custom powder coat colors for power racks.
+                    </div>
+</div>
+</div>
+<!-- FAQ 5 -->
+<div class="faq-accordion-item" data-cat="returns">
+<div class="faq-accordion-header">
+<h3 class="faq-accordion-title">
+<i class="fa-solid fa-box-open" style="color: #ff7a00; font-size: 1rem;"></i>
+                        What is your 30-Day Hassle-Free Return Policy?
+                    </h3>
+<div class="faq-accordion-icon"><i class="fa-solid fa-chevron-down"></i></div>
+</div>
+<div class="faq-accordion-content">
+<div class="faq-accordion-body">
+                        We offer a 30-day money-back guarantee on all apparel, accessories, and un-opened gear. If you are not 100% satisfied, simply initiate a return ticket through our portal. Freight return shipping fees apply for heavy strength machinery unless damaged upon initial transit arrival.
+                    </div>
+</div>
+</div>
+<!-- FAQ 6 -->
+<div class="faq-accordion-item" data-cat="equipment">
+<div class="faq-accordion-header">
+<h3 class="faq-accordion-title">
+<i class="fa-solid fa-screwdriver-wrench" style="color: #ff7a00; font-size: 1rem;"></i>
+                        Can I book an on-site technician for equipment assembly?
+                    </h3>
+<div class="faq-accordion-icon"><i class="fa-solid fa-chevron-down"></i></div>
+</div>
+<div class="faq-accordion-content">
+<div class="faq-accordion-body">
+                        Yes! White-glove assembly and professional technician dispatch are available in major metropolitan areas across North America, Europe, and Asia-Pacific. Select "White Glove Installation" at checkout or contact our support team to schedule an appointment.
+                    </div>
+</div>
+</div>
+</div>
+<!-- Help Desk Banner Card -->
+<div style="background: #ffffff; border-radius: 20px; padding: 30px; margin-top: 50px; border: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px; box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);">
+<div style="display: flex; align-items: center; gap: 20px;">
+<div style="width: 55px; height: 55px; border-radius: 14px; background: #fff7ed; color: #ff7a00; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0;">
+<i class="fa-solid fa-headset"></i>
+</div>
+<div>
+<h4 style="font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.15rem; color: #0f172a; margin-bottom: 4px;">Still have questions?</h4>
+<p style="color: #64748b; font-size: 0.9rem; margin: 0;">Our technical support engineers are available 24/7 to assist you.</p>
+</div>
+</div>
+<a class="btn-solid" href="404.html" style="padding: 12px 28px; font-size: 0.9rem;"><i class="fa-solid fa-paper-plane" style="margin-right: 8px;"></i> Contact Support Desk</a>
+</div>
+</div>
+</section>
+<!-- Section 7: Social Media (Redesigned) -->
+<section class="content-section reveal" data-aos="fade-up" style="padding: 40px 0;">
+<div class="container">
+<div class="social-follow-section">
+<div class="text-center" data-aos="fade-up" style="max-width: 650px; margin: 0 auto 50px;">
+<span class="section-subtitle" style="color: #ff7a00;">JOIN OUR ATHLETE COMMUNITY</span>
+<h2 class="section-title" style="color: #ffffff; margin-bottom: 15px;">Follow the Store</h2>
+<p style="color: #cbd5e1; font-size: 1.05rem; line-height: 1.7;">Connect with over 250,000+ athletes worldwide. Follow our official channels for live restock alerts, daily workout tips, and equipment testing videos.</p>
+</div>
+<div class="grid-4">
+<!-- Instagram Card -->
+<div class="social-follow-card reveal" data-aos="fade-up" data-aos-delay="100">
+<div class="social-follow-icon">
+<i class="fa-brands fa-instagram"></i>
+</div>
+<h3 class="social-follow-handle">@StacklyFitness</h3>
+<div class="social-follow-stat"><i class="fa-solid fa-users" style="margin-right: 5px;"></i> 145K Followers</div>
+<p class="social-follow-desc">Daily equipment reels, customer gym setups &amp; exclusive discount codes.</p>
+<a class="social-follow-btn" href="404.html">Follow on Instagram</a>
+</div>
+<!-- TikTok Card -->
+<div class="social-follow-card reveal" data-aos="fade-up" data-aos-delay="200">
+<div class="social-follow-icon">
+<i class="fa-brands fa-tiktok"></i>
+</div>
+<h3 class="social-follow-handle">@StacklyOfficial</h3>
+<div class="social-follow-stat"><i class="fa-solid fa-bolt" style="margin-right: 5px;"></i> 82K Followers</div>
+<p class="social-follow-desc">Steel stress tests, barbell drop challenges &amp; 60-second assembly tips.</p>
+<a class="social-follow-btn" href="404.html">Follow on TikTok</a>
+</div>
+<!-- Twitter/X Card -->
+<div class="social-follow-card reveal" data-aos="fade-up" data-aos-delay="300">
+<div class="social-follow-icon">
+<i class="fa-brands fa-twitter"></i>
+</div>
+<h3 class="social-follow-handle">@StacklyStore</h3>
+<div class="social-follow-stat"><i class="fa-solid fa-fire" style="margin-right: 5px;"></i> 35K Followers</div>
+<p class="social-follow-desc">Real-time restock announcements, engineering updates &amp; community Q&amp;A.</p>
+<a class="social-follow-btn" href="404.html">Follow on X</a>
+</div>
+<!-- YouTube Card -->
+<div class="social-follow-card reveal" data-aos="fade-up" data-aos-delay="400">
+<div class="social-follow-icon">
+<i class="fa-brands fa-youtube"></i>
+</div>
+<h3 class="social-follow-handle">@StacklyTV</h3>
+<div class="social-follow-stat"><i class="fa-solid fa-play" style="margin-right: 5px;"></i> 110K Subscribers</div>
+<p class="social-follow-desc">Full equipment reviews, commercial gym layout guides &amp; athlete interviews.</p>
+<a class="social-follow-btn" href="404.html">Subscribe on YouTube</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<footer class="footer" style="margin-top: 80px;">
+<div class="container footer-grid">
+<div class="footer-brand">
+<a class="logo" href="index.html">
+<img alt="Stackly Logo" class="brand-logo-img" src="assets/logo.webp"/>
+</a>
+<p>Your ultimate destination for premium sports gear, fitness equipment, and athletic apparel.</p>
+<div class="social-links">
+<a href="404.html"><i class="fa-brands fa-facebook-f"></i></a>
+<a href="404.html"><i class="fa-brands fa-instagram"></i></a>
+<a href="404.html"><i class="fa-brands fa-youtube"></i></a>
+<a href="404.html"><i class="fa-brands fa-linkedin-in"></i></a>
+</div>
+</div>
+<div class="footer-links">
+<h3>Quick Navigation</h3>
+<ul>
+<li><a href="index.html">Home</a></li>
+<li><a href="products.html">Products</a></li>
+<li><a href="about.html">About</a></li>
+<li><a href="services.html">Services</a></li>
+<li><a href="blog.html">Blog</a></li>
+</ul>
+</div>
+<div class="footer-links">
+<h3>Support Hub</h3>
+<ul>
+<li><a href="404.html">Privacy Matrix</a></li>
+<li><a href="404.html">Terms &amp; Licensing</a></li>
+<li><a href="404.html">Member Portal</a></li>
+<li><a href="contact.html">Contact Desk</a></li>
+</ul>
+</div>
+<div class="footer-links">
+<h3>Contact Us</h3>
+<ul>
+<li><i class="fa-solid fa-envelope" style="margin-right: 8px; color: #ff7a00;"></i> <a href="mailto:info@stackly.com" style="color:inherit;">info@stackly.com</a></li>
+<li><i class="fa-solid fa-phone" style="margin-right: 8px; color: #ff7a00;"></i> <a href="tel:9876543210" style="color:inherit;">9876543210</a></li>
+<li><i class="fa-solid fa-location-dot" style="margin-right: 8px; color: #ff7a00;"></i> <a href="https://www.google.com/maps/place/Stackly/@11.6829566,78.1739798,17z/data=!3m1!4b1!4m6!3m5!1s0x3babefef7fd970bb:0xe11aef1a71994f9!8m2!3d11.6829566!4d78.1739798!16s%2Fg%2F11l660s35r?entry=ttu&amp;g_ep=EgoyMDI2MDcwNy4wIKXMDSoASAFQAw%3D%3D" style="color:inherit;" target="_blank">MMR Complex, Chinna Thirupathi, near Chinna Muniyappan Kovil, Salem, Tamil Nadu 636008</a></li>
+<li><i class="fa-solid fa-clock" style="margin-right: 8px; color: #ff7a00;"></i> 24/7 Store Support</li>
+</ul>
+</div>
+</div>
+<div class="footer-bottom text-center">
+<p>© 2026 Stackly Store Inc. Designed for elite athletes worldwide.</p>
+</div>
+</footer>
+<script src="js/main.js"></script>
+<script src="js/form-validation.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // FAQ Accordion & Category Filter Logic
+    const faqHeaders = document.querySelectorAll('.faq-accordion-header');
+    if (faqHeaders.length > 0) {
+        faqHeaders.forEach(header => {
+            header.addEventListener('click', function() {
+                const item = this.parentElement;
+                const isActive = item.classList.contains('active');
+                
+                // Close all accordion items
+                document.querySelectorAll('.faq-accordion-item').forEach(i => i.classList.remove('active'));
+                
+                // Open clicked item if it was closed
+                if (!isActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+    }
+
+    const faqTabBtns = document.querySelectorAll('.faq-tab-btn');
+    if (faqTabBtns.length > 0) {
+        faqTabBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                faqTabBtns.forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                const category = this.getAttribute('data-category');
+                const items = document.querySelectorAll('.faq-accordion-item');
+                
+                items.forEach(item => {
+                    if (category === 'all' || item.getAttribute('data-cat') === category) {
+                        item.style.display = 'block';
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+            });
+        });
+    }
+
+    const apptForm = document.getElementById('apptForm');
+    const alertBanner = document.getElementById('apptAlert');
+    const alertMsg = document.getElementById('apptAlertMsg');
+    const inputs = document.querySelectorAll('.appt-input');
+    const btn = document.getElementById('apptSubmitBtn');
+    const spinner = document.getElementById('apptSpinner');
+
+    if (apptForm) {
+        apptForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            let isValid = true;
+            alertBanner.classList.remove('show');
+            
+            // Check all inputs
+            inputs.forEach(inp => {
+                if (!inp.value.trim()) {
+                    isValid = false;
+                    inp.classList.add('error');
+                }
+            });
+            
+            if (!isValid) {
+                alertBanner.className = 'appt-alert error show';
+                alertMsg.textContent = 'Please fill out all required fields.';
+                return;
+            }
+            
+            // Basic email validation
+            const emailInp = document.getElementById('appEmail');
+            if (!/^\S+@\S+\.\S+$/.test(emailInp.value)) {
+                emailInp.classList.add('error');
+                alertBanner.className = 'appt-alert error show';
+                alertMsg.textContent = 'Please enter a valid email address.';
+                return;
+            }
+
+            // Simulate loading
+            btn.classList.add('loading');
+            spinner.style.display = 'inline-block';
+            
+            setTimeout(() => {
+                window.location.href = '404.html';
+            }, 1000);
+        });
+
+        // Clear error on typing
+        inputs.forEach(inp => {
+            inp.addEventListener('input', () => {
+                inp.classList.remove('error');
+                alertBanner.classList.remove('show');
+            });
+        });
+    }
+});
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        if (typeof AOS !== 'undefined') {
+            AOS.init({ duration: 800, once: true });
+        }
+    });
+</script>
+</body>
+</html>

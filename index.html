@@ -1,0 +1,2277 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Stackly | Premium Sports &amp; Fitness Store</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&amp;family=Poppins:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet"/>
+<link href="css/main.css" rel="stylesheet"/>
+<style>
+        /* Bento Services Section Styling */
+        .bento-services-section {
+            padding: 80px 0;
+            background: #ffffff;
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1.15fr;
+            grid-template-rows: 240px 240px;
+            gap: 20px;
+        }
+        .bento-card {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            border: 1px solid #e2e8f0;
+        }
+        .bento-card:hover {
+            transform: translateY(-8px);
+            border-color: #ff7a00;
+            box-shadow: 0 20px 45px rgba(255, 122, 0, 0.18);
+        }
+        .bento-card-bg {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
+        }
+        .bento-card:hover .bento-card-bg {
+            transform: scale(1.08);
+            filter: brightness(1.05);
+        }
+        .bento-card-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(15, 23, 42, 0.05) 0%, rgba(15, 23, 42, 0.85) 100%);
+            transition: opacity 0.3s ease;
+        }
+        .bento-card:hover .bento-card-overlay {
+            background: linear-gradient(180deg, rgba(15, 23, 42, 0.1) 0%, rgba(15, 23, 42, 0.92) 100%);
+        }
+        .bento-card-content {
+            position: relative;
+            z-index: 2;
+            padding: 28px;
+            color: #ffffff;
+        }
+        
+        /* Top Left Solid Orange Accent Card */
+        .bento-card-accent {
+            background: linear-gradient(135deg, #ff7a00 0%, #ea580c 100%);
+            border-radius: 32px 20px 20px 20px;
+            border: none;
+            padding: 32px 28px;
+            justify-content: space-between;
+        }
+        .bento-card-accent:hover {
+            box-shadow: 0 20px 40px rgba(255, 122, 0, 0.35);
+        }
+        .bento-accent-subtitle {
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 8px;
+            display: block;
+        }
+        .bento-accent-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 2.2rem;
+            color: #ffffff;
+            line-height: 1.15;
+            margin-bottom: 12px;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+        .bento-accent-desc {
+            color: rgba(255, 255, 255, 0.92);
+            font-size: 0.88rem;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+        .bento-link-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 700;
+            font-size: 0.92rem;
+            color: #ffffff;
+            transition: gap 0.3s ease;
+        }
+        .bento-card:hover .bento-link-btn {
+            gap: 14px;
+        }
+
+        /* Middle & Bottom Cards Text */
+        .bento-title-small {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 1.35rem;
+            color: #ffffff;
+            margin: 0;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+
+        /* Right Tall Card Spanning 2 Rows */
+        .bento-card-tall {
+            grid-row: span 2;
+            border-radius: 20px 32px 32px 20px;
+        }
+        .bento-card-tall .bento-accent-title {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+        .bento-card-tall .bento-accent-desc {
+            color: #cbd5e1;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        /* Bento Services Card Hover Description */
+        .bento-hover-desc {
+            max-height: 0;
+            opacity: 0;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            color: #cbd5e1;
+            font-size: 0.85rem;
+            line-height: 1.5;
+            margin-top: 0;
+        }
+        .bento-card:hover .bento-hover-desc {
+            max-height: 120px;
+            opacity: 1;
+            margin-top: 8px;
+        }
+
+        /* Auto & Manual Hero Slider Styles */
+        .hero-slider-container {
+            position: relative;
+            overflow: hidden;
+            height: 100vh;
+            min-height: 550px;
+            background: #0f172a;
+        }
+        .hero-track {
+            display: flex;
+            height: 100%;
+            transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+        .hero-slide-item {
+            min-width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+        }
+        .hero-slide-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(15, 23, 42, 0.65) 0%, rgba(15, 23, 42, 0.88) 100%);
+        }
+        .hero-slide-content {
+            position: relative;
+            z-index: 2;
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .hero-nav-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(8px);
+        }
+        .hero-nav-arrow:hover {
+            background: #ff7a00;
+            border-color: #ff7a00;
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 8px 25px rgba(255, 122, 0, 0.4);
+        }
+        .hero-nav-prev { left: 30px; }
+        .hero-nav-next { right: 30px; }
+        .hero-dots-wrapper {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 12px;
+            z-index: 10;
+        }
+        .hero-dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .hero-dot.active, .hero-dot:hover {
+            background: #ff7a00;
+            border-color: #ff7a00;
+            transform: scale(1.2);
+            width: 32px;
+            border-radius: 20px;
+        }
+
+        /* Modern Home Page FAQ Section Styling */
+        .home-faq-wrap {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .home-faq-item {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 18px;
+            margin-bottom: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.03);
+            transition: all 0.3s ease;
+        }
+        .home-faq-item:hover {
+            border-color: rgba(255, 122, 0, 0.4);
+            box-shadow: 0 8px 25px rgba(15, 23, 42, 0.06);
+        }
+        .home-faq-item.active {
+            border-color: #ff7a00;
+            box-shadow: 0 10px 30px rgba(255, 122, 0, 0.12);
+        }
+        .home-faq-header {
+            padding: 22px 28px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            user-select: none;
+        }
+        .home-faq-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 1.08rem;
+            color: #0f172a;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin: 0;
+            transition: color 0.3s ease;
+        }
+        .home-faq-item.active .home-faq-title {
+            color: #ff7a00;
+        }
+        .home-faq-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: #fff7ed;
+            color: #ff7a00;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            transition: transform 0.4s ease, background 0.3s ease, color 0.3s ease;
+            flex-shrink: 0;
+        }
+        .home-faq-item.active .home-faq-icon {
+            transform: rotate(180deg);
+            background: #ff7a00;
+            color: #ffffff;
+        }
+        .home-faq-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0, 1, 0, 1), padding 0.3s ease;
+            padding: 0 28px;
+        }
+        .home-faq-item.active .home-faq-content {
+            max-height: 400px;
+            padding: 0 28px 24px;
+        }
+        .home-faq-body {
+            color: #64748b;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            border-top: 1px dashed #e2e8f0;
+            padding-top: 16px;
+        }
+
+        /* 3 Additional Image Sections Styling for Home Page */
+        .home-showroom-wrap {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+            background: #ffffff;
+            border-radius: 28px;
+            padding: 60px 50px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 15px 35px rgba(15, 23, 42, 0.05);
+            transition: all 0.4s ease;
+        }
+        .home-showroom-wrap:hover {
+            box-shadow: 0 25px 50px rgba(255, 122, 0, 0.12);
+            border-color: rgba(255, 122, 0, 0.4);
+        }
+        .home-showroom-img {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            height: 400px;
+        }
+        .home-showroom-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .home-showroom-wrap:hover .home-showroom-img img {
+            transform: scale(1.08);
+        }
+
+        /* Promo Banner Input Wrapper & Validation Styles */
+        .promo-input-wrapper {
+            position: relative;
+            display: flex;
+            background: #ffffff;
+            padding: 5px;
+            border-radius: 50px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        .promo-input-wrapper:focus-within {
+            border-color: #ff7a00;
+            box-shadow: 0 0 0 4px rgba(255, 122, 0, 0.18);
+        }
+        .promo-input-wrapper.has-error {
+            border-color: #ef4444 !important;
+            background: #fff5f5 !important;
+            box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.2) !important;
+        }
+
+        .home-coach-card {
+            background: #ffffff;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.04);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            text-align: center;
+            text-decoration: none;
+            display: block;
+        }
+        .home-coach-card:hover {
+            transform: translateY(-10px);
+            border-color: #ff7a00;
+            box-shadow: 0 20px 40px rgba(255, 122, 0, 0.15);
+        }
+        .home-coach-img {
+            height: 250px;
+            overflow: hidden;
+            background: #0f172a;
+            position: relative;
+        }
+        .home-coach-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top center;
+            transition: transform 0.5s ease;
+        }
+        .home-coach-card:hover .home-coach-img img {
+            transform: scale(1.06);
+        }
+
+        .home-hub-card {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            height: 360px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            text-decoration: none;
+            display: block;
+        }
+        .home-hub-card:hover {
+            transform: translateY(-8px) scale(1.01);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+        }
+        .home-hub-bg {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .home-hub-card:hover .home-hub-bg {
+            transform: scale(1.1);
+        }
+
+        /* Stackly Mobile App Section Styles */
+        .home-app-section {
+            padding: 90px 0;
+            background: #f8fafc;
+            position: relative;
+            overflow: hidden;
+            border-top: 1px solid #e2e8f0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .home-app-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        .app-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 18px;
+            border-radius: 30px;
+            background: #fff7ed;
+            border: 1px solid rgba(255, 122, 0, 0.3);
+            color: #ff7a00;
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+        .app-content h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 900;
+            color: #0f172a;
+            line-height: 1.25;
+            margin-bottom: 20px;
+        }
+        .app-content h2 span {
+            color: #ff7a00;
+        }
+        .app-content p {
+            color: #475569;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 35px;
+        }
+        .app-features-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        .app-feature-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 18px;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            padding: 18px 24px;
+            border-radius: 16px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(15, 23, 42, 0.03);
+        }
+        .app-feature-card:hover {
+            background: #ffffff;
+            border-color: rgba(255, 122, 0, 0.5);
+            transform: translateX(8px);
+            box-shadow: 0 10px 25px rgba(255, 122, 0, 0.12);
+        }
+        .app-feature-icon {
+            width: 46px;
+            height: 46px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #ff7a00, #e66e00);
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+            box-shadow: 0 8px 20px rgba(255, 122, 0, 0.3);
+        }
+        .app-feature-info h4 {
+            color: #0f172a;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin: 0 0 4px 0;
+        }
+        .app-feature-info p {
+            color: #64748b;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin: 0;
+        }
+        .app-buttons-group {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .store-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 14px;
+            background: #0f172a;
+            border: 1px solid #0f172a;
+            padding: 12px 24px;
+            border-radius: 14px;
+            color: #ffffff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(15, 23, 42, 0.15);
+        }
+        .store-btn:hover {
+            background: #ff7a00;
+            border-color: #ff7a00;
+            transform: translateY(-4px);
+            box-shadow: 0 12px 25px rgba(255, 122, 0, 0.35);
+        }
+        .store-btn i {
+            font-size: 1.8rem;
+        }
+        .store-btn-text span {
+            display: block;
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.85;
+        }
+        .store-btn-text strong {
+            display: block;
+            font-size: 1.05rem;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        .qr-card {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px dashed rgba(255, 122, 0, 0.4);
+            padding: 10px 18px;
+            border-radius: 14px;
+            color: #ffffff;
+            transition: all 0.3s ease;
+        }
+        .qr-card:hover {
+            border-color: #ff7a00;
+            background: rgba(255, 122, 0, 0.1);
+        }
+        .qr-card i {
+            font-size: 2rem;
+            color: #ff7a00;
+        }
+        .qr-card span {
+            font-size: 0.8rem;
+            color: #cbd5e1;
+            line-height: 1.3;
+        }
+
+        /* Mockup Phone Side */
+        .app-mockup-wrapper {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .app-phone-frame {
+            width: 320px;
+            height: 580px;
+            background: #0f172a;
+            border: 10px solid #1e293b;
+            border-radius: 44px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5), 0 0 40px rgba(255, 122, 0, 0.15);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.5s ease;
+        }
+        .app-mockup-wrapper:hover .app-phone-frame {
+            transform: translateY(-10px) rotate(-1deg);
+        }
+        .app-phone-notch {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 130px;
+            height: 24px;
+            background: #1e293b;
+            border-bottom-left-radius: 16px;
+            border-bottom-right-radius: 16px;
+            z-index: 10;
+        }
+        .app-screen-content {
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 40px 20px 25px;
+            position: relative;
+        }
+        .app-screen-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(15, 23, 42, 0.3) 0%, rgba(15, 23, 42, 0.95) 100%);
+        }
+        .app-screen-inner {
+            position: relative;
+            z-index: 2;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .app-floating-pill {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            border: 1px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 12px 18px;
+            color: #0f172a;
+            box-shadow: 0 15px 35px rgba(15, 23, 42, 0.12);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.4s ease;
+            z-index: 20;
+        }
+        .app-floating-pill-1 {
+            top: 60px;
+            left: -30px;
+        }
+        .app-floating-pill-2 {
+            bottom: 80px;
+            right: -25px;
+        }
+        .app-mockup-wrapper:hover .app-floating-pill-1 {
+            transform: translateY(-6px) scale(1.03);
+        }
+        .app-mockup-wrapper:hover .app-floating-pill-2 {
+            transform: translateY(6px) scale(1.03);
+        }
+
+        /* Popular Products Section Styling (Matching Reference Layout) */
+        .pop-products-section {
+            padding: 90px 0;
+            background: #f8fafc;
+        }
+        .pop-products-grid {
+            display: grid;
+            grid-template-columns: 1.35fr 0.85fr;
+            gap: 30px;
+            align-items: stretch;
+        }
+        .pop-cards-wrap {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 22px;
+        }
+        .pop-card {
+            background: #ffffff;
+            border-radius: 20px;
+            border: 1px solid #e2e8f0;
+            padding: 22px;
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        .pop-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(180deg, #ff7a00, #ea580c);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .pop-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(255, 122, 0, 0.5);
+            box-shadow: 0 20px 40px rgba(255, 122, 0, 0.12);
+        }
+        .pop-card:hover::before {
+            opacity: 1;
+        }
+        .pop-img-box {
+            width: 105px;
+            height: 105px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, #f1f5f9 0%, #ffffff 100%);
+            border: 1px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            padding: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+        .pop-img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .pop-card:hover .pop-img-box img {
+            transform: scale(1.1);
+        }
+        .pop-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100%;
+        }
+        .pop-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 1.05rem;
+            color: #0f172a;
+            text-transform: uppercase;
+            margin: 0 0 6px 0;
+            letter-spacing: 0.5px;
+            line-height: 1.25;
+        }
+        .pop-rating {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            color: #ffb800;
+            font-size: 0.82rem;
+            margin-bottom: 12px;
+        }
+        .pop-rating span {
+            color: #94a3b8;
+            font-weight: 600;
+            font-size: 0.8rem;
+            margin-left: 4px;
+        }
+        .pop-bottom-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+        .pop-price {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 1.35rem;
+            color: #0f172a;
+        }
+        .pop-cart-btn {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff7a00 0%, #ea580c 100%);
+            color: #ffffff;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            box-shadow: 0 6px 16px rgba(255, 122, 0, 0.3);
+        }
+        .pop-cart-btn:hover {
+            transform: scale(1.15) rotate(8deg);
+            background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%);
+            box-shadow: 0 10px 22px rgba(255, 122, 0, 0.5);
+        }
+
+        /* Right Side Athlete Promo Banner */
+        .pop-banner-card {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            background: #0f172a;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 35px 30px;
+            border: 1px solid rgba(255, 122, 0, 0.25);
+            box-shadow: 0 15px 35px rgba(15, 23, 42, 0.12);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            min-height: 380px;
+        }
+        .pop-banner-card:hover {
+            transform: translateY(-6px);
+            border-color: #ff7a00;
+            box-shadow: 0 25px 50px rgba(255, 122, 0, 0.22);
+        }
+        .pop-banner-bg {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.4s ease;
+        }
+        .pop-banner-card:hover .pop-banner-bg {
+            transform: scale(1.08);
+            filter: brightness(1.1);
+        }
+        .pop-banner-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(15, 23, 42, 0.2) 0%, rgba(15, 23, 42, 0.75) 60%, rgba(15, 23, 42, 0.95) 100%);
+            transition: opacity 0.3s ease;
+        }
+        .pop-banner-card:hover .pop-banner-overlay {
+            background: linear-gradient(180deg, rgba(15, 23, 42, 0.1) 0%, rgba(15, 23, 42, 0.7) 60%, rgba(15, 23, 42, 0.95) 100%);
+        }
+        .pop-banner-outline-text {
+            position: absolute;
+            top: 18%;
+            left: 0;
+            width: 100%;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 3.2rem;
+            line-height: 1.1;
+            text-transform: uppercase;
+            color: transparent;
+            -webkit-text-stroke: 1.5px rgba(255, 122, 0, 0.25);
+            text-align: center;
+            pointer-events: none;
+            letter-spacing: 4px;
+            z-index: 1;
+            transition: all 0.4s ease;
+        }
+        .pop-banner-card:hover .pop-banner-outline-text {
+            -webkit-text-stroke: 1.5px rgba(255, 122, 0, 0.6);
+            transform: scale(1.02);
+        }
+        .pop-banner-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Redesigned Split Why Choose Us Section Styling */
+        .why-section {
+            padding: 95px 0;
+            background: #ffffff;
+        }
+        .why-split-container {
+            display: grid;
+            grid-template-columns: 0.9fr 1.1fr;
+            gap: 50px;
+            align-items: center;
+        }
+        .why-image-wrapper {
+            position: relative;
+            border-radius: 28px;
+            overflow: hidden;
+            height: 100%;
+            min-height: 540px;
+            box-shadow: 0 20px 45px rgba(15, 23, 42, 0.08);
+            border: 1px solid #e2e8f0;
+            background: #0f172a;
+        }
+        .why-main-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), filter 0.5s ease;
+        }
+        .why-image-wrapper:hover .why-main-img {
+            transform: scale(1.08);
+            filter: brightness(1.05);
+        }
+        .why-img-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(15, 23, 42, 0.1) 0%, rgba(15, 23, 42, 0.35) 60%, rgba(15, 23, 42, 0.88) 100%);
+        }
+        .why-badge-pill {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            padding: 14px 22px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(15, 23, 42, 0.15);
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            z-index: 10;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+        .why-badge-pill-top {
+            top: 25px;
+            left: 25px;
+        }
+        .why-badge-pill-bottom {
+            bottom: 25px;
+            right: 25px;
+            background: rgba(15, 23, 42, 0.9);
+            border-color: rgba(255, 122, 0, 0.4);
+            color: #ffffff;
+        }
+        .why-image-wrapper:hover .why-badge-pill-top {
+            transform: translateY(-5px);
+        }
+        .why-image-wrapper:hover .why-badge-pill-bottom {
+            transform: translateY(5px);
+        }
+        .why-badge-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #ff7a00, #ea580c);
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            box-shadow: 0 6px 16px rgba(255, 122, 0, 0.35);
+            flex-shrink: 0;
+        }
+        .why-header-left {
+            margin-bottom: 35px;
+        }
+        .why-header-left h2 {
+            font-size: 2.3rem;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: #0f172a;
+            margin-top: 5px;
+            line-height: 1.2;
+        }
+        .why-header-left p {
+            color: #64748b;
+            font-size: 1.02rem;
+            line-height: 1.65;
+            margin-top: 12px;
+        }
+        .why-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        .why-card-item {
+            background: #ffffff;
+            border-radius: 20px;
+            border: 1px solid #e2e8f0;
+            padding: 24px 20px;
+            box-shadow: 0 8px 25px rgba(15, 23, 42, 0.03);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        .why-card-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #ff7a00, #ea580c);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .why-card-item:hover {
+            transform: translateY(-6px);
+            border-color: rgba(255, 122, 0, 0.4);
+            box-shadow: 0 18px 40px rgba(255, 122, 0, 0.14);
+        }
+        .why-card-item:hover::before {
+            opacity: 1;
+        }
+        .why-card-icon {
+            width: 46px;
+            height: 46px;
+            border-radius: 14px;
+            background: #fff7ed;
+            color: #ff7a00;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            margin-bottom: 14px;
+            transition: all 0.4s ease;
+        }
+        .why-card-item:hover .why-card-icon {
+            transform: scale(1.1) rotate(-6deg);
+            background: linear-gradient(135deg, #ff7a00, #ea580c);
+            color: #ffffff;
+            box-shadow: 0 8px 20px rgba(255, 122, 0, 0.3);
+        }
+        .why-card-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 1.05rem;
+            color: #0f172a;
+            margin-bottom: 6px;
+        }
+        .why-card-desc {
+            color: #64748b;
+            font-size: 0.85rem;
+            line-height: 1.55;
+            margin: 0;
+        }
+
+        /* Impact Stats Count Section Styling */
+        .impact-stats-section {
+            padding: 85px 0;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: #ffffff;
+            position: relative;
+            overflow: hidden;
+            border-top: 1px solid rgba(255, 122, 0, 0.2);
+            border-bottom: 1px solid rgba(255, 122, 0, 0.2);
+        }
+        .impact-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 25px;
+        }
+        .impact-stat-card {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 35px 24px;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+        }
+        .impact-stat-card:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: #ff7a00;
+            box-shadow: 0 20px 40px rgba(255, 122, 0, 0.2);
+        }
+        .impact-stat-icon {
+            width: 55px;
+            height: 55px;
+            border-radius: 14px;
+            background: rgba(255, 122, 0, 0.15);
+            color: #ff7a00;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin: 0 auto 20px;
+            transition: all 0.3s ease;
+        }
+        .impact-stat-card:hover .impact-stat-icon {
+            background: #ff7a00;
+            color: #ffffff;
+            transform: scale(1.1) rotate(-6deg);
+            box-shadow: 0 8px 20px rgba(255, 122, 0, 0.4);
+        }
+        .impact-stat-num {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 2.8rem;
+            color: #ffffff;
+            margin-bottom: 6px;
+            line-height: 1.1;
+        }
+        .impact-stat-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 1.05rem;
+            color: #ff7a00;
+            margin-bottom: 4px;
+        }
+        .impact-stat-sub {
+            color: #94a3b8;
+            font-size: 0.85rem;
+            margin: 0;
+        }
+
+        /* Mobile Breakpoints & 320px Screen Responsiveness */
+        @media (max-width: 992px) {
+            .home-showroom-wrap { grid-template-columns: 1fr; gap: 30px; }
+            .home-showroom-img { height: 300px; }
+            .hero-nav-arrow { width: 45px; height: 45px; font-size: 1.1rem; }
+            .hero-nav-prev { left: 15px; }
+            .hero-nav-next { right: 15px; }
+            .home-app-container { grid-template-columns: 1fr; text-align: center; gap: 40px; }
+            .app-features-list { align-items: center; }
+            .app-feature-card { width: 100%; max-width: 500px; text-align: left; }
+            .app-buttons-group { justify-content: center; }
+            .app-floating-pill-1 { left: 10px; }
+            .app-floating-pill-2 { right: 10px; }
+            .pop-products-grid { grid-template-columns: 1fr; gap: 30px; }
+            .pop-banner-card { min-height: 350px; }
+            .why-split-container { grid-template-columns: 1fr; gap: 40px; }
+            .why-image-wrapper { min-height: 380px; height: 380px; }
+            .impact-stats-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
+            .promo-banner { flex-direction: column; text-align: center; gap: 30px; padding: 45px 24px; }
+            .promo-banner p { max-width: 100%; }
+            .news-grid { grid-template-columns: 1fr; gap: 25px; }
+        }
+
+        @media (max-width: 768px) {
+            .hero-slider-container { height: 100vh; min-height: 520px; padding: 0; }
+            .hero-slide-item { padding: 95px 18px 55px 18px; }
+            .hero-slide-content span { font-size: 0.78rem !important; margin-bottom: 10px !important; display: inline-block; letter-spacing: 2px !important; }
+            .hero-slide-content h1 { font-size: 2.2rem !important; line-height: 1.25 !important; }
+            .hero-slide-content p { font-size: 0.95rem !important; margin-bottom: 22px !important; }
+            .hero-dots-wrapper { bottom: 15px; }
+        }
+
+        @media (max-width: 640px) {
+            .hero-slide-content h1 { font-size: 1.9rem !important; }
+            .hero-slide-content p { font-size: 0.9rem !important; }
+            .pop-cards-wrap { grid-template-columns: 1fr; gap: 16px; }
+            .pop-card { padding: 16px; }
+            .why-cards-grid { grid-template-columns: 1fr; gap: 16px; }
+            .bento-grid { grid-template-columns: 1fr; grid-template-rows: auto; }
+            .bento-card-tall { grid-row: auto; }
+            .bento-card { min-height: 220px; }
+            .store-product-grid { grid-template-columns: 1fr; gap: 20px; }
+        }
+
+        @media (max-width: 480px) {
+            .container { padding: 0 14px; }
+            .bento-card-accent { padding: 22px 16px !important; }
+            .bento-accent-title { font-size: 1.5rem !important; line-height: 1.2 !important; }
+            .pop-banner-outline-text { font-size: 1.7rem !important; letter-spacing: 1px !important; }
+            .hero-slider-container { height: 100vh; min-height: 480px; padding: 0; }
+            .hero-slide-item { padding: 90px 12px 45px 12px; }
+            .hero-slide-content span { font-size: 0.72rem !important; letter-spacing: 1.5px !important; margin-bottom: 8px !important; }
+            .hero-slide-content h1 { font-size: 1.6rem !important; line-height: 1.2 !important; margin-bottom: 12px !important; }
+            .hero-slide-content p { font-size: 0.85rem !important; margin-bottom: 18px !important; line-height: 1.45 !important; }
+            .hero-slide-content div[style*="display:flex"] { flex-direction: column; gap: 10px; width: 100%; max-width: 250px; margin: 0 auto; }
+            .hero-slide-content .promo-btn { width: 100%; text-align: center; justify-content: center; font-size: 0.88rem; padding: 10px 16px; }
+            .hero-nav-arrow { width: 34px; height: 34px; font-size: 0.85rem; }
+            .hero-nav-prev { left: 4px; }
+            .hero-nav-next { right: 4px; }
+            .hero-dots-wrapper { bottom: 12px; }
+
+            .impact-stats-grid { grid-template-columns: 1fr; gap: 16px; }
+            .impact-stat-card { padding: 24px 16px; }
+            .impact-stat-num { font-size: 2.2rem; }
+
+            .promo-banner { padding: 30px 14px; margin: 40px 0; border-radius: 20px; }
+            .promo-banner h2 { font-size: 1.7rem; }
+            .promo-banner p { font-size: 0.9rem; }
+            #promo-newsletter-form { width: 100% !important; }
+            .promo-input-wrapper { flex-direction: column; border-radius: 20px; padding: 10px; gap: 10px; }
+            #promo-email { width: 100%; text-align: center; padding: 10px 12px; font-size: 0.9rem; }
+            .promo-input-wrapper .promo-btn { width: 100%; justify-content: center; border-radius: 12px; padding: 12px 18px; font-size: 0.92rem; }
+
+            .home-showroom-wrap { padding: 24px 14px; border-radius: 20px; }
+            .home-showroom-img { height: 240px; border-radius: 16px; }
+            .home-showroom-img div { font-size: 0.75rem !important; padding: 8px 12px !important; bottom: 8px !important; left: 8px !important; }
+            .home-showroom-wrap h2 { font-size: 1.7rem !important; }
+            .home-showroom-wrap p { font-size: 0.9rem !important; margin-bottom: 20px !important; }
+
+            .home-app-section { padding: 50px 0; }
+            .app-content h2 { font-size: 1.8rem; }
+            .app-content p { font-size: 0.9rem; }
+            .app-feature-card { padding: 14px 14px; gap: 12px; text-align: left; border-radius: 14px; }
+            .app-feature-icon { width: 36px; height: 36px; font-size: 0.95rem; border-radius: 10px; }
+            .store-btn { width: 100%; justify-content: center; padding: 12px 14px; }
+            .app-phone-frame { width: 250px; height: 450px; border-width: 6px; border-radius: 32px; }
+            .app-floating-pill { padding: 8px 10px; gap: 8px; font-size: 0.72rem; border-radius: 12px; }
+            .app-floating-pill-1 { top: 15px; left: -10px; }
+            .app-floating-pill-2 { bottom: 15px; right: -10px; }
+
+            .news-card { flex-direction: column; padding: 12px; border-radius: 14px; }
+            .news-img-wrapper { width: 100%; flex: none; height: 170px; border-radius: 10px; }
+            .news-content h3 { font-size: 1rem; }
+
+            .pop-card { padding: 14px; gap: 12px; border-radius: 16px; }
+            .pop-img-box { width: 75px; height: 75px; border-radius: 12px; }
+            .pop-title { font-size: 0.88rem; }
+            .pop-price { font-size: 1.1rem; }
+            .pop-cart-btn { width: 34px; height: 34px; font-size: 0.82rem; }
+
+            .why-image-wrapper { min-height: 280px; height: 280px; border-radius: 18px; }
+            .why-badge-pill { padding: 8px 12px; gap: 8px; border-radius: 12px; }
+            .why-badge-pill-top { top: 10px; left: 10px; }
+            .why-badge-pill-bottom { bottom: 10px; right: 10px; }
+            .why-badge-icon { width: 32px; height: 32px; font-size: 0.9rem; border-radius: 8px; }
+
+            .home-faq-header { padding: 14px 14px; }
+            .home-faq-title { font-size: 0.9rem; gap: 8px; }
+            .home-faq-icon { width: 26px; height: 26px; font-size: 0.72rem; }
+            .home-faq-item.active .home-faq-content { padding: 0 14px 16px; }
+            .home-faq-body { font-size: 0.85rem; }
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar">
+<div class="nav-container">
+<a class="logo" href="index.html">
+<img alt="Stackly Logo" class="brand-logo-img" src="assets/logo.webp"/>
+</a>
+<ul class="nav-links">
+<li class="mobile-menu-logo">
+<a href="index.html"><img alt="Stackly Logo" class="brand-logo-img" src="assets/logo.webp"/></a>
+</li>
+<li><a class="nav-link active" href="index.html">Home</a></li>
+<li><a class="nav-link" href="products.html">Products</a></li>
+<li><a class="nav-link" href="about.html">About</a></li>
+<li><a class="nav-link" href="services.html">Services</a></li>
+<li><a class="nav-link" href="blog.html">Blog</a></li>
+<li><a class="nav-link" href="contact.html">Contact</a></li>
+<li class="mobile-menu-btn">
+<a class="btn-nav mobile-btn-login" href="login.html">Login</a>
+</li>
+</ul>
+<div class="nav-actions">
+<a class="btn-nav" href="login.html">Login</a>
+<div class="hamburger">
+<span class="bar"></span>
+<span class="bar"></span>
+<span class="bar"></span>
+</div>
+</div>
+</div>
+</nav>
+<!-- STORE HERO SLIDER (AUTO & MANUAL SLIDER) -->
+<section class="hero-slider-container" id="hero-slider-section">
+<div class="hero-track" id="hero-track">
+<!-- Slide 1 -->
+<div class="hero-slide-item" style="background-image: url('assets/home-hero.webp');">
+<div class="hero-slide-overlay"></div>
+<div class="hero-slide-content">
+<span style="color:#ff7a00; font-weight:800; letter-spacing:3px; text-transform:uppercase; margin-bottom:15px; display:block;">Summer Sale 2026</span>
+<h1 style="color:#fff; font-size:4.2rem; font-weight:900; margin-bottom:20px; font-family:'Montserrat', sans-serif;">UP TO 40% OFF <br/><span style="color:#ff7a00;">ELITE HARDWARE</span></h1>
+<p style="color:#cbd5e1; font-size:1.15rem; max-width:650px; margin: 0 auto 30px; line-height: 1.7;">Equip your home or commercial gym with professional-grade power racks, dumbbells, and cardio machinery.</p>
+<div style="display:flex; gap:15px; justify-content:center;">
+<a class="promo-btn" href="404.html">Shop Equipment</a>
+<a class="promo-btn" href="404.html" style="background:transparent; border:2px solid #fff; color:#fff;">View Deals</a>
+</div>
+</div>
+</div>
+<!-- Slide 2 -->
+<div class="hero-slide-item" style="background-image: url('assets/power-reack-shutdown.webp');">
+<div class="hero-slide-overlay"></div>
+<div class="hero-slide-content">
+<span style="color:#ff7a00; font-weight:800; letter-spacing:3px; text-transform:uppercase; margin-bottom:15px; display:block;">Commercial Fit-Outs</span>
+<h1 style="color:#fff; font-size:4.2rem; font-weight:900; margin-bottom:20px; font-family:'Montserrat', sans-serif;">PRO POWER RACKS &amp; <br/><span style="color:#ff7a00;">RIG SOLUTIONS</span></h1>
+<p style="color:#cbd5e1; font-size:1.15rem; max-width:650px; margin: 0 auto 30px; line-height: 1.7;">Heavy-duty 11-gauge steel construction engineered for maximum safety and lifetime durability.</p>
+<div style="display:flex; gap:15px; justify-content:center;">
+<a class="promo-btn" href="404.html">Explore Racks</a>
+<a class="promo-btn" href="404.html" style="background:transparent; border:2px solid #fff; color:#fff;">Request 3D Layout</a>
+</div>
+</div>
+</div>
+<!-- Slide 3 -->
+<div class="hero-slide-item" style="background-image: url('assets/apparel.webp');">
+<div class="hero-slide-overlay"></div>
+<div class="hero-slide-content">
+<span style="color:#ff7a00; font-weight:800; letter-spacing:3px; text-transform:uppercase; margin-bottom:15px; display:block;">Next-Gen Compression</span>
+<h1 style="color:#fff; font-size:4.2rem; font-weight:900; margin-bottom:20px; font-family:'Montserrat', sans-serif;">PRO ATHLETIC <br/><span style="color:#ff7a00;">APPAREL &amp; GEAR</span></h1>
+<p style="color:#cbd5e1; font-size:1.15rem; max-width:650px; margin: 0 auto 30px; line-height: 1.7;">Engineered for high-intensity training with breathable moisture-wicking technology.</p>
+<div style="display:flex; gap:15px; justify-content:center;">
+<a class="promo-btn" href="404.html">Shop Apparel</a>
+<a class="promo-btn" href="404.html" style="background:transparent; border:2px solid #fff; color:#fff;">View Catalog</a>
+</div>
+</div>
+</div>
+</div>
+<!-- Manual Navigation Controls -->
+<button aria-label="Previous Slide" class="hero-nav-arrow hero-nav-prev" id="hero-prev-btn" type="button"><i class="fa-solid fa-chevron-left"></i></button>
+<button aria-label="Next Slide" class="hero-nav-arrow hero-nav-next" id="hero-next-btn" type="button"><i class="fa-solid fa-chevron-right"></i></button>
+<!-- Slide Indicators -->
+<div class="hero-dots-wrapper" id="hero-dots-wrap"></div>
+</section>
+<!-- TRENDING PRODUCTS GRID -->
+<section class="section-padding reveal" data-aos="fade-up">
+<div class="container">
+<div class="text-center" data-aos="fade-up" style="margin-bottom: 50px;">
+<span class="subtitle">Best Sellers</span>
+<h2 style="font-size: 2.5rem; font-family:'Montserrat', sans-serif;">Trending Gear</h2>
+</div>
+<div class="store-product-grid">
+<!-- Product 1 -->
+<div class="store-card reveal" data-aos="fade-up" data-aos-delay="100">
+<div class="badge-tag badge-new">New</div>
+<div class="store-img-box bg-img" style="background-image: url('assets/elitePro-power-rack.webp');"></div>
+<span class="store-cat">Hardware</span>
+<h3 class="store-title">Elite Pro Power Rack</h3>
+<div class="store-rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i> <span>(128)</span></div>
+<div class="store-bot-row">
+<div class="store-price">$899.00</div>
+<button class="store-add-btn" onclick="window.location.href='404.html'"><i class="fa-solid fa-plus"></i></button>
+</div>
+</div>
+<!-- Product 2 -->
+<div class="store-card reveal" data-aos="fade-up" data-aos-delay="200">
+<div class="badge-tag badge-sale">-15%</div>
+<div class="store-img-box bg-img" style="background-image: url('assets/compression-tee.webp');"></div>
+<span class="store-cat">Apparel</span>
+<h3 class="store-title">Aero-Knit Compression Tee</h3>
+<div class="store-rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> <span>(45)</span></div>
+<div class="store-bot-row">
+<div class="store-price">$38.25 <del>$45.00</del></div>
+<button class="store-add-btn" onclick="window.location.href='404.html'"><i class="fa-solid fa-plus"></i></button>
+</div>
+</div>
+<!-- Product 3 -->
+<div class="store-card reveal" data-aos="fade-up" data-aos-delay="300">
+<div class="store-img-box bg-img" style="background-image: url('assets/leather-belt.webp');"></div>
+<span class="store-cat">Accessories</span>
+<h3 class="store-title">Pro Leather Lifting Belt</h3>
+<div class="store-rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i> <span>(89)</span></div>
+<div class="store-bot-row">
+<div class="store-price">$55.00</div>
+<button class="store-add-btn" onclick="window.location.href='404.html'"><i class="fa-solid fa-plus"></i></button>
+</div>
+</div>
+<!-- Product 4 -->
+<div class="store-card reveal" data-aos="fade-up" data-aos-delay="400">
+<div class="store-img-box bg-img" style="background-image: url('assets/whey--isolate-5lbs.webp');"></div>
+<span class="store-cat">Supplements</span>
+<h3 class="store-title">100% Whey Isolate 5lbs</h3>
+<div class="store-rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i> <span>(312)</span></div>
+<div class="store-bot-row">
+<div class="store-price">$65.00</div>
+<button class="store-add-btn" onclick="window.location.href='404.html'"><i class="fa-solid fa-plus"></i></button>
+</div>
+</div>
+</div>
+<div class="text-center" data-aos="fade-up" style="margin-top: 50px;">
+<a class="promo-btn" href="404.html" style="background:#0f172a; padding: 14px 40px;">View Full Catalog</a>
+</div>
+</div>
+</section>
+<!-- BENTO STORE CATEGORIES GRID SECTION (IMAGE 1 SECTION) -->
+<section class="bento-services-section reveal" data-aos="fade-up">
+<div class="container">
+<div class="bento-grid">
+<!-- Card 1: Solid Orange Accent Card (Top Left) -->
+<a class="bento-card bento-card-accent reveal" data-aos="fade-up" data-aos-delay="100" href="404.html">
+<div>
+<span class="bento-accent-subtitle">EXPLORE CATEGORIES</span>
+<h2 class="bento-accent-title">The Categories</h2>
+<p class="bento-accent-desc">Browse our commercial strength hardware, pro compression apparel, premium supplements, and smartwatch accessories.</p>
+</div>
+</a>
+<!-- Card 2: Strength Hardware (Top Middle) -->
+<a class="bento-card reveal" data-aos="fade-up" data-aos-delay="200" href="404.html">
+<img alt="Strength Hardware" class="bento-card-bg" src="assets/strength-training.webp"/>
+<div class="bento-card-overlay"></div>
+<div class="bento-card-content">
+<h3 class="bento-title-small">Strength Hardware</h3>
+<p class="bento-hover-desc">Commercial 11-gauge power racks, squat stands, Olympic barbells &amp; rubber hex dumbbell sets.</p>
+</div>
+</a>
+<!-- Card 3: Pro Athletic Apparel (Right Tall Card Spanning 2 Rows) -->
+<a class="bento-card bento-card-tall reveal" data-aos="fade-left" data-aos-delay="300" href="404.html">
+<img alt="Pro Athletic Apparel" class="bento-card-bg" src="assets/apparels.webp"/>
+<div class="bento-card-overlay"></div>
+<div class="bento-card-content">
+<span style="color: #ff7a00; font-size: 0.8rem; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 6px; display: block;">FEATURED COLLECTION</span>
+<h3 class="bento-accent-title">Pro Athletic Apparel</h3>
+<p class="bento-accent-desc">High-durability compression tights, moisture-wicking tees, lifting straps, and pro training footwear.</p>
+<div class="bento-link-btn">
+<span>Shop Apparel</span>
+<i class="fa-solid fa-arrow-right"></i>
+</div>
+</div>
+</a>
+<!-- Card 4: Sports Nutrition (Bottom Left) -->
+<a class="bento-card reveal" data-aos="fade-up" data-aos-delay="400" href="404.html">
+<img alt="Sports Nutrition" class="bento-card-bg" src="assets/supplements.webp"/>
+<div class="bento-card-overlay"></div>
+<div class="bento-card-content">
+<h3 class="bento-title-small">Sports Nutrition</h3>
+<p class="bento-hover-desc">100% micro-filtered whey isolate, pre-workout energy powders &amp; hydration stacks.</p>
+</div>
+</a>
+<!-- Card 5: Fitness Accessories (Bottom Middle) -->
+<a class="bento-card reveal" data-aos="fade-up" data-aos-delay="500" href="404.html">
+<img alt="Fitness Accessories" class="bento-card-bg" src="assets/fitness-accessiores.webp"/>
+<div class="bento-card-overlay"></div>
+<div class="bento-card-content">
+<h3 class="bento-title-small">Fitness Accessories</h3>
+<p class="bento-hover-desc">Stainless steel shaker bottles, leather lifting belts, smartwatches &amp; telemetry sensors.</p>
+</div>
+</a>
+</div>
+</div>
+</section>
+<!-- OUR POPULAR PRODUCTS SECTION (TRAINING SHOES, SHAKER BOTTLES, SMART WATCH, GYM APPAREL) -->
+<section class="pop-products-section reveal" data-aos="fade-up">
+<div class="container">
+<div class="text-center" data-aos="fade-up" style="margin-bottom: 45px;">
+<span class="subtitle">PREMIUM GEAR &amp; PERFORMANCE ESSENTIALS</span>
+<h2 style="font-size: 2.5rem; font-family:'Montserrat', sans-serif; text-transform: uppercase; font-weight: 800; color: #0f172a; letter-spacing: 1px; margin-top: 5px;">OUR POPULAR PRODUCT</h2>
+</div>
+<div class="pop-products-grid">
+<!-- Left Column: 2x2 Grid of Compact Product Cards -->
+<div class="pop-cards-wrap">
+<!-- Product 1: Training Shoes -->
+<div class="pop-card reveal" data-aos="fade-up" data-aos-delay="100">
+<div class="pop-img-box">
+<img alt="Training Shoes" src="assets/traning-shoes.webp"/>
+</div>
+<div class="pop-info">
+<h3 class="pop-title">TRAINING SHOES</h3>
+<div class="pop-rating">
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<span>(48)</span>
+</div>
+<div class="pop-bottom-row">
+<div class="pop-price">$129.00</div>
+<button aria-label="Add to Cart" class="pop-cart-btn" onclick="window.location.href='404.html'"><i class="fa-solid fa-basket-shopping"></i></button>
+</div>
+</div>
+</div>
+<!-- Product 2: Shaker Bottles -->
+<div class="pop-card reveal" data-aos="fade-up" data-aos-delay="200">
+<div class="pop-img-box">
+<img alt="Shaker Bottle" src="assets/shaker-bottle.webp"/>
+</div>
+<div class="pop-info">
+<h3 class="pop-title">SHAKER BOTTLE</h3>
+<div class="pop-rating">
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-regular fa-star"></i>
+<span>(32)</span>
+</div>
+<div class="pop-bottom-row">
+<div class="pop-price">$24.00</div>
+<button aria-label="Add to Cart" class="pop-cart-btn" onclick="window.location.href='404.html'"><i class="fa-solid fa-basket-shopping"></i></button>
+</div>
+</div>
+</div>
+<!-- Product 3: Smart Watch -->
+<div class="pop-card reveal" data-aos="fade-up" data-aos-delay="300">
+<div class="pop-img-box">
+<img alt="Smart Watch" src="assets/smart-watch.webp"/>
+</div>
+<div class="pop-info">
+<h3 class="pop-title">SMART WATCH</h3>
+<div class="pop-rating">
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<span>(95)</span>
+</div>
+<div class="pop-bottom-row">
+<div class="pop-price">$199.00</div>
+<button aria-label="Add to Cart" class="pop-cart-btn" onclick="window.location.href='404.html'"><i class="fa-solid fa-basket-shopping"></i></button>
+</div>
+</div>
+</div>
+<!-- Product 4: Gym Apparel -->
+<div class="pop-card reveal" data-aos="fade-up" data-aos-delay="400">
+<div class="pop-img-box">
+<img alt="Gym Apparel" src="assets/apparel.webp"/>
+</div>
+<div class="pop-info">
+<h3 class="pop-title">GYM APPAREL</h3>
+<div class="pop-rating">
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star"></i>
+<i class="fa-solid fa-star-half-stroke"></i>
+<span>(64)</span>
+</div>
+<div class="pop-bottom-row">
+<div class="pop-price">$48.00</div>
+<button aria-label="Add to Cart" class="pop-cart-btn" onclick="window.location.href='404.html'"><i class="fa-solid fa-basket-shopping"></i></button>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Featured Athlete Banner -->
+<div class="pop-banner-card reveal" data-aos="fade-left">
+<img alt="Pro Athlete Workout" class="pop-banner-bg" src="assets/trainer1.webp"/>
+<div class="pop-banner-overlay"></div>
+<div class="pop-banner-outline-text">NEVER<br/>GIVE<br/>UP</div>
+<div class="pop-banner-content">
+<span style="display: inline-block; background: rgba(255, 122, 0, 0.2); border: 1px solid rgba(255, 122, 0, 0.5); color: #ff7a00; font-size: 0.78rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; padding: 5px 14px; border-radius: 30px; margin-bottom: 12px;">ATHLETE GEAR &amp; ESSENTIALS</span>
+<h3 style="font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 1.75rem; color: #ffffff; text-transform: uppercase; margin-bottom: 10px; line-height: 1.2;">PREMIUM ATHLETIC GEAR &amp; TELEMETRY</h3>
+<p style="color: #cbd5e1; font-size: 0.88rem; line-height: 1.6; margin-bottom: 22px;">High-durability gym apparel, stainless shaker bottles, precision smartwatch telemetry, and pro training shoes.</p>
+<a href="404.html" style="display: inline-flex; align-items: center; gap: 10px; background: #ff7a00; color: #ffffff !important; padding: 14px 28px; font-weight: 700; text-decoration: none; border-radius: 50px; box-shadow: 0 8px 20px rgba(255, 122, 0, 0.4); transition: all 0.3s ease;"><i class="fa-solid fa-bag-shopping" style="color: #ffffff;"></i> Shop Gear Collection</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- REDESIGNED SPLIT WHY CHOOSE US SECTION -->
+<section class="why-section reveal" data-aos="fade-up">
+<div class="container">
+<div class="why-split-container">
+<!-- Left Side: Unique Featured Visual Image Frame with Glassmorphism Badges -->
+<div class="why-image-wrapper reveal" data-aos="fade-right">
+<img alt="Why Choose Stackly Sports Store" class="why-main-img" src="assets/sports.webp"/>
+<div class="why-img-overlay"></div>
+<!-- Floating Pill Badge 1 (Top Left) -->
+<div class="why-badge-pill why-badge-pill-top">
+<div class="why-badge-icon">
+<i class="fa-solid fa-circle-check"></i>
+</div>
+<div>
+<strong style="display: block; font-size: 0.95rem; color: #0f172a;">Commercial Certified</strong>
+<span style="font-size: 0.78rem; color: #64748b;">11-Gauge Heavy Steel</span>
+</div>
+</div>
+<!-- Floating Pill Badge 2 (Bottom Right) -->
+<div class="why-badge-pill why-badge-pill-bottom">
+<div class="why-badge-icon" style="background: #22c55e;">
+<i class="fa-solid fa-star"></i>
+</div>
+<div>
+<strong style="display: block; font-size: 0.95rem; color: #ffffff;">150k+ Athletes</strong>
+<span style="font-size: 0.78rem; color: #cbd5e1;">5-Star Community Rating</span>
+</div>
+</div>
+</div>
+<!-- Right Side: Section Details & 2x3 Feature Card Grid -->
+<div class="why-content-side reveal" data-aos="fade-left">
+<div class="why-header-left">
+<span class="subtitle">THE STACKLY ADVANTAGE</span>
+<h2>BUILT FOR ELITE ATHLETES &amp; GYM BUILDERS</h2>
+<p>We combine commercial steel engineering with 24/7 expert master coach support, fast insured freight delivery, and lifetime structural durability.</p>
+</div>
+<div class="why-cards-grid">
+<!-- Feature 1 -->
+<div class="why-card-item reveal" data-aos="fade-up" data-aos-delay="100">
+<div class="why-card-icon">
+<i class="fa-solid fa-shield-halved"></i>
+</div>
+<h3 class="why-card-title">100% Certified Pro Gear</h3>
+<p class="why-card-desc">Tested for commercial durability &amp; heavy training.</p>
+</div>
+<!-- Feature 2 -->
+<div class="why-card-item reveal" data-aos="fade-up" data-aos-delay="200">
+<div class="why-card-icon">
+<i class="fa-solid fa-truck-fast"></i>
+</div>
+<h3 class="why-card-title">Fast &amp; Free Shipping</h3>
+<p class="why-card-desc">Free insured freight delivery on orders over $150.</p>
+</div>
+<!-- Feature 3 -->
+<div class="why-card-item reveal" data-aos="fade-up" data-aos-delay="300">
+<div class="why-card-icon">
+<i class="fa-solid fa-headset"></i>
+</div>
+<h3 class="why-card-title">24/7 Expert Coach Support</h3>
+<p class="why-card-desc">Direct access to master coaches &amp; gear architects.</p>
+</div>
+<!-- Feature 4 -->
+<div class="why-card-item reveal" data-aos="fade-up" data-aos-delay="400">
+<div class="why-card-icon">
+<i class="fa-solid fa-rotate-left"></i>
+</div>
+<h3 class="why-card-title">30-Day Risk-Free Returns</h3>
+<p class="why-card-desc">Hassle-free 30-day money-back guarantee on all items.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- New Image Section A: Interactive Virtual Showroom Tour -->
+<section class="content-section bg-light" style="padding: 100px 0;">
+<div class="container">
+<div class="home-showroom-wrap reveal">
+<div class="home-showroom-img">
+<img alt="Stackly Virtual Gym Showroom" src="assets/about1.webp"/>
+<div style="position: absolute; bottom: 20px; left: 20px; background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(10px); color: #ffffff; padding: 12px 20px; border-radius: 14px; border: 1px solid rgba(255, 122, 0, 0.4); display: flex; align-items: center; gap: 12px; font-size: 0.9rem; font-weight: 600;">
+<i class="fa-solid fa-vr-cardboard" style="color: #ff7a00; font-size: 1.2rem;"></i>
+<span>Live 3D Virtual Showroom Walkthrough</span>
+</div>
+</div>
+<div>
+<span class="subtitle">3D EXPERIENCE CENTER</span>
+<h2 style="font-size: 2.5rem; font-family:'Montserrat', sans-serif; margin-bottom: 20px; color: #0f172a;">Inspect Gear In Interactive 3D</h2>
+<p style="color: #64748b; font-size: 1.05rem; line-height: 1.7; margin-bottom: 30px;">Can't visit our Flagship Experience Centers in California or Bali in person? Connect with an equipment architect for a live video tour to test biomechanics, cable smoothness, and steel rack gauge strength.</p>
+<div style="display: flex; gap: 15px; flex-wrap: wrap;">
+<a class="promo-btn" href="404.html"><i class="fa-solid fa-video" style="margin-right: 8px;"></i> Book Virtual Tour</a>
+<a class="promo-btn" href="404.html" style="background: transparent; border: 2px solid #0f172a; color: #0f172a;">View Showrooms</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- IMPACT STATS COUNT SECTION (HOME PAGE) -->
+<section class="impact-stats-section reveal" data-aos="fade-up">
+<div class="container">
+<div class="text-center reveal" data-aos="fade-up" style="max-width: 700px; margin: 0 auto 50px;">
+<span style="color: #ff7a00; font-weight: 800; letter-spacing: 2px; text-transform: uppercase; font-size: 0.85rem;">OUR GLOBAL MILESTONES</span>
+<h2 style="font-family: 'Montserrat', sans-serif; font-size: 2.4rem; font-weight: 900; text-transform: uppercase; color: #ffffff; margin-top: 5px;">POWERING ELITE PERFORMANCE</h2>
+</div>
+<div class="impact-stats-grid">
+<!-- Stat 1 -->
+<div class="impact-stat-card reveal" data-aos="zoom-in" data-aos-delay="100">
+<div class="impact-stat-icon">
+<i class="fa-solid fa-users"></i>
+</div>
+<div class="impact-stat-num">150K+</div>
+<h4 class="impact-stat-title">Active Athletes</h4>
+<p class="impact-stat-sub">Trust Stackly Store daily</p>
+</div>
+<!-- Stat 2 -->
+<div class="impact-stat-card reveal" data-aos="zoom-in" data-aos-delay="200">
+<div class="impact-stat-icon">
+<i class="fa-solid fa-truck-fast"></i>
+</div>
+<div class="impact-stat-num">99.8%</div>
+<h4 class="impact-stat-title">On-Time Shipping</h4>
+<p class="impact-stat-sub">Automated 24h dispatch</p>
+</div>
+<!-- Stat 3 -->
+<div class="impact-stat-card reveal" data-aos="zoom-in" data-aos-delay="300">
+<div class="impact-stat-icon">
+<i class="fa-solid fa-dumbbell"></i>
+</div>
+<div class="impact-stat-num">450+</div>
+<h4 class="impact-stat-title">Facilities Built</h4>
+<p class="impact-stat-sub">Commercial &amp; home gyms</p>
+</div>
+<!-- Stat 4 -->
+<div class="impact-stat-card reveal" data-aos="zoom-in" data-aos-delay="400">
+<div class="impact-stat-icon">
+<i class="fa-solid fa-star"></i>
+</div>
+<div class="impact-stat-num">4.95/5</div>
+<h4 class="impact-stat-title">Rating Score</h4>
+<p class="impact-stat-sub">Verified athlete reviews</p>
+</div>
+</div>
+</div>
+</section>
+<!-- STACKLY PRO MOBILE APP SECTION (UPDATED FOR SPORTS & FITNESS STORE) -->
+<section class="home-app-section reveal" data-aos="fade-up">
+<div class="container">
+<div class="home-app-container">
+<!-- Left Text Content & Features -->
+<div class="app-content reveal" data-aos="fade-right">
+<span class="app-badge">
+<i class="fa-solid fa-mobile-screen-button"></i> Store Mobile Experience
+                    </span>
+<h2>Shop Gear &amp; Train Anywhere with <br/><span>Stackly Pro App</span></h2>
+<p>Order commercial strength gear with 1-click checkout, track freight shipments, monitor live telemetry, and get exclusive store drops.</p>
+<div class="app-features-list">
+<!-- Feature 1 -->
+<div class="app-feature-card" data-aos="fade-up" data-aos-delay="100">
+<div class="app-feature-icon">
+<i class="fa-solid fa-cart-shopping"></i>
+</div>
+<div class="app-feature-info">
+<h4>1-Click Gear Ordering &amp; Freight Tracking</h4>
+<p>Order power racks, supplements &amp; apparel with instant checkout and real-time BOL freight tracking.</p>
+</div>
+</div>
+<!-- Feature 3 -->
+<div class="app-feature-card" data-aos="fade-up" data-aos-delay="200">
+<div class="app-feature-icon">
+<i class="fa-solid fa-bolt"></i>
+</div>
+<div class="app-feature-info">
+<h4>App-Exclusive Restock Alerts &amp; Drops</h4>
+<p>Unlock early access to limited edition gym apparel, restock notifications, and 15% app member discounts.</p>
+</div>
+</div>
+</div>
+<!-- Store Download Buttons -->
+<div class="app-buttons-group" data-aos="fade-up" data-aos-delay="300">
+<a class="store-btn" href="404.html">
+<i class="fa-brands fa-apple"></i>
+<div class="store-btn-text">
+<span>Download on the</span>
+<strong>App Store</strong>
+</div>
+</a>
+<a class="store-btn" href="404.html">
+<i class="fa-brands fa-google-play"></i>
+<div class="store-btn-text">
+<span>Get it on</span>
+<strong>Google Play</strong>
+</div>
+</a>
+</div>
+</div>
+<!-- Right Mockup Visual -->
+<div class="app-mockup-wrapper reveal" data-aos="fade-left">
+<!-- Floating Badge 1 -->
+<div class="app-floating-pill app-floating-pill-1" data-aos="zoom-in" data-aos-delay="300">
+<div style="width: 38px; height: 38px; border-radius: 50%; background: #ff7a00; display: flex; align-items: center; justify-content: center; color: #fff;">
+<i class="fa-solid fa-fire"></i>
+</div>
+<div>
+<strong style="display: block; font-size: 0.95rem; color: #0f172a;">12.4k Calories</strong>
+<span style="font-size: 0.78rem; color: #64748b;">Burned this week</span>
+</div>
+</div>
+<!-- Phone Container -->
+<div class="app-phone-frame">
+<div class="app-phone-notch"></div>
+<div class="app-screen-content" style="background-image: url('assets/slide1.webp');">
+<div class="app-screen-overlay"></div>
+<div class="app-screen-inner">
+<div style="display: flex; justify-content: space-between; align-items: center; color: #fff;">
+<span style="font-weight: 800; font-size: 0.9rem;">STACKLY PRO</span>
+<i class="fa-solid fa-wifi" style="font-size: 0.85rem; color: #ff7a00;"></i>
+</div>
+<div style="margin-bottom: 20px;">
+<span style="background: #ff7a00; color: #fff; padding: 4px 10px; border-radius: 10px; font-size: 0.72rem; font-weight: 800; text-transform: uppercase;">Live Syncing</span>
+<h3 style="color: #fff; margin: 10px 0 5px; font-size: 1.4rem; font-family: 'Montserrat', sans-serif;">Heavy Lifting Protocol</h3>
+<p style="color: #cbd5e1; font-size: 0.8rem; margin: 0;">Set 4 of 5 • 140kg Barbell Squat</p>
+<a href="404.html" style="display: inline-block; width: 100%; padding: 12px; background: #ff7a00; color: #fff; text-align: center; border-radius: 12px; font-weight: 700; text-decoration: none; margin-top: 15px; font-size: 0.9rem;">Resume Workout</a>
+</div>
+</div>
+</div>
+</div>
+<!-- Floating Badge 2 -->
+<div class="app-floating-pill app-floating-pill-2" data-aos="zoom-in" data-aos-delay="400">
+<div style="width: 38px; height: 38px; border-radius: 50%; background: #22c55e; display: flex; align-items: center; justify-content: center; color: #fff;">
+<i class="fa-solid fa-star"></i>
+</div>
+<div>
+<strong style="display: block; font-size: 0.95rem; color: #0f172a;">4.9 ★ Rating</strong>
+<span style="font-size: 0.78rem; color: #64748b;">150K+ Athletes</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- NEWS & ARTICLE SECTION -->
+<section class="news-section reveal" data-aos="fade-up">
+<div class="container">
+<div class="news-header reveal" data-aos="fade-up">
+<span class="subtitle">Our News</span>
+<h2>News &amp; Article</h2>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+</div>
+<div class="news-grid">
+<!-- Article 1 -->
+<div class="news-card reveal" data-aos="fade-up" data-aos-delay="100">
+<div class="news-img-wrapper">
+<div class="news-img" style="background-image: url('assets/cable-safety.webp');"></div>
+</div>
+<div class="news-content">
+<h3>Essential Power Rack Maintenance &amp; Cable Safety</h3>
+<div class="news-meta"><i class="fa-regular fa-clock"></i> January 30, 2026</div>
+<p>Learn how regular cable tensioning, barbell sleeve lubrication, and torque checks extend equipment lifespan and ensure maximum workout safety.</p>
+<a class="news-read-more" href="404.html">Read More <i class="fa-solid fa-arrow-right"></i></a>
+</div>
+</div>
+<!-- Article 2 -->
+<div class="news-card reveal" data-aos="fade-up" data-aos-delay="200">
+<div class="news-img-wrapper">
+<div class="news-img" style="background-image: url('assets/bumper-plates.webp');"></div>
+</div>
+<div class="news-content">
+<h3>Choosing the Right Commercial Bumper Plates for Heavy Lifting</h3>
+<div class="news-meta"><i class="fa-regular fa-clock"></i> January 30, 2026</div>
+<p>Explore the key differences between urethane, rubber, and competition bumper plates to build a durable noise-reducing strength zone.</p>
+<a class="news-read-more" href="404.html">Read More <i class="fa-solid fa-arrow-right"></i></a>
+</div>
+</div>
+<!-- Article 3 -->
+<div class="news-card reveal" data-aos="fade-up" data-aos-delay="300">
+<div class="news-img-wrapper">
+<div class="news-img" style="background-image: url('assets/cardio-machines.webp');"></div>
+</div>
+<div class="news-content">
+<h3>Top 5 High-Intensity Home Cardio Machines for Maximum Endurance</h3>
+<div class="news-meta"><i class="fa-regular fa-clock"></i> January 30, 2026</div>
+<p>Compare air bikes, curved treadmills, and magnetic rowers to find the most efficient full-body conditioning equipment for home training.</p>
+<a class="news-read-more" href="404.html">Read More <i class="fa-solid fa-arrow-right"></i></a>
+</div>
+</div>
+<!-- Article 4 -->
+<div class="news-card reveal" data-aos="fade-up" data-aos-delay="400">
+<div class="news-img-wrapper">
+<div class="news-img" style="background-image: url('assets/home-gym-design.webp');"></div>
+</div>
+<div class="news-content">
+<h3>Designing the Ultimate Home Gym Layout in Small Spaces</h3>
+<div class="news-meta"><i class="fa-regular fa-clock"></i> January 30, 2026</div>
+<p>Discover smart space-saving strategies using wall-mounted folding power racks, selectorized dumbbells, and multi-functional bench setups.</p>
+<a class="news-read-more" href="404.html">Read More <i class="fa-solid fa-arrow-right"></i></a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- CLIENT TESTIMONIALS -->
+<section class="testimonial-wrapper reveal" data-aos="fade-up">
+<div class="testimonial-bg"></div>
+<div class="testimonial-content">
+<div class="testimonial-header reveal" data-aos="fade-up">
+<span class="subtitle">Testimonial</span>
+<h2>Client Testimonials</h2>
+<p>Discover why elite athletes and home gym enthusiasts trust our premium sports equipment and supplements to power their fitness journeys.</p>
+</div>
+<div class="testimonial-slider-container reveal" data-aos="fade-up" data-aos-delay="200">
+<div class="testimonial-slider-track" id="testi-track">
+<!-- Card 1 -->
+<div class="testi-card">
+<p class="testi-text">The adjustable bench I bought here is tank-solid. It shipped incredibly fast and was assembled in under 10 minutes. This store is now my go-to for all heavy lifting gear.</p>
+<div class="testi-author">
+<div class="author-info">
+<img alt="Priscilla Russo" src="assets/testimonial1.webp"/>
+<div class="author-details">
+<h4>Priscilla Russo</h4>
+<p>Powerlifter</p>
+</div>
+</div>
+<div class="quote-icon">66</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="testi-card">
+<p class="testi-text">Their whey isolate tastes incredible and mixes perfectly with no clumps. The monthly subscription saves me so much hassle and keeps my nutrition perfectly on track.</p>
+<div class="testi-author">
+<div class="author-info">
+<img alt="Paddy Hardy" src="assets/trainer1.webp"/>
+<div class="author-details">
+<h4>Paddy Hardy</h4>
+<p>Fitness Coach</p>
+</div>
+</div>
+<div class="quote-icon">66</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="testi-card">
+<p class="testi-text">The compression gear holds up to the most grueling marathon training sessions. When I needed a size exchange, their customer service team handled it instantly.</p>
+<div class="testi-author">
+<div class="author-info">
+<img alt="Hari Wheatley" src="assets/testimonial3.webp"/>
+<div class="author-details">
+<h4>Hari Wheatley</h4>
+<p>Triathlete</p>
+</div>
+</div>
+<div class="quote-icon">66</div>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="testi-card">
+<p class="testi-text">The quality of the bumper plates is exceptional. Minimal bounce and perfect weight accuracy. Definitely equipping the rest of my facility with these.</p>
+<div class="testi-author">
+<div class="author-info">
+<img alt="Emma Stone" src="assets/trainer2.webp"/>
+<div class="author-details">
+<h4>Emma Stone</h4>
+<p>Gym Owner</p>
+</div>
+</div>
+<div class="quote-icon">66</div>
+</div>
+</div>
+<!-- Card 5 -->
+<div class="testi-card">
+<p class="testi-text">Their 24/7 support team helped me troubleshoot my treadmill motor at 2 AM. Absolutely stellar service and highly knowledgeable staff.</p>
+<div class="testi-author">
+<div class="author-info">
+<img alt="Liam Neeson" src="assets/trainer3.webp"/>
+<div class="author-details">
+<h4>Liam Neeson</h4>
+<p>Marathon Runner</p>
+</div>
+</div>
+<div class="quote-icon">66</div>
+</div>
+</div>
+</div>
+</div>
+<div class="testimonial-controls" id="testi-dots"></div>
+</div>
+</section>
+<!-- MODERN FAQ ACCORDION SECTION FOR HOME PAGE -->
+<section class="section-padding reveal" data-aos="fade-up" id="home-faq-section">
+<div class="container">
+<div class="text-center reveal" data-aos="fade-up" style="max-width: 750px; margin: 0 auto 50px;">
+<span class="subtitle">GOT QUESTIONS?</span>
+<h2 style="font-size: 2.5rem; font-family:'Montserrat', sans-serif;">Frequently Asked Questions</h2>
+<p style="color: #64748b; font-size: 1.05rem;">Quick answers to common questions about freight shipping, power rack warranties, installation, and returns.</p>
+</div>
+<div class="home-faq-wrap reveal">
+<!-- FAQ 1 -->
+<div class="home-faq-item active" data-aos="fade-up" data-aos-delay="100">
+<div class="home-faq-header">
+<h3 class="home-faq-title">
+<i class="fa-solid fa-truck-fast" style="color: #ff7a00;"></i>
+                            Do you offer free international shipping &amp; freight delivery?
+                        </h3>
+<div class="home-faq-icon"><i class="fa-solid fa-chevron-down"></i></div>
+</div>
+<div class="home-faq-content">
+<div class="home-faq-body">
+                            Yes! Free standard ground shipping is included on all orders over $150. Heavy freight shipments (power racks, functional trainers, treadmills) ship via insured freight carriers with real-time BOL tracking.
+                        </div>
+</div>
+</div>
+<!-- FAQ 2 -->
+<div class="home-faq-item" data-aos="fade-up" data-aos-delay="200">
+<div class="home-faq-header">
+<h3 class="home-faq-title">
+<i class="fa-solid fa-shield-halved" style="color: #ff7a00;"></i>
+                            What warranty coverage comes with Stackly strength equipment?
+                        </h3>
+<div class="home-faq-icon"><i class="fa-solid fa-chevron-down"></i></div>
+</div>
+<div class="home-faq-content">
+<div class="home-faq-body">
+                            All heavy-duty 11-gauge steel power racks, squat stands, and Olympic barbells come with a <strong>Limited Lifetime Structural Frame Warranty</strong>. Pulley cables, sealed bearings, and vinyl pads include 2 years of full replacement coverage.
+                        </div>
+</div>
+</div>
+<!-- FAQ 3 -->
+<div class="home-faq-item" data-aos="fade-up" data-aos-delay="300">
+<div class="home-faq-header">
+<h3 class="home-faq-title">
+<i class="fa-solid fa-screwdriver-wrench" style="color: #ff7a00;"></i>
+                            Can I book professional white-glove equipment assembly?
+                        </h3>
+<div class="home-faq-icon"><i class="fa-solid fa-chevron-down"></i></div>
+</div>
+<div class="home-faq-content">
+<div class="home-faq-body">
+                            Absolutely. White-glove assembly, room positioning, and packaging removal are available nationwide across North America, Europe, and Asia-Pacific. You can add assembly service directly during checkout or request technician dispatch.
+                        </div>
+</div>
+</div>
+<!-- FAQ 4 -->
+<div class="home-faq-item" data-aos="fade-up" data-aos-delay="400">
+<div class="home-faq-header">
+<h3 class="home-faq-title">
+<i class="fa-solid fa-rotate-left" style="color: #ff7a00;"></i>
+                            What is your 30-Day Money-Back Guarantee policy?
+                        </h3>
+<div class="home-faq-icon"><i class="fa-solid fa-chevron-down"></i></div>
+</div>
+<div class="home-faq-content">
+<div class="home-faq-body">
+                            We offer a hassle-free 30-day return window on all apparel, accessories, and un-opened gear. If you are not completely satisfied with your purchase, initiate a return ticket through our support portal for a full refund.
+                        </div>
+</div>
+</div>
+<!-- FAQ 5 -->
+<div class="home-faq-item" data-aos="fade-up" data-aos-delay="500">
+<div class="home-faq-header">
+<h3 class="home-faq-title">
+<i class="fa-solid fa-wand-magic-sparkles" style="color: #ff7a00;"></i>
+                            Do you offer custom laser logo branding for commercial facilities?
+                        </h3>
+<div class="home-faq-icon"><i class="fa-solid fa-chevron-down"></i></div>
+</div>
+<div class="home-faq-content">
+<div class="home-faq-body">
+                            Yes! Our in-house laser studio provides custom stainless steel logo plates, custom powder coat color finishes, and laser-etched uprights for commercial gyms, university weight rooms, and training centers.
+                        </div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- PROMO BANNER -->
+<section class="container" data-aos="fade-up">
+<div class="promo-banner reveal" data-aos="zoom-in">
+<div>
+<span style="color:#ff7a00; font-weight:800; letter-spacing:2px; text-transform:uppercase; margin-bottom:10px; display:block;">VIP Store Club</span>
+<h2>Unlock 20% Off Your First Order</h2>
+<p>Join the Stackly Store Elite mailing list to receive exclusive drops, restock alerts, and member-only discounts straight to your inbox.</p>
+</div>
+<div>
+<form id="promo-newsletter-form" novalidate="true" style="width:420px; max-width:100%;">
+<div class="input-group" style="margin-bottom:0; position:relative;">
+<div class="promo-input-wrapper">
+<input id="promo-email" name="email" placeholder="Enter email address" required="" style="border:none; padding:15px 25px; outline:none; flex:1; border-radius:50px; font-family:'Poppins', sans-serif; background:transparent; color:#0f172a;" type="email"/>
+<button class="promo-btn" onclick="window.location.href='404.html'; return false;" style="padding:12px 30px;" type="submit">Join</button>
+</div>
+</div>
+</form>
+</div>
+</div>
+</section>
+<footer class="footer reveal" data-aos="fade-up">
+<div class="container footer-grid">
+<div class="footer-brand" data-aos="fade-right" data-aos-delay="100">
+<a class="logo" href="index.html">
+<img alt="Stackly Logo" class="brand-logo-img" src="assets/logo.webp"/>
+</a>
+<p>Your ultimate destination for premium sports gear, fitness equipment, and athletic apparel.</p>
+<div class="social-links">
+<a href="404.html"><i class="fa-brands fa-facebook-f"></i></a>
+<a href="404.html"><i class="fa-brands fa-instagram"></i></a>
+<a href="404.html"><i class="fa-brands fa-youtube"></i></a>
+<a href="404.html"><i class="fa-brands fa-linkedin-in"></i></a>
+</div>
+</div>
+<div class="footer-links" data-aos="fade-up" data-aos-delay="200">
+<h3>Quick Navigation</h3>
+<ul>
+<li><a href="index.html">Home</a></li>
+<li><a href="products.html">Products</a></li>
+<li><a href="about.html">About</a></li>
+<li><a href="services.html">Services</a></li>
+<li><a href="blog.html">Blog</a></li>
+</ul>
+</div>
+<div class="footer-links" data-aos="fade-up" data-aos-delay="300">
+<h3>Support Hub</h3>
+<ul>
+<li><a href="404.html">Privacy Matrix</a></li>
+<li><a href="404.html">Terms &amp; Licensing</a></li>
+<li><a href="404.html">Member Portal</a></li>
+<li><a href="contact.html">Contact Desk</a></li>
+</ul>
+</div>
+<!-- NEWLY ADDED CONTACT COLUMN (Matches your layout perfectly) -->
+<div class="footer-links" data-aos="fade-up" data-aos-delay="400">
+<h3>Contact Us</h3>
+<ul>
+<li><i class="fa-solid fa-envelope" style="margin-right: 8px; color: #ff7a00;"></i> <a href="mailto:info@stackly.com" style="color:inherit;">info@stackly.com</a></li>
+<li><i class="fa-solid fa-phone" style="margin-right: 8px; color: #ff7a00;"></i> <a href="tel:9876543210" style="color:inherit;">9876543210</a></li>
+<li><i class="fa-solid fa-location-dot" style="margin-right: 8px; color: #ff7a00;"></i> <a href="https://www.google.com/maps/place/Stackly/@11.6829566,78.1739798,17z/data=!3m1!4b1!4m6!3m5!1s0x3babefef7fd970bb:0xe11aef1a71994f9!8m2!3d11.6829566!4d78.1739798!16s%2Fg%2F11l660s35r?entry=ttu&amp;g_ep=EgoyMDI2MDcwNy4wIKXMDSoASAFQAw%3D%3D" style="color:inherit;" target="_blank">MMR Complex, Chinna Thirupathi, near Chinna Muniyappan Kovil, Salem, Tamil Nadu 636008</a></li>
+<li><i class="fa-solid fa-clock" style="margin-right: 8px; color: #ff7a00;"></i> 24/7 Athlete Support</li>
+</ul>
+</div>
+</div>
+<div class="footer-bottom text-center">
+<p>© 2026 Stackly Inc. Designed for elite athletes worldwide.</p>
+</div>
+</footer>
+<script src="js/main.js"></script>
+<script src="js/form-validation.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script>
+        document.addEventListener("DOMContentLoaded", function() {
+            if (typeof AOS !== 'undefined') {
+                AOS.init({ duration: 800, once: true });
+            }
+        });
+    </script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const track = document.getElementById('testi-track');
+        if(!track) return;
+        const cards = track.querySelectorAll('.testi-card');
+        const dotsContainer = document.getElementById('testi-dots');
+        
+        let currentIndex = 0;
+        let cardsPerView = 3;
+        
+        function updateCardsPerView() {
+            if(window.innerWidth <= 768) cardsPerView = 1;
+            else if(window.innerWidth <= 1024) cardsPerView = 2;
+            else cardsPerView = 3;
+            updateSlider(false);
+        }
+        
+        window.addEventListener('resize', updateCardsPerView);
+        
+        function renderDots() {
+            dotsContainer.innerHTML = '';
+            const totalDots = Math.max(1, cards.length - cardsPerView + 1);
+            for(let i=0; i < totalDots; i++) {
+                const dot = document.createElement('div');
+                dot.classList.add('testi-dot');
+                if(i === currentIndex) dot.classList.add('active');
+                dot.addEventListener('click', () => {
+                    currentIndex = i;
+                    updateSlider(true);
+                    resetAutoSlide();
+                });
+                dotsContainer.appendChild(dot);
+            }
+        }
+        
+        function updateSlider(animate = true) {
+            if (currentIndex > cards.length - cardsPerView) {
+                currentIndex = Math.max(0, cards.length - cardsPerView);
+            }
+            
+            const cardWidth = cards[0].offsetWidth;
+            const gap = parseFloat(window.getComputedStyle(track).gap) || 0;
+            const moveX = currentIndex * (cardWidth + gap);
+            
+            track.style.transition = animate ? 'transform 0.6s cubic-bezier(0.25, 1, 0.5, 1)' : 'none';
+            track.style.transform = `translateX(-${moveX}px)`;
+            
+            renderDots();
+        }
+        
+        let autoSlideInterval;
+        function startAutoSlide() {
+            autoSlideInterval = setInterval(() => {
+                currentIndex++;
+                if(currentIndex > cards.length - cardsPerView) {
+                    currentIndex = 0;
+                }
+                updateSlider(true);
+            }, 4000); // 4 seconds
+        }
+        
+        function resetAutoSlide() {
+            clearInterval(autoSlideInterval);
+            startAutoSlide();
+        }
+        
+        // Initial setup
+        updateCardsPerView();
+        startAutoSlide();
+        
+        // Pause on hover
+        track.addEventListener('mouseenter', () => clearInterval(autoSlideInterval));
+        track.addEventListener('mouseleave', startAutoSlide);
+    });
+
+    // STORE HERO SLIDER (Auto & Manual Controls)
+    document.addEventListener('DOMContentLoaded', function() {
+        const heroTrack = document.getElementById('hero-track');
+        const heroPrev = document.getElementById('hero-prev-btn');
+        const heroNext = document.getElementById('hero-next-btn');
+        const heroDotsWrap = document.getElementById('hero-dots-wrap');
+        const heroSection = document.getElementById('hero-slider-section');
+
+        if (heroTrack && heroDotsWrap) {
+            const slides = heroTrack.querySelectorAll('.hero-slide-item');
+            let heroIndex = 0;
+            let heroTimer = null;
+
+            heroDotsWrap.innerHTML = '';
+            slides.forEach((_, idx) => {
+                const dot = document.createElement('div');
+                dot.classList.add('hero-dot');
+                if (idx === 0) dot.classList.add('active');
+                dot.addEventListener('click', () => {
+                    heroIndex = idx;
+                    updateHeroSlider();
+                    resetHeroTimer();
+                });
+                heroDotsWrap.appendChild(dot);
+            });
+
+            function updateHeroSlider() {
+                heroTrack.style.transform = `translateX(-${heroIndex * 100}%)`;
+                const dots = heroDotsWrap.querySelectorAll('.hero-dot');
+                dots.forEach((dot, idx) => {
+                    dot.classList.toggle('active', idx === heroIndex);
+                });
+            }
+
+            function nextHeroSlide() {
+                heroIndex = (heroIndex + 1) % slides.length;
+                updateHeroSlider();
+            }
+
+            function prevHeroSlide() {
+                heroIndex = (heroIndex - 1 + slides.length) % slides.length;
+                updateHeroSlider();
+            }
+
+            if (heroNext) {
+                heroNext.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    nextHeroSlide();
+                    resetHeroTimer();
+                });
+            }
+
+            if (heroPrev) {
+                heroPrev.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    prevHeroSlide();
+                    resetHeroTimer();
+                });
+            }
+
+            function startHeroTimer() {
+                heroTimer = setInterval(nextHeroSlide, 5000);
+            }
+
+            function resetHeroTimer() {
+                clearInterval(heroTimer);
+                startHeroTimer();
+            }
+
+            startHeroTimer();
+
+            if (heroSection) {
+                heroSection.addEventListener('mouseenter', () => clearInterval(heroTimer));
+                heroSection.addEventListener('mouseleave', startHeroTimer);
+            }
+        }
+
+        // HOME FAQ ACCORDION INTERACTION
+        const faqItems = document.querySelectorAll('.home-faq-item');
+        faqItems.forEach(item => {
+            const header = item.querySelector('.home-faq-header');
+            if (header) {
+                header.addEventListener('click', () => {
+                    const isActive = item.classList.contains('active');
+                    faqItems.forEach(otherItem => otherItem.classList.remove('active'));
+                    if (!isActive) {
+                        item.classList.add('active');
+                    }
+                });
+            }
+        });
+    });
+</script>
+</body>
+</html>

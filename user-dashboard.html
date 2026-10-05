@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Athlete Portal — Stackly Sports Store</title>
+<meta content="Stackly Athlete telemetry dashboard. Log metrics, track sports equipment orders, workout PRs, and nutrition." name="description"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&amp;family=Montserrat:wght@700;800;900&amp;family=Bebas+Neue&amp;display=swap" rel="stylesheet"/>
+<link href="css/style.css" rel="stylesheet"/>
+</head>
+<body>
+<!-- Page Loader -->
+<div class="page-loader" id="userLoader">
+<img alt="Stackly" src="assets/logo.webp" style="height:52px;width:auto;object-fit:contain;animation:pulseLogoUser 1.4s ease-in-out infinite;"/>
+<div class="loader-bar"><div class="loader-bar-fill"></div></div>
+</div>
+<style>
+    @keyframes pulseLogoUser {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.7; transform: scale(0.96); }
+    }
+  </style>
+<div class="dashboard-root">
+<!-- Sidebar Overlay -->
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+<!-- Sidebar (5 MAIN MENUS ONLY) -->
+<aside class="sidebar" id="sidebar">
+<div class="sidebar-logo" style="flex-direction: column; align-items: center; justify-content: center; text-align: center; width: 100%;">
+<a href="404.html" style="display: flex; align-items: center; justify-content: center; width: 100%;">
+<img alt="Stackly Logo" src="assets/logo.webp" style="height:36px;width:auto;object-fit:contain;"/>
+</a>
+<div class="sidebar-dashboard-tag" style="text-align: center; margin-top: 6px;">Customer Dashboard</div>
+<button aria-label="Close Sidebar" class="sidebar-close-btn" id="sidebarCloseBtn" onclick="window.location.href='404.html'" style="display: none; position: absolute; right: 15px; top: 15px;">
+<i class="fa-solid fa-xmark"></i>
+</button>
+</div>
+<nav class="sidebar-nav">
+<div class="sidebar-section-label">Main Navigation</div>
+<!-- 1. Dashboard -->
+<a class="nav-item active" data-tab="dashboard">
+<i class="fa-solid fa-gauge nav-icon"></i>
+<span>Dashboard</span>
+</a>
+<!-- 2. Gear & Store Orders -->
+<a class="nav-item" data-tab="equipment">
+<i class="fa-solid fa-bag-shopping nav-icon"></i>
+<span>Gear &amp; Orders</span>
+</a>
+<!-- 3. Workout & Telemetry -->
+<a class="nav-item" data-tab="workouts">
+<i class="fa-solid fa-dumbbell nav-icon"></i>
+<span>Workout Telemetry</span>
+</a>
+<!-- 4. Nutrition & Fuel Tracker -->
+<a class="nav-item" data-tab="nutrition">
+<i class="fa-solid fa-apple-whole nav-icon"></i>
+<span>Nutrition Tracker</span>
+</a>
+<!-- 5. Athlete Profile & Settings -->
+<a class="nav-item" data-tab="profile">
+<i class="fa-solid fa-user-gear nav-icon"></i>
+<span>Profile &amp; Settings</span>
+</a>
+</nav>
+<div class="sidebar-footer">
+<div class="sidebar-user-card" id="sidebarUserBtn">
+<div class="user-avatar-sm" id="sidebarAvatar" style="background:var(--gradient-blue);">A</div>
+<div class="sidebar-user-info">
+<div class="sidebar-user-name" id="sidebarName">user@stackly.com</div>
+<div class="sidebar-user-role" id="sidebarRole">Customer User</div>
+</div>
+<i class="fa-solid fa-right-from-bracket text-muted" id="logoutBtn" style="cursor:pointer;" title="Log Out"></i>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="main-content">
+<!-- Top Navbar -->
+<header class="top-navbar">
+<button aria-label="Toggle Navigation Sidebar" class="navbar-toggle" id="navbarToggle">
+<i class="fa-solid fa-bars"></i>
+</button>
+<div class="navbar-title">Customer Dashboard</div>
+<div class="navbar-actions">
+<div class="navbar-profile" id="navbarProfile">
+<div class="navbar-avatar" id="navAvatar" style="background:var(--gradient-blue);">C</div>
+<div class="navbar-user-info">
+<div class="navbar-user-name" id="navName">user@stackly.com</div>
+<div class="navbar-user-email" id="navEmail" style="font-size: 11px; color: var(--text-mid);">Customer User</div>
+</div>
+</div>
+</div>
+</header>
+<!-- Dashboard View Port -->
+<div class="content-area">
+<!-- ==================== MENU 1: DASHBOARD ==================== -->
+<section class="page-section active" id="sect-dashboard">
+<div class="page-header">
+<div class="page-header-top">
+<div>
+<h1 class="page-title">Athlete Performance Console</h1>
+<p class="page-subtitle">Real-time telemetry, calorie burn, heart rate, and gear order updates.</p>
+</div>
+</div>
+</div>
+<!-- Statistics Cards with Suitable Icons -->
+<div class="stats-grid">
+<div class="stat-card orange" data-tilt="">
+<div class="stat-card-header">
+<div class="stat-icon-wrap orange"><i class="fa-solid fa-fire-flame-simple"></i></div>
+<span class="stat-trend up"><i class="fa-solid fa-caret-up"></i> +15%</span>
+</div>
+<div class="stat-value" id="valCalories">2,850</div>
+<div class="stat-label">Calories Burned (kcal)</div>
+</div>
+<div class="stat-card blue" data-tilt="">
+<div class="stat-card-header">
+<div class="stat-icon-wrap blue"><i class="fa-solid fa-dumbbell"></i></div>
+<span class="stat-trend up"><i class="fa-solid fa-caret-up"></i> +2</span>
+</div>
+<div class="stat-value" id="valSessions">6</div>
+<div class="stat-label">Workout Sessions</div>
+</div>
+<div class="stat-card green" data-tilt="">
+<div class="stat-card-header">
+<div class="stat-icon-wrap green"><i class="fa-solid fa-heart-pulse"></i></div>
+<span class="stat-trend up"><i class="fa-solid fa-caret-up"></i> 99%</span>
+</div>
+<div class="stat-value" id="valFitnessScore">88</div>
+<div class="stat-label">Endurance Index Score</div>
+</div>
+<div class="stat-card yellow" data-tilt="">
+<div class="stat-card-header">
+<div class="stat-icon-wrap yellow"><i class="fa-solid fa-bullseye"></i></div>
+<span class="stat-trend up"><i class="fa-solid fa-caret-up"></i> +8%</span>
+</div>
+<div class="stat-value" id="valWeeklyProgress">85%</div>
+<div class="stat-label">Weekly Calorie Goal</div>
+</div>
+<div class="stat-card purple" data-tilt="">
+<div class="stat-card-header">
+<div class="stat-icon-wrap purple"><i class="fa-solid fa-trophy"></i></div>
+<span class="stat-trend up"><i class="fa-solid fa-caret-up"></i> 4</span>
+</div>
+<div class="stat-value" id="valAchievements">4</div>
+<div class="stat-label">Badges Unlocked</div>
+</div>
+</div>
+<!-- Charts Section -->
+<div class="charts-grid">
+<div class="chart-card full-width">
+<div class="chart-header">
+<div>
+<h2 class="chart-title">Weekly Workout &amp; Training Hours</h2>
+<p class="chart-subtitle">Analyzing training minutes logged vs target capacity curve.</p>
+</div>
+</div>
+<div class="chart-container" style="height: 300px;">
+<canvas id="userWorkoutProgressChart"></canvas>
+</div>
+</div>
+<div class="chart-card">
+<div class="chart-header">
+<h2 class="chart-title">Daily Calorie Burn Breakdown</h2>
+</div>
+<div class="chart-container" style="height: 260px;">
+<canvas id="userCaloriesBurnedChart"></canvas>
+</div>
+</div>
+<div class="chart-card">
+<div class="chart-header">
+<h2 class="chart-title">Activity Share by Sport Category</h2>
+</div>
+<div class="chart-container" style="height: 260px;">
+<canvas id="userActivityDistributionChart"></canvas>
+</div>
+</div>
+</div>
+<!-- Content Grid: Live Timeline & Badges -->
+<div class="content-grid">
+<div class="info-card">
+<h2 class="card-section-title"><i class="fa-solid fa-clock-rotate-left"></i> Live Telemetry Log</h2>
+<div class="activity-list" id="progressTimelineList">
+<!-- Dynamically populated -->
+</div>
+</div>
+<div class="info-card">
+<h2 class="card-section-title"><i class="fa-solid fa-trophy"></i> Unlocked Athlete Achievements</h2>
+<div class="activity-list" id="achievementsGrid">
+<!-- Dynamically populated -->
+</div>
+</div>
+</div>
+</section>
+<!-- ==================== MENU 2: GEAR & ORDERS ==================== -->
+<section class="page-section" id="sect-equipment">
+<div class="page-header">
+<div class="page-header-top">
+<div>
+<h1 class="page-title">Gear &amp; Sports Equipment Analytics</h1>
+<p class="page-subtitle">Track your purchased barbells, dumbbells, accessories, expenditure, and shipping status.</p>
+</div>
+</div>
+</div>
+<!-- Stat Cards with Suitable Icons -->
+<div class="stats-grid">
+<div class="stat-card blue">
+<div class="stat-card-header">
+<div class="stat-icon-wrap blue"><i class="fa-solid fa-bag-shopping"></i></div>
+</div>
+<div class="stat-value">$1,240</div>
+<div class="stat-label">Total Gear Purchases</div>
+</div>
+<div class="stat-card yellow">
+<div class="stat-card-header">
+<div class="stat-icon-wrap yellow"><i class="fa-solid fa-truck-fast"></i></div>
+</div>
+<div class="stat-value">1 Order</div>
+<div class="stat-label">Active In Transit</div>
+</div>
+<div class="stat-card green">
+<div class="stat-card-header">
+<div class="stat-icon-wrap green"><i class="fa-solid fa-shield-halved"></i></div>
+</div>
+<div class="stat-value">100%</div>
+<div class="stat-label">Equipment Warranty Active</div>
+</div>
+<div class="stat-card orange">
+<div class="stat-card-header">
+<div class="stat-icon-wrap orange"><i class="fa-solid fa-coins"></i></div>
+</div>
+<div class="stat-value">420 Pts</div>
+<div class="stat-label">Store Loyalty Rewards</div>
+</div>
+</div>
+<!-- Gear Expenditure & Category Charts -->
+<div class="charts-grid">
+<div class="chart-card">
+<div class="chart-header">
+<h2 class="chart-title">Monthly Gear Expenditure ($)</h2>
+</div>
+<div class="chart-container" style="height: 260px;">
+<canvas id="gearExpenditureChart"></canvas>
+</div>
+</div>
+<div class="chart-card">
+<div class="chart-header">
+<h2 class="chart-title">Equipment Category Share</h2>
+</div>
+<div class="chart-container" style="height: 260px;">
+<canvas id="gearCategoryShareChart"></canvas>
+</div>
+</div>
+</div>
+<!-- Order Telemetry Table Card -->
+<div class="table-card">
+<div class="table-card-header">
+<h2 class="table-card-title">Live Equipment Orders &amp; Shipping Telemetry</h2>
+<div class="table-search">
+<i class="fa-solid fa-magnifying-glass"></i>
+<input id="userOrdersSearch" placeholder="Filter gear orders..." type="text"/>
+</div>
+</div>
+<div style="overflow-x:auto;">
+<table class="data-table" id="userOrdersTable">
+<thead>
+<tr>
+<th>Order ID</th>
+<th>Order Date</th>
+<th>Gear Item</th>
+<th>Amount</th>
+<th>Delivery Status</th>
+<th>Tracking Code</th>
+</tr>
+</thead>
+<tbody id="userOrdersList">
+<!-- Loaded dynamically -->
+</tbody>
+</table>
+</div>
+</div>
+<!-- Gear Warranty & Servicing Table Card -->
+<div class="table-card">
+<div class="table-card-header">
+<h2 class="table-card-title">Equipment Warranty &amp; Servicing Log</h2>
+</div>
+<div style="overflow-x:auto;">
+<table class="data-table" id="gearMaintenanceTable">
+<thead>
+<tr>
+<th>Product Name</th>
+<th>Serial / SKU</th>
+<th>Purchase Date</th>
+<th>Warranty Period</th>
+<th>Maintenance Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Titanium Smart Dumbbell Set</strong></td>
+<td><code>STK-EQP-003</code></td>
+<td>2026-05-28</td>
+<td>2 Years Full Cover</td>
+<td><span class="status-badge active">Active (360 Days Left)</span></td>
+</tr>
+<tr>
+<td><strong>Stackly Iso-Whey 5lbs</strong></td>
+<td><code>STK-NUT-301</code></td>
+<td>2026-06-01</td>
+<td>Sealed Unit</td>
+<td><span class="status-badge active">In Use</span></td>
+</tr>
+<tr>
+<td><strong>Pro-Perform Wicking Hoodie</strong></td>
+<td><code>STK-APP-501</code></td>
+<td>2026-06-03</td>
+<td>90 Days Garment</td>
+<td><span class="status-badge warning">Processing Batch</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<!-- ==================== MENU 3: WORKOUT TELEMETRY ==================== -->
+<section class="page-section" id="sect-workouts">
+<div class="page-header">
+<div class="page-header-top">
+<div>
+<h1 class="page-title">Workout Telemetry &amp; Session Analytics</h1>
+<p class="page-subtitle">Real-time biometric pacing, power output, heart rate zones, and PR benchmarks.</p>
+</div>
+</div>
+</div>
+<!-- Stat Cards with Suitable Icons -->
+<div class="stats-grid">
+<div class="stat-card blue">
+<div class="stat-card-header">
+<div class="stat-icon-wrap blue"><i class="fa-solid fa-person-running"></i></div>
+</div>
+<div class="stat-value">48</div>
+<div class="stat-label">Total Workouts Logged</div>
+</div>
+<div class="stat-card green">
+<div class="stat-card-header">
+<div class="stat-icon-wrap green"><i class="fa-solid fa-bolt"></i></div>
+</div>
+<div class="stat-value">840 W</div>
+<div class="stat-label">Peak Power Output</div>
+</div>
+<div class="stat-card yellow">
+<div class="stat-card-header">
+<div class="stat-icon-wrap yellow"><i class="fa-solid fa-heart-pulse"></i></div>
+</div>
+<div class="stat-value">142 BPM</div>
+<div class="stat-label">Avg Workout Heart Rate</div>
+</div>
+<div class="stat-card orange">
+<div class="stat-card-header">
+<div class="stat-icon-wrap orange"><i class="fa-solid fa-stopwatch"></i></div>
+</div>
+<div class="stat-value">185 min</div>
+<div class="stat-label">HR Zone 4/5 Duration</div>
+</div>
+</div>
+<!-- Workout Charts Grid -->
+<div class="charts-grid">
+<div class="chart-card">
+<div class="chart-header">
+<h2 class="chart-title">Heart Rate &amp; Cardio Intensity Telemetry Curve</h2>
+</div>
+<div class="chart-container" style="height: 260px;">
+<canvas id="heartRateIntensityChart"></canvas>
+</div>
+</div>
+<div class="chart-card">
+<div class="chart-header">
+<h2 class="chart-title">Training Load Volume by Muscle Group</h2>
+</div>
+<div class="chart-container" style="height: 260px;">
+<canvas id="muscleGroupVolumeChart"></canvas>
+</div>
+</div>
+</div>
+<!-- Recorded Workout Sessions Table -->
+<div class="table-card">
+<div class="table-card-header">
+<h2 class="table-card-title">Recorded Workout Sessions Log</h2>
+</div>
+<div style="overflow-x:auto;">
+<table class="data-table" id="userActivitiesTable">
+<thead>
+<tr>
+<th>Date &amp; Time</th>
+<th>Training Type</th>
+<th>Duration</th>
+<th>Energy Burned</th>
+<th>Complexity Level</th>
+<th>Telemetry Status</th>
+</tr>
+</thead>
+<tbody id="userActivitiesList">
+<!-- Loaded dynamically -->
+</tbody>
+</table>
+</div>
+</div>
+<!-- Personal Records & Lift Benchmarks Table -->
+<div class="table-card">
+<div class="table-card-header">
+<h2 class="table-card-title">Personal Records (PRs) &amp; Strength Benchmarks</h2>
+</div>
+<div style="overflow-x:auto;">
+<table class="data-table" id="personalRecordsTable">
+<thead>
+<tr>
+<th>Movement / Exercise</th>
+<th>Personal Record (PR)</th>
+<th>Date Achieved</th>
+<th>Coached By</th>
+<th>PR Progress</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Barbell Deadlift</strong></td>
+<td>340 lbs (154 kg)</td>
+<td>2026-05-30</td>
+<td>Coach Arnold</td>
+<td><span class="status-badge active">+15 lbs (+4.6%)</span></td>
+</tr>
+<tr>
+<td><strong>Olympic Barbell Squat</strong></td>
+<td>295 lbs (133 kg)</td>
+<td>2026-05-22</td>
+<td>Coach Arnold</td>
+<td><span class="status-badge active">+10 lbs (+3.5%)</span></td>
+</tr>
+<tr>
+<td><strong>Bench Press 1RM</strong></td>
+<td>245 lbs (111 kg)</td>
+<td>2026-05-18</td>
+<td>Coach Carter</td>
+<td><span class="status-badge active">+5 lbs (+2.1%)</span></td>
+</tr>
+<tr>
+<td><strong>5K Sprint Time</strong></td>
+<td>21 min 45 sec</td>
+<td>2026-06-01</td>
+<td>Coach Serena</td>
+<td><span class="status-badge active">-32 sec Faster</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<!-- ==================== MENU 4: NUTRITION TRACKER ==================== -->
+<section class="page-section" id="sect-nutrition">
+<div class="page-header">
+<div class="page-header-top">
+<div>
+<h1 class="page-title">Athlete Nutrition &amp; Supplement Telemetry</h1>
+<p class="page-subtitle">Track real-time macro balances, protein isolates, hydration index, and daily fuel logs.</p>
+</div>
+</div>
+</div>
+<!-- Stat Cards with Suitable Icons -->
+<div class="stats-grid">
+<div class="stat-card green">
+<div class="stat-card-header">
+<div class="stat-icon-wrap green"><i class="fa-solid fa-utensils"></i></div>
+</div>
+<div class="stat-value">2,850 / 3,000</div>
+<div class="stat-label">Daily Calories (kcal)</div>
+</div>
+<div class="stat-card blue">
+<div class="stat-card-header">
+<div class="stat-icon-wrap blue"><i class="fa-solid fa-bowl-food"></i></div>
+</div>
+<div class="stat-value">210g / 220g</div>
+<div class="stat-label">Whey Protein Intake</div>
+</div>
+<div class="stat-card yellow">
+<div class="stat-card-header">
+<div class="stat-icon-wrap yellow"><i class="fa-solid fa-droplet"></i></div>
+</div>
+<div class="stat-value">3.8 L / 4.0 L</div>
+<div class="stat-label">Hydration Water Target</div>
+</div>
+<div class="stat-card orange">
+<div class="stat-card-header">
+<div class="stat-icon-wrap orange"><i class="fa-solid fa-flask"></i></div>
+</div>
+<div class="stat-value">98.4%</div>
+<div class="stat-label">Electrolyte Balance</div>
+</div>
+</div>
+<!-- Nutrition Charts Grid -->
+<div class="charts-grid">
+<div class="chart-card">
+<div class="chart-header">
+<h2 class="chart-title">Hourly Calorie &amp; Protein Intake Curve</h2>
+</div>
+<div class="chart-container" style="height: 260px;">
+<canvas id="hourlyNutrIntakeChart"></canvas>
+</div>
+</div>
+<div class="chart-card">
+<div class="chart-header">
+<h2 class="chart-title">Macro Nutrient Distribution</h2>
+</div>
+<div class="chart-container" style="height: 260px;">
+<canvas id="macroBalanceChart"></canvas>
+</div>
+</div>
+</div>
+<!-- Today's Meal & Fuel Logs Table -->
+<div class="table-card">
+<div class="table-card-header">
+<h2 class="table-card-title">Today's Nutrition &amp; Supplement Logs</h2>
+</div>
+<div style="overflow-x:auto;">
+<table class="data-table" id="mealsTable">
+<thead>
+<tr>
+<th>Time Logged</th>
+<th>Meal / Supplement Stack</th>
+<th>Carbs (g)</th>
+<th>Protein (g)</th>
+<th>Fats (g)</th>
+<th>Energy (kcal)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>08:15 AM</td>
+<td><strong>Stackly Iso-Whey Shake + Oats</strong></td>
+<td>65g</td>
+<td>40g</td>
+<td>12g</td>
+<td>520 kcal</td>
+</tr>
+<tr>
+<td>01:00 PM</td>
+<td><strong>Grilled Chicken Breast + Jasmine Rice</strong></td>
+<td>85g</td>
+<td>55g</td>
+<td>10g</td>
+<td>650 kcal</td>
+</tr>
+<tr>
+<td>04:30 PM</td>
+<td><strong>Stackly BCAA Recovery Fuel + Almonds</strong></td>
+<td>25g</td>
+<td>20g</td>
+<td>18g</td>
+<td>340 kcal</td>
+</tr>
+<tr>
+<td>07:45 PM</td>
+<td><strong>Baked Salmon Steak + Steamed Broccoli</strong></td>
+<td>45g</td>
+<td>25g</td>
+<td>28g</td>
+<td>510 kcal</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Supplement Stack Telemetry Table -->
+<div class="table-card">
+<div class="table-card-header">
+<h2 class="table-card-title">Stackly Supplement Stack Schedule</h2>
+</div>
+<div style="overflow-x:auto;">
+<table class="data-table" id="supplementStackTable">
+<thead>
+<tr>
+<th>Supplement Product</th>
+<th>Dosage Unit</th>
+<th>Timing Schedule</th>
+<th>Target Objective</th>
+<th>Stock Supply</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Stackly Iso-Whey Isolate 5lbs</strong></td>
+<td>1 Scoop (30g)</td>
+<td>Post-Workout &amp; Morning</td>
+<td>Muscle Protein Synthesis</td>
+<td><span class="status-badge active">42 Servings Left</span></td>
+</tr>
+<tr>
+<td><strong>BCAA Recovery Fuel Matrix</strong></td>
+<td>1 Scoop (15g)</td>
+<td>Intra-Workout</td>
+<td>Muscle Endurance &amp; Anti-Fatigue</td>
+<td><span class="status-badge warning">5 Servings (Reorder)</span></td>
+</tr>
+<tr>
+<td><strong>Creatine Monohydrate Unflavored</strong></td>
+<td>5 grams</td>
+<td>Daily Morning</td>
+<td>ATP Power &amp; Hydration</td>
+<td><span class="status-badge active">60 Servings Left</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+<!-- ==================== MENU 5: PROFILE & SETTINGS ==================== -->
+<section class="page-section" id="sect-profile">
+<div class="page-header">
+<h1 class="page-title">Athlete Telemetry &amp; Performance Profile</h1>
+<p class="page-subtitle">Real-time biometric telemetry, wearable sensor devices, and personal records.</p>
+</div>
+<div class="profile-header-card" style="background: linear-gradient(135deg, #0F172A 0%, #1E293B 50%, #FF6B35 100%);">
+<div class="profile-avatar-large" id="profileAvatarBig" style="background:rgba(255,107,53,0.3);">A</div>
+<h2 class="profile-name" id="profileNameBig">user@stackly.com</h2>
+<p class="profile-email-display" id="profileEmailBig">user@stackly.com</p>
+<div class="profile-stats-bar">
+<div class="profile-stat-item">
+<div class="profile-stat-number">482 hrs</div>
+<div class="profile-stat-label">Lifetime Training</div>
+</div>
+<div class="profile-stat-item">
+<div class="profile-stat-number">340 lbs</div>
+<div class="profile-stat-label">Max Deadlift PR</div>
+</div>
+<div class="profile-stat-item">
+<div class="profile-stat-number">142.5k</div>
+<div class="profile-stat-label">Total kcal Expended</div>
+</div>
+</div>
+</div>
+<!-- Telemetry Stat Count Cards with Suitable Icons -->
+<div class="stats-grid">
+<div class="stat-card blue">
+<div class="stat-card-header">
+<div class="stat-icon-wrap blue"><i class="fa-solid fa-signal"></i></div>
+</div>
+<div class="stat-value">99.8%</div>
+<div class="stat-label">Sensor Telemetry Sync</div>
+</div>
+<div class="stat-card green">
+<div class="stat-card-header">
+<div class="stat-icon-wrap green"><i class="fa-solid fa-heart-pulse"></i></div>
+</div>
+<div class="stat-value">54 bpm</div>
+<div class="stat-label">Resting Heart Rate</div>
+</div>
+<div class="stat-card yellow">
+<div class="stat-card-header">
+<div class="stat-icon-wrap yellow"><i class="fa-solid fa-lungs"></i></div>
+</div>
+<div class="stat-value">62 mL/kg</div>
+<div class="stat-label">Est. VO2 Max Index</div>
+</div>
+<div class="stat-card orange">
+<div class="stat-card-header">
+<div class="stat-icon-wrap orange"><i class="fa-solid fa-battery-full"></i></div>
+</div>
+<div class="stat-value">98.4%</div>
+<div class="stat-label">Recovery Score</div>
+</div>
+</div>
+<!-- Performance Trends Charts -->
+<div class="charts-grid">
+<div class="chart-card">
+<div class="chart-header">
+<h2 class="chart-title">Endurance Score Progression</h2>
+</div>
+<div class="chart-container" style="height: 260px;">
+<canvas id="userFitnessScoreChart"></canvas>
+</div>
+</div>
+<div class="chart-card">
+<div class="chart-header">
+<h2 class="chart-title">Monthly Energy Burn (kcal)</h2>
+</div>
+<div class="chart-container" style="height: 260px;">
+<canvas id="userWeeklyPerformanceChart"></canvas>
+</div>
+</div>
+</div>
+<!-- Connected Wearables Data Table -->
+<div class="table-card">
+<div class="table-card-header">
+<h2 class="table-card-title">Connected Wearable Devices &amp; Sensors</h2>
+</div>
+<div style="overflow-x:auto;">
+<table class="data-table" id="wearablesTable">
+<thead>
+<tr>
+<th>Device Name</th>
+<th>Hardware Model</th>
+<th>Connection Status</th>
+<th>Battery</th>
+<th>Last Synced</th>
+<th>Telemetry Channel</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Apple Watch Ultra 2</strong></td>
+<td><code>APL-WCH-092</code></td>
+<td><span class="status-badge active">Connected</span></td>
+<td>84%</td>
+<td>2 mins ago</td>
+<td>Heart Rate &amp; GPS</td>
+</tr>
+<tr>
+<td><strong>Garmin Forerunner 965</strong></td>
+<td><code>GRM-FRN-965</code></td>
+<td><span class="status-badge active">Connected</span></td>
+<td>92%</td>
+<td>10 mins ago</td>
+<td>Pacing &amp; Cadence</td>
+</tr>
+<tr>
+<td><strong>Polar H10 Chest Strap</strong></td>
+<td><code>PLR-H10-BT</code></td>
+<td><span class="status-badge active">Connected</span></td>
+<td>76%</td>
+<td>1 hour ago</td>
+<td>ECG Biometrics</td>
+</tr>
+<tr>
+<td><strong>Stackly Smart Scale Pro</strong></td>
+<td><code>STK-SCL-500</code></td>
+<td><span class="status-badge active">Connected</span></td>
+<td>100%</td>
+<td>Today 08:00</td>
+<td>Body Fat &amp; Water %</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</section>
+</div>
+</main>
+</div>
+<!-- Toast Container -->
+<div class="toast-container" id="toastContainer"></div>
+<!-- Scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.8.1/vanilla-tilt.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/form-validation.js"></script>
+<script src="js/dashboard.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (AUTH.checkSession('user')) {
+        window.dashboardApp.init('user');
+      }
+    });
+  </script>
+</body>
+</html>

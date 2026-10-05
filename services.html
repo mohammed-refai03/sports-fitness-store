@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Services | Stackly Sports Store</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&amp;family=Poppins:wght@300;400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet"/>
+<link href="css/main.css" rel="stylesheet"/>
+<style>
+        .page-header { padding: 180px 0 100px; background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); color: #fff; text-align: center; }
+        .page-header h1 { font-size: 4rem; margin-bottom: 20px; font-family: 'Montserrat', sans-serif; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; }
+        .page-header h1 span { color: #ff7a00; }
+        .page-header p { font-size: 1.2rem; color: #cbd5e1; max-width: 700px; margin: 0 auto; line-height: 1.8; }
+        
+        .content-section { padding: 80px 0; }
+        .bg-light { background-color: #f8fafc; }
+        
+        /* Modular UI Components */
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+        .grid-2-asym { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 50px; align-items: center; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; }
+        
+        .card { background: #fff; border-radius: 16px; padding: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.04); transition: transform 0.3s; border: 1px solid #f1f5f9; }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
+        
+        .img-placeholder { background: #e2e8f0; border-radius: 16px; background-size: cover; background-position: center; }
+        .img-h300 { height: 300px; }
+        .img-h400 { height: 400px; }
+        
+        .section-title { font-size: 2.5rem; margin-bottom: 20px; color: #0f172a; font-family: 'Montserrat', sans-serif; font-weight: 800; }
+        .section-subtitle { color: #ff7a00; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; font-size: 0.9rem; margin-bottom: 10px; display: block; }
+        .section-desc { color: #64748b; font-size: 1.1rem; line-height: 1.7; margin-bottom: 30px; }
+        
+        .btn-solid { background: #ff7a00; color: #fff; padding: 14px 32px; border-radius: 50px; font-weight: 600; display: inline-block; transition: 0.3s; border: none; cursor: pointer; }
+        .btn-solid:hover { background: #ea580c; color: #fff; transform: translateY(-2px); }
+        
+        .btn-outline { background: transparent; color: #0f172a; padding: 12px 30px; border-radius: 50px; font-weight: 600; display: inline-block; transition: 0.3s; border: 2px solid #0f172a; }
+        .btn-outline:hover { background: #0f172a; color: #fff; }
+        
+        .icon-box { width: 60px; height: 60px; border-radius: 12px; background: #fff7ed; color: #ff7a00; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-bottom: 20px; }
+        
+        .faq-item { border-bottom: 1px solid #e2e8f0; padding: 20px 0; }
+        .faq-q { font-weight: 700; font-size: 1.1rem; color: #0f172a; margin-bottom: 10px; }
+        .faq-a { color: #64748b; line-height: 1.6; }
+
+        /* Custom Styles for 3 New Services Sections */
+
+        /* Section 1: Our Core Services Cards */
+        .core-service-card {
+            background: #ffffff;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        .core-service-card:hover {
+            transform: translateY(-10px);
+            border-color: #ff7a00;
+            box-shadow: 0 20px 40px rgba(255, 122, 0, 0.15);
+        }
+        .core-service-img-box {
+            position: relative;
+            height: 240px;
+            overflow: hidden;
+        }
+        .core-service-img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .core-service-card:hover .core-service-img-box img {
+            transform: scale(1.08);
+        }
+        .core-service-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 122, 0, 0.9);
+            color: #ffffff;
+            font-size: 0.75rem;
+            font-weight: 800;
+            padding: 5px 12px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            backdrop-filter: blur(4px);
+        }
+        .core-service-body {
+            padding: 28px 24px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+        .core-service-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 1.25rem;
+            color: #0f172a;
+            margin-bottom: 10px;
+        }
+        .core-service-desc {
+            color: #64748b;
+            font-size: 0.92rem;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        /* Section 2: Why Our Service Matters Grid */
+        .why-service-item {
+            background: #ffffff;
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid #e2e8f0;
+            transition: all 0.4s ease;
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+        .why-service-item:hover {
+            transform: translateX(8px);
+            border-color: #ff7a00;
+            box-shadow: 0 10px 30px rgba(255, 122, 0, 0.1);
+        }
+        .why-service-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 16px;
+            background: #fff7ed;
+            color: #ff7a00;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+            transition: all 0.4s ease;
+        }
+        .why-service-item:hover .why-service-icon {
+            background: #ff7a00;
+            color: #ffffff;
+            transform: scale(1.1) rotate(-6deg);
+        }
+        .why-service-img-frame {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            height: 100%;
+            min-height: 380px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+        .why-service-img-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .why-service-img-frame:hover img {
+            transform: scale(1.06);
+        }
+
+        /* Section 3: After-Sales Support Cards */
+        .aftersales-card {
+            background: #ffffff;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 10px 25px rgba(15, 23, 42, 0.04);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+        }
+        .aftersales-card:hover {
+            transform: translateY(-10px);
+            border-color: #ff7a00;
+            box-shadow: 0 20px 40px rgba(255, 122, 0, 0.15);
+        }
+        .aftersales-img-box {
+            position: relative;
+            height: 220px;
+            overflow: hidden;
+        }
+        .aftersales-img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+        .aftersales-card:hover .aftersales-img-box img {
+            transform: scale(1.08);
+        }
+        .aftersales-body {
+            padding: 24px 20px;
+            text-align: center;
+        }
+        .aftersales-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: #0f172a;
+            margin-bottom: 6px;
+        }
+        .aftersales-sub {
+            color: #ff7a00;
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-bottom: 12px;
+        }
+
+        /* Responsive Breakpoints for 3 New Sections */
+        @media (max-width: 992px) {
+            .why-service-img-frame { min-height: 300px; margin-top: 30px; }
+        }
+        @media (max-width: 640px) {
+            .why-service-item { flex-direction: column; text-align: center; align-items: center; }
+        }
+
+        /* 3 Additional Services Image Sections Styling */
+        
+        /* Custom Laser Engraving Section */
+        .laser-custom-wrap {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+            background: #ffffff;
+            border-radius: 24px;
+            padding: 40px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 15px 35px rgba(15, 23, 42, 0.05);
+            transition: all 0.4s ease;
+        }
+        .laser-custom-wrap:hover {
+            box-shadow: 0 25px 50px rgba(255, 122, 0, 0.12);
+            border-color: rgba(255, 122, 0, 0.4);
+        }
+        .laser-img-frame {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            height: 380px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        .laser-img-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .laser-custom-wrap:hover .laser-img-frame img {
+            transform: scale(1.08);
+        }
+        .laser-badge-overlay {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(10px);
+            color: #ffffff;
+            padding: 12px 20px;
+            border-radius: 14px;
+            border: 1px solid rgba(255, 122, 0, 0.4);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        .laser-badge-overlay i {
+            color: #ff7a00;
+            font-size: 1.2rem;
+        }
+
+        /* Certified Field Master Technicians Card Grid */
+        .tech-team-card {
+            background: #ffffff;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.04);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+        }
+        .tech-team-card:hover {
+            transform: translateY(-10px);
+            border-color: #ff7a00;
+            box-shadow: 0 20px 40px rgba(255, 122, 0, 0.15);
+        }
+        .tech-team-img-box {
+            position: relative;
+            height: 260px;
+            overflow: hidden;
+            background: #0f172a;
+        }
+        .tech-team-img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top center;
+            transition: transform 0.5s ease, filter 0.5s ease;
+        }
+        .tech-team-card:hover .tech-team-img-box img {
+            transform: scale(1.06);
+            filter: brightness(1.05);
+        }
+        .tech-team-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 122, 0, 0.9);
+            color: #ffffff;
+            font-size: 0.75rem;
+            font-weight: 800;
+            padding: 5px 12px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            backdrop-filter: blur(4px);
+        }
+        .tech-team-body {
+            padding: 24px 20px;
+            text-align: center;
+        }
+        .tech-team-name {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 1.2rem;
+            color: #0f172a;
+            margin-bottom: 4px;
+        }
+        .tech-team-role {
+            color: #ff7a00;
+            font-weight: 600;
+            font-size: 0.85rem;
+            margin-bottom: 12px;
+        }
+        .tech-team-meta {
+            font-size: 0.82rem;
+            color: #64748b;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            border-top: 1px dashed #e2e8f0;
+            padding-top: 12px;
+            margin-top: 12px;
+        }
+
+        /* Priority Emergency Dispatch Showcase Cards */
+        .dispatch-card {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            height: 360px;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .dispatch-card:hover {
+            transform: translateY(-8px) scale(1.01);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+        }
+        .dispatch-bg {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .dispatch-card:hover .dispatch-bg {
+            transform: scale(1.1);
+        }
+        .dispatch-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(15, 23, 42, 0.1) 0%, rgba(15, 23, 42, 0.92) 80%);
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            transition: opacity 0.3s ease;
+        }
+        .dispatch-card:hover .dispatch-overlay {
+            background: linear-gradient(180deg, rgba(15, 23, 42, 0.2) 0%, rgba(15, 23, 42, 0.96) 75%);
+        }
+        .dispatch-tag {
+            background: #ff7a00;
+            color: #ffffff;
+            font-size: 0.75rem;
+            font-weight: 800;
+            padding: 4px 12px;
+            border-radius: 20px;
+            width: fit-content;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .dispatch-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 1.4rem;
+            color: #ffffff;
+            margin-bottom: 8px;
+            transition: transform 0.3s ease;
+        }
+        .dispatch-card:hover .dispatch-title {
+            transform: translateY(-4px);
+        }
+        .dispatch-desc {
+            color: #cbd5e1;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: 16px;
+        }
+        .dispatch-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: #ff7a00;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: gap 0.3s ease;
+        }
+        .dispatch-card:hover .dispatch-btn {
+            gap: 14px;
+            color: #ffffff;
+        }
+
+        /* Responsive Breakpoints */
+        @media (max-width: 992px) {
+            .laser-custom-wrap { grid-template-columns: 1fr; gap: 30px; }
+            .laser-img-frame { height: 300px; }
+            .dispatch-card { height: 320px; }
+        }
+        @media (max-width: 640px) {
+            .laser-custom-wrap { padding: 24px; }
+            .dispatch-card { height: 300px; }
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar scrolled" style="background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(20px); padding: 16px 0; box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05); color: #111; position: fixed; top: 0; width: 100%; z-index: 9999;">
+<div class="nav-container">
+<a class="logo" href="index.html">
+<img alt="Stackly Logo" class="brand-logo-img" src="assets/logo.webp"/>
+</a>
+<ul class="nav-links">
+<li class="mobile-menu-logo">
+<a href="index.html"><img alt="Stackly Logo" class="brand-logo-img" src="assets/logo.webp"/></a>
+</li>
+<li><a class="nav-link" href="index.html">Home</a></li>
+<li><a class="nav-link" href="products.html">Products</a></li>
+<li><a class="nav-link" href="about.html">About</a></li>
+<li><a class="nav-link active" href="services.html">Services</a></li>
+<li><a class="nav-link" href="blog.html">Blog</a></li>
+<li><a class="nav-link" href="contact.html">Contact</a></li>
+<li class="mobile-menu-btn">
+<a class="btn-nav mobile-btn-login" href="login.html">Login</a>
+</li>
+</ul>
+<div class="nav-actions">
+<a class="btn-nav" href="login.html">Login</a>
+<div class="hamburger">
+<span class="bar"></span>
+<span class="bar"></span>
+<span class="bar"></span>
+</div>
+</div>
+</div>
+</nav>
+<header class="page-header page-header-services reveal" data-aos="fade-down">
+<div class="container" data-aos="fade-up">
+<h1>Premium <span>Services</span></h1>
+<p>From gym fit-outs to personal styling, we offer full-spectrum support.</p>
+</div>
+</header>
+<!-- New Section 1: Our Core Services -->
+<section class="content-section">
+<div class="container">
+<div class="text-center" data-aos="fade-up" style="max-width: 750px; margin: 0 auto 50px;">
+<span class="section-subtitle">END-TO-END SOLUTIONS</span>
+<h2 class="section-title">Our Core Services</h2>
+<p class="section-desc">Explore our comprehensive range of specialized fitness services designed for home athletes, commercial facilities, and professional training centers.</p>
+</div>
+<div class="grid-3">
+<!-- Core Service Card 1 -->
+<div class="core-service-card reveal" data-aos="fade-up" data-aos-delay="100">
+<div class="core-service-img-box">
+<img alt="White-Glove Equipment Assembly &amp; Delivery" src="assets/white-glove-services.webp"/>
+<span class="core-service-badge">POPULAR SERVICE</span>
+</div>
+<div class="core-service-body">
+<h3 class="core-service-title">White-Glove Equipment Assembly &amp; Delivery</h3>
+<p class="core-service-desc">Professional white-glove unboxing, room-of-choice positioning, full power rack assembly, and eco-friendly packaging disposal by certified technicians.</p>
+<a class="btn-outline" href="404.html" style="margin-top: auto; font-size: 0.85rem; padding: 10px 22px; text-align: center;">Book Assembly</a>
+</div>
+</div>
+<!-- Core Service Card 2 -->
+<div class="core-service-card reveal" data-aos="fade-up" data-aos-delay="200">
+<div class="core-service-img-box">
+<img alt="3D Gym Layout &amp; CAD Spatial Design" src="assets/gym1.webp"/>
+<span class="core-service-badge">COMMERCIAL FIT-OUT</span>
+</div>
+<div class="core-service-body">
+<h3 class="core-service-title">3D Gym Layout &amp; CAD Spatial Design</h3>
+<p class="core-service-desc">Turnkey commercial floorplan mapping, 3D CAD rendering, equipment clearance optimization, and custom laser-engraved rig branding.</p>
+<a class="btn-solid" href="404.html" style="margin-top: auto; font-size: 0.85rem; padding: 10px 22px; text-align: center;">Request 3D Layout</a>
+</div>
+</div>
+<!-- Core Service Card 3 -->
+<div class="core-service-card reveal" data-aos="fade-up" data-aos-delay="300">
+<div class="core-service-img-box">
+<img alt="Preventative Maintenance &amp; Facility Servicing" src="assets/equipment-maintenance.webp"/>
+<span class="core-service-badge">24/7 DISPATCH</span>
+</div>
+<div class="core-service-body">
+<h3 class="core-service-title">Preventative Maintenance &amp; Facility Servicing</h3>
+<p class="core-service-desc">Quarterly cable tensioning, barbell sleeve lubrication, electronic console recalibration, selector pin replacement, and safety audits.</p>
+<a class="btn-outline" href="404.html" style="margin-top: auto; font-size: 0.85rem; padding: 10px 22px; text-align: center;">Schedule Service</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- New Section 2: Why Our Service Matters -->
+<section class="content-section bg-light reveal" data-aos="fade-up">
+<div class="container">
+<div class="text-center" data-aos="fade-up" style="max-width: 750px; margin: 0 auto 50px;">
+<span class="section-subtitle">THE STACKLY ADVANTAGE</span>
+<h2 class="section-title">Why Our Service Matters</h2>
+<p class="section-desc">Investing in premium fitness equipment is only half the battle. Discover why our dedicated service ecosystem ensures long-term performance, safety, and reliability.</p>
+</div>
+<div class="grid-2-asym" style="align-items: center;">
+<div data-aos="fade-right">
+<div class="why-service-item">
+<div class="why-service-icon">
+<i class="fa-solid fa-clock-rotate-left"></i>
+</div>
+<div>
+<h3 style="font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.15rem; color: #0f172a; margin-bottom: 6px;">Zero Downtime Guarantee</h3>
+<p style="color: #64748b; font-size: 0.9rem; line-height: 1.6; margin: 0;">Equipment breakdowns interrupt your training routine. Priority technician dispatch guarantees replacement parts and field support within 24 hours.</p>
+</div>
+</div>
+<div class="why-service-item">
+<div class="why-service-icon">
+<i class="fa-solid fa-shield-halved"></i>
+</div>
+<div>
+<h3 style="font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.15rem; color: #0f172a; margin-bottom: 6px;">Biomechanical Safety &amp; Ergonomics</h3>
+<p style="color: #64748b; font-size: 0.9rem; line-height: 1.6; margin: 0;">Improperly assembled racks or loose pulley cables pose severe injury risks. Certified technicians torque every bolt to exact manufacturer specifications.</p>
+</div>
+</div>
+<div class="why-service-item">
+<div class="why-service-icon">
+<i class="fa-solid fa-chart-line"></i>
+</div>
+<div>
+<h3 style="font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 1.15rem; color: #0f172a; margin-bottom: 6px;">Lifetime Value Protection</h3>
+<p style="color: #64748b; font-size: 0.9rem; line-height: 1.6; margin: 0;">Regular preventative servicing doubles the operational lifespan of motor units, cables, and bearings—protecting your long-term investment.</p>
+</div>
+</div>
+</div>
+<div class="why-service-img-frame" data-aos="fade-left">
+<img alt="Why Stackly Fitness Service Matters" src="assets/strength.webp"/>
+</div>
+</div>
+</div>
+</section>
+<!-- PROGRAMS SECTION -->
+<section class="prog-section reveal" data-aos="fade-up">
+<div class="prog-header reveal" data-aos="fade-down">
+<span class="prog-badge">Our Offers</span>
+<h2 class="prog-main-title">Shop By Category</h2>
+</div>
+<div class="prog-grid reveal" data-aos="fade-up" data-aos-delay="100">
+<!-- Wide Card 1: SPORTS -->
+<div class="prog-card prog-card-wide reveal" data-aos="fade-up" data-aos-delay="100">
+<div class="prog-img-wrap">
+<img alt="Sports" class="prog-img" src="assets/sports.webp"/>
+</div>
+<div class="prog-content">
+<div class="prog-meta">
+<i class="fa-solid fa-basketball"></i>
+<span>All Ages</span>
+</div>
+<h3 class="prog-title">Team Sports</h3>
+<p class="prog-desc">Explore our top-notch sports gear and equipment for basketball, soccer, baseball, and more. Built for peak performance.</p>
+<a class="prog-link" href="404.html">
+<div class="prog-link-icon"><i class="fa-solid fa-arrow-right"></i></div>
+                        Shop Sports
+                    </a>
+</div>
+</div>
+<!-- Wide Card 2: AQUATICS -->
+<div class="prog-card prog-card-wide reveal" data-aos="fade-up" data-aos-delay="200">
+<div class="prog-img-wrap">
+<img alt="Aquatics" class="prog-img" src="assets/wights-racks.webp"/>
+</div>
+<div class="prog-content">
+<div class="prog-meta">
+<i class="fa-solid fa-dumbbell"></i>
+<span>Pro &amp; Home</span>
+</div>
+<h3 class="prog-title">Weights &amp; Racks</h3>
+<p class="prog-desc">Experience our premium strength training hardware, designed to enhance your home or commercial gym setup with unparalleled durability.</p>
+<a class="prog-link" href="404.html">
+<div class="prog-link-icon"><i class="fa-solid fa-arrow-right"></i></div>
+                        Shop Now
+                    </a>
+</div>
+</div>
+<!-- Tall Card 1: FITNESS -->
+<div class="prog-card prog-card-tall reveal" data-aos="fade-up" data-aos-delay="150">
+<div class="prog-img-wrap">
+<img alt="Fitness" class="prog-img" src="assets/cardio.webp"/>
+</div>
+<div class="prog-content">
+<div class="prog-meta">
+<i class="fa-solid fa-person-running"></i>
+<span>Cardio</span>
+</div>
+<h3 class="prog-title">Cardio Machines</h3>
+<p class="prog-desc">Discover our elite cardio machines, featuring advanced tracking and ergonomic designs to help you crush your endurance goals.</p>
+<a class="prog-link" href="404.html">
+<div class="prog-link-icon"><i class="fa-solid fa-arrow-right"></i></div>
+                        Shop Now
+                    </a>
+</div>
+</div>
+<!-- Tall Card 2: CAMPS -->
+<div class="prog-card prog-card-tall reveal" data-aos="fade-up" data-aos-delay="250">
+<div class="prog-img-wrap">
+<img alt="Camps" class="prog-img" src="assets/supplements.webp"/>
+</div>
+<div class="prog-content">
+<div class="prog-meta">
+<i class="fa-solid fa-bolt"></i>
+<span>Nutrition</span>
+</div>
+<h3 class="prog-title"><span class="highlight-orange">Supplements</span></h3>
+<p class="prog-desc">Our nutrition selection features premium protein, pre-workouts, and vitamins that promote recovery and power for all athletes.</p>
+<a class="prog-link" href="404.html">
+<div class="prog-link-icon"><i class="fa-solid fa-arrow-right"></i></div>
+                        Shop Now
+                    </a>
+</div>
+</div>
+<!-- Tall Card 3: RENT -->
+<div class="prog-card prog-card-tall reveal" data-aos="fade-up" data-aos-delay="350">
+<div class="prog-img-wrap">
+<img alt="Rent" class="prog-img" src="assets/apparel-1.webp"/>
+</div>
+<div class="prog-content">
+<div class="prog-meta">
+<i class="fa-solid fa-shirt"></i>
+<span>Apparel</span>
+</div>
+<h3 class="prog-title">Apparel</h3>
+<p class="prog-desc">Shop our top-notch athletic wear for your workouts, providing the perfect blend of breathable comfort and durable compression.</p>
+<a class="prog-link" href="404.html">
+<div class="prog-link-icon"><i class="fa-solid fa-arrow-right"></i></div>
+                        Shop Now
+                    </a>
+</div>
+</div>
+<!-- Tall Card 4: DAYCARE -->
+<div class="prog-card prog-card-tall reveal" data-aos="fade-up" data-aos-delay="450">
+<div class="prog-img-wrap">
+<img alt="Daycare" class="prog-img" src="assets/access.webp"/>
+</div>
+<div class="prog-content">
+<div class="prog-meta">
+<i class="fa-solid fa-stopwatch"></i>
+<span>Accessories</span>
+</div>
+<h3 class="prog-title">Accessories</h3>
+<p class="prog-desc">Premium accessories provide a safe and engaging enhancement to your training, ensuring you have the tools needed for every workout.</p>
+<a class="prog-link" href="404.html">
+<div class="prog-link-icon"><i class="fa-solid fa-arrow-right"></i></div>
+                        Shop Now
+                    </a>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 1: Intro -->
+<section class="content-section reveal" data-aos="fade-up">
+<div class="container text-center" data-aos="fade-up" style="max-width: 800px; margin: 0 auto;">
+<span class="section-subtitle">Beyond the Cart</span>
+<h2 class="section-title">Premium Store Services</h2>
+<p class="section-desc">We don't just sell equipment; we provide end-to-end solutions for individuals and commercial gyms to ensure your setup is flawless.</p>
+</div>
+</section>
+<!-- Section 2: Equipment Assembly -->
+<section class="content-section bg-light reveal" data-aos="fade-up">
+<div class="container grid-2">
+<div class="img-placeholder img-h400" data-aos="fade-right" style="background-image: url('assets/service-banner.webp');"></div>
+<div data-aos="fade-left">
+<div class="icon-box"><i class="fa-solid fa-screwdriver-wrench"></i></div>
+<h2 class="section-title" style="font-size: 2rem;">White-Glove Delivery &amp; Assembly</h2>
+<p class="section-desc">Skip the frustration of manuals and missing bolts. Our certified technicians will deliver your heavy equipment, carry it to your room of choice, assemble it fully, and haul away the packaging.</p>
+<a class="btn-outline" href="404.html">Book Installation</a>
+</div>
+</div>
+</section>
+<!-- Section 3: Commercial Gym Fit-Outs -->
+<section class="content-section reveal" data-aos="fade-up">
+<div class="container grid-2-asym">
+<div data-aos="fade-right">
+<div class="icon-box"><i class="fa-solid fa-ruler-combined"></i></div>
+<h2 class="section-title" style="font-size: 2rem;">Commercial Gym Design</h2>
+<p class="section-desc">Opening a new facility? Our 3D spatial designers will map out your floor plan, optimize equipment flow, and provide bulk wholesale pricing for complete gym fit-outs.</p>
+<ul style="list-style:none; margin-bottom: 20px;">
+<li style="margin-bottom: 10px;"><i class="fa-solid fa-check text-orange"></i> 3D CAD Renderings</li>
+<li style="margin-bottom: 10px;"><i class="fa-solid fa-check text-orange"></i> Custom Branding on Racks</li>
+<li style="margin-bottom: 10px;"><i class="fa-solid fa-check text-orange"></i> Flooring Installation</li>
+</ul>
+<a class="btn-solid" href="404.html">Request a Quote</a>
+</div>
+<div class="img-placeholder img-h400" data-aos="fade-left" style="background-image: url('assets/home-gym-gear.webp');"></div>
+</div>
+</section>
+<!-- Section 4: Personal Shopping -->
+<section class="content-section bg-light reveal" data-aos="fade-up">
+<div class="container grid-2">
+<div class="img-placeholder img-h400" data-aos="fade-right" style="background-image: url('assets/apparel-fitting.webp');"></div>
+<div data-aos="fade-left">
+<div class="icon-box"><i class="fa-solid fa-shirt"></i></div>
+<h2 class="section-title" style="font-size: 2rem;">Virtual Fitting &amp; Styling</h2>
+<p class="section-desc">Not sure which lifting shoe is right for your arch? Need advice on compression gear? Book a free 15-minute video call with our apparel experts for personalized sizing and styling recommendations.</p>
+<a class="btn-outline" href="404.html">Schedule Call</a>
+</div>
+</div>
+</section>
+<!-- Section 6: Maintenance & Repair -->
+<section class="content-section bg-light reveal" data-aos="fade-up">
+<div class="container grid-2-asym">
+<div data-aos="fade-right">
+<h2 class="section-title" style="font-size: 2rem;">Equipment Servicing &amp; Repair</h2>
+<p class="section-desc">Keep your treadmills running smoothly and your cables safe. We offer preventative maintenance contracts and emergency repair services for all major brands we sell.</p>
+<a class="btn-outline" href="404.html">Report an Issue</a>
+</div>
+<div class="img-placeholder img-h300" data-aos="fade-left" style="background-image: url('assets/equipment-services.webp');"></div>
+</div>
+</section>
+<!-- New Section 3: After-Sales Support -->
+<section class="content-section reveal" data-aos="fade-up">
+<div class="container">
+<div class="text-center" data-aos="fade-up" style="max-width: 750px; margin: 0 auto 50px;">
+<span class="section-subtitle">COMPREHENSIVE AFTERCARE</span>
+<h2 class="section-title">After-Sales Support</h2>
+<p class="section-desc">Our relationship doesn't end at delivery. Experience complete peace of mind with our dedicated lifetime after-sales support ecosystem.</p>
+</div>
+<div class="grid-3">
+<!-- After-Sales Card 1 -->
+<div class="aftersales-card reveal" data-aos="fade-up" data-aos-delay="100">
+<div class="aftersales-img-box">
+<img alt="Lifetime Warranty Claims Assistance" src="assets/warranty.webp"/>
+</div>
+<div class="aftersales-body">
+<h3 class="aftersales-title">Direct Warranty Claims Desk</h3>
+<div class="aftersales-sub"><i class="fa-solid fa-circle-check"></i> Hassle-Free OEM Processing</div>
+<p style="color: #64748b; font-size: 0.88rem; line-height: 1.6; margin-bottom: 18px;">Skip endless phone loops. Speak directly with a dedicated claims advisor to receive replacement parts free of charge under warranty.</p>
+<a class="btn-outline" href="404.html" style="font-size: 0.82rem; padding: 8px 18px;">Initiate Claim</a>
+</div>
+</div>
+<!-- After-Sales Card 2 -->
+<div class="aftersales-card reveal" data-aos="fade-up" data-aos-delay="200">
+<div class="aftersales-img-box">
+<img alt="Dedicated Account Specialist" src="assets/1-1-advisor.webp"/>
+</div>
+<div class="aftersales-body">
+<h3 class="aftersales-title">1-on-1 Equipment Advisor</h3>
+<div class="aftersales-sub"><i class="fa-solid fa-headset"></i> Dedicated Support Engineer</div>
+<p style="color: #64748b; font-size: 0.88rem; line-height: 1.6; margin-bottom: 18px;">Direct phone &amp; email line to a certified master technician for routine maintenance advice, cable care tips, and equipment upgrades.</p>
+<a class="btn-solid" href="404.html" style="font-size: 0.82rem; padding: 8px 18px;">Talk to Advisor</a>
+</div>
+</div>
+<!-- After-Sales Card 3 -->
+<div class="aftersales-card reveal" data-aos="fade-up" data-aos-delay="300">
+<div class="aftersales-img-box">
+<img alt="Genuine Parts &amp; Trade-In Portal" src="assets/trade-portal.webp"/>
+</div>
+<div class="aftersales-body">
+<h3 class="aftersales-title">Genuine Parts &amp; Trade-In Portal</h3>
+<div class="aftersales-sub"><i class="fa-solid fa-boxes-packing"></i> Certified OEM Accessories</div>
+<p style="color: #64748b; font-size: 0.88rem; line-height: 1.6; margin-bottom: 18px;">Order original factory replacement cables, bushings, and vinyl pads—or trade in older gear for store credit toward new models.</p>
+<a class="btn-outline" href="404.html" style="font-size: 0.82rem; padding: 8px 18px;">Explore Parts</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- New Image Section 6: Priority Emergency Dispatch & Fast Spare Parts -->
+<section class="content-section bg-light reveal" data-aos="fade-up">
+<div class="container">
+<div class="text-center" data-aos="fade-up" style="max-width: 750px; margin: 0 auto 50px;">
+<span class="section-subtitle">RAPID RESPONSE DISPATCH</span>
+<h2 class="section-title">24/7 Priority Emergency Service</h2>
+<p class="section-desc">Experience swift emergency response when equipment breaks. Our rapid dispatch network delivers replacement parts and certified technicians within 24 hours.</p>
+</div>
+<div class="grid-3">
+<div class="dispatch-card reveal" data-aos="fade-up" data-aos-delay="100">
+<img alt="Cable &amp; Weight Machine Emergency Repair" class="dispatch-bg" src="assets/hiit.webp"/>
+<div class="dispatch-overlay">
+<span class="dispatch-tag">24-HOUR DISPATCH</span>
+<h3 class="dispatch-title">Cable &amp; Weight Machine Repair</h3>
+<p class="dispatch-desc">Emergency replacement for snapped selector cables, damaged pulleys, worn pop-pins, and machine guide rod alignment.</p>
+<a class="dispatch-btn" href="404.html">Request Immediate Dispatch <i class="fa-solid fa-arrow-right"></i></a>
+</div>
+</div>
+<div class="dispatch-card reveal" data-aos="fade-up" data-aos-delay="200">
+<img alt="Treadmill &amp; Electronic Calibration" class="dispatch-bg" src="assets/elite-treadmill.webp"/>
+<div class="dispatch-overlay">
+<span class="dispatch-tag">REMOTE &amp; ON-SITE</span>
+<h3 class="dispatch-title">Console &amp; Digital Electronics Service</h3>
+<p class="dispatch-desc">Fast troubleshooting for treadmill touchscreen error codes, motor controller resets, drive belt tensioning, and incline calibration.</p>
+<a class="dispatch-btn" href="404.html">Book Electronic Calibration <i class="fa-solid fa-arrow-right"></i></a>
+</div>
+</div>
+<div class="dispatch-card reveal" data-aos="fade-up" data-aos-delay="300">
+<img alt="Preventative Safety Audit" class="dispatch-bg" src="assets/cable-safety.webp"/>
+<div class="dispatch-overlay">
+<span class="dispatch-tag">ANNUAL AUDITS</span>
+<h3 class="dispatch-title">Facility Safety &amp; Equipment Certification</h3>
+<p class="dispatch-desc">On-site structural torque audits, barbell straightness checks, rubber flooring safety inspections, and commercial facility compliance certification.</p>
+<a class="dispatch-btn" href="404.html">Schedule Safety Audit <i class="fa-solid fa-arrow-right"></i></a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- PRICING SECTION -->
+<section class="prc-section reveal" data-aos="fade-up">
+<div class="container">
+<div class="prc-header reveal" data-aos="fade-down">
+<div class="prc-subtitle">
+<i class="fa-solid fa-dumbbell"></i> PRICING <i class="fa-solid fa-dumbbell"></i>
+</div>
+<h2 class="prc-title">FLEXIBLE PRICING</h2>
+</div>
+<div class="prc-grid reveal" data-aos="fade-up" data-aos-delay="100">
+<!-- Card 1 -->
+<div class="prc-card prc-card-dark reveal" data-aos="fade-up" data-aos-delay="100">
+<div class="prc-top-container">
+<div class="prc-slant"></div>
+<div class="prc-top">
+<div class="prc-badge">BASIC</div>
+<div class="prc-price-wrap">
+<span class="prc-price">$70</span>
+<span class="prc-per">Per Bottle</span>
+</div>
+<div class="prc-total">($70.00 TOTAL)</div>
+</div>
+</div>
+<div class="prc-bottom">
+<ul class="prc-list">
+<li><i class="fa-solid fa-circle-check"></i> 1 Person User purefit</li>
+<li><i class="fa-solid fa-circle-check"></i> 1 x 250 veggie caps bottle</li>
+<li><i class="fa-solid fa-circle-check"></i> 1 x 50 Capsules Per Bottle</li>
+<li class="faint"><i class="fa-solid fa-circle-check"></i> Free Shipping</li>
+</ul>
+<a class="prc-btn prc-btn-outline" href="404.html"><i class="fa-solid fa-basket-shopping"></i> BUY NOW</a>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="prc-card prc-card-mid reveal" data-aos="fade-up" data-aos-delay="200">
+<div class="prc-top-container">
+<div class="prc-slant"></div>
+<div class="prc-top">
+<div class="prc-badge" style="color: #ff7a00;">FAMILY</div>
+<div class="prc-price-wrap">
+<span class="prc-price">$64</span>
+<span class="prc-per">Per Bottle</span>
+</div>
+<div class="prc-total">($192.00 TOTAL)</div>
+</div>
+</div>
+<div class="prc-bottom">
+<ul class="prc-list">
+<li><i class="fa-solid fa-circle-check"></i> 3 Person User purefit</li>
+<li><i class="fa-solid fa-circle-check"></i> 3 x 250 veggie caps bottle</li>
+<li><i class="fa-solid fa-circle-check"></i> 3 x 50 Capsules Per Bottle</li>
+<li><i class="fa-solid fa-circle-check"></i> Free Shipping</li>
+</ul>
+<a class="prc-btn prc-btn-solid" href="404.html"><i class="fa-solid fa-basket-shopping"></i> BUY NOW</a>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="prc-card prc-card-dark reveal" data-aos="fade-up" data-aos-delay="300">
+<div class="prc-top-container">
+<div class="prc-slant"></div>
+<div class="prc-top">
+<div class="prc-badge">PROFESSIONAL</div>
+<div class="prc-price-wrap">
+<span class="prc-price">$52</span>
+<span class="prc-per">Per Bottle</span>
+</div>
+<div class="prc-total">($312.00 TOTAL)</div>
+</div>
+</div>
+<div class="prc-bottom">
+<ul class="prc-list">
+<li><i class="fa-solid fa-circle-check"></i> 6 Person User purefit</li>
+<li><i class="fa-solid fa-circle-check"></i> 6 x 250 veggie caps bottle</li>
+<li><i class="fa-solid fa-circle-check"></i> 6 x 50 Capsules Per Bottle</li>
+<li class="faint"><i class="fa-solid fa-circle-check"></i> Free Shipping</li>
+</ul>
+<a class="prc-btn prc-btn-outline" href="404.html"><i class="fa-solid fa-basket-shopping"></i> BUY NOW</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- New Image Section 4: Custom Laser Engraving & Personalization -->
+<section class="content-section bg-light reveal" data-aos="fade-up">
+<div class="container">
+<div class="laser-custom-wrap">
+<div class="laser-img-frame" data-aos="fade-right">
+<img alt="Custom Laser Engraved Gym Equipment" src="assets/dumbells.webp"/>
+<div class="laser-badge-overlay">
+<i class="fa-solid fa-wand-magic-sparkles"></i>
+<span>Precision Fiber Laser Engraving Studio</span>
+</div>
+</div>
+<div data-aos="fade-left">
+<span class="section-subtitle">CUSTOMIZATION &amp; BRANDING</span>
+<h2 class="section-title">Laser Engraving &amp; Personalization</h2>
+<p class="section-desc">Make your gym setup truly one-of-a-kind. Our in-house fiber laser studio engraves custom team logos, gym names, or athlete initials directly onto power rack uprights, Olympic barbells, and stainless steel weight plates.</p>
+<div style="display: flex; gap: 15px; flex-wrap: wrap;">
+<a class="btn-solid" href="404.html"><i class="fa-solid fa-pen-ruler" style="margin-right: 8px;"></i> Request Custom Mockup</a>
+<a class="btn-outline" href="404.html">View Sample Gallery</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<footer class="footer" style="margin-top: 80px;">
+<div class="container footer-grid">
+<div class="footer-brand">
+<a class="logo" href="index.html">
+<img alt="Stackly Logo" class="brand-logo-img" src="assets/logo.webp"/>
+</a>
+<p>Your ultimate destination for premium sports gear, fitness equipment, and athletic apparel.</p>
+<div class="social-links">
+<a href="404.html"><i class="fa-brands fa-facebook-f"></i></a>
+<a href="404.html"><i class="fa-brands fa-instagram"></i></a>
+<a href="404.html"><i class="fa-brands fa-youtube"></i></a>
+<a href="404.html"><i class="fa-brands fa-linkedin-in"></i></a>
+</div>
+</div>
+<div class="footer-links">
+<h3>Quick Navigation</h3>
+<ul>
+<li><a href="index.html">Home</a></li>
+<li><a href="products.html">Products</a></li>
+<li><a href="about.html">About</a></li>
+<li><a href="services.html">Services</a></li>
+<li><a href="blog.html">Blog</a></li>
+</ul>
+</div>
+<div class="footer-links">
+<h3>Support Hub</h3>
+<ul>
+<li><a href="404.html">Privacy Matrix</a></li>
+<li><a href="404.html">Terms &amp; Licensing</a></li>
+<li><a href="404.html">Member Portal</a></li>
+<li><a href="contact.html">Contact Desk</a></li>
+</ul>
+</div>
+<div class="footer-links">
+<h3>Contact Us</h3>
+<ul>
+<li><i class="fa-solid fa-envelope" style="margin-right: 8px; color: #ff7a00;"></i> <a href="mailto:info@stackly.com" style="color:inherit;">info@stackly.com</a></li>
+<li><i class="fa-solid fa-phone" style="margin-right: 8px; color: #ff7a00;"></i> <a href="tel:9876543210" style="color:inherit;">9876543210</a></li>
+<li><i class="fa-solid fa-location-dot" style="margin-right: 8px; color: #ff7a00;"></i> <a href="https://www.google.com/maps/place/Stackly/@11.6829566,78.1739798,17z/data=!3m1!4b1!4m6!3m5!1s0x3babefef7fd970bb:0xe11aef1a71994f9!8m2!3d11.6829566!4d78.1739798!16s%2Fg%2F11l660s35r?entry=ttu&amp;g_ep=EgoyMDI2MDcwNy4wIKXMDSoASAFQAw%3D%3D" style="color:inherit;" target="_blank">MMR Complex, Chinna Thirupathi, near Chinna Muniyappan Kovil, Salem, Tamil Nadu 636008</a></li>
+<li><i class="fa-solid fa-clock" style="margin-right: 8px; color: #ff7a00;"></i> 24/7 Store Support</li>
+</ul>
+</div>
+</div>
+<div class="footer-bottom text-center">
+<p>© 2026 Stackly Store Inc. Designed for elite athletes worldwide.</p>
+</div>
+</footer>
+<script src="js/main.js"></script>
+<script src="js/form-validation.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script>
+        document.addEventListener("DOMContentLoaded", function() {
+            if (typeof AOS !== 'undefined') {
+                AOS.init({ duration: 800, once: true });
+            }
+        });
+    </script>
+</body>
+</html>

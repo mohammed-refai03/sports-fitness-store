@@ -1466,6 +1466,17 @@ document.addEventListener('DOMContentLoaded', function() {
     const btn = document.getElementById('apptSubmitBtn');
     const spinner = document.getElementById('apptSpinner');
 
+    // Restrict date input field to today's date onwards
+    const appDateInp = document.getElementById('appDate');
+    if (appDateInp) {
+        const today = new Date();
+        const yyyy = today.getFullYear();
+        const mm = String(today.getMonth() + 1).padStart(2, '0');
+        const dd = String(today.getDate()).padStart(2, '0');
+        const todayStr = `${yyyy}-${mm}-${dd}`;
+        appDateInp.setAttribute('min', todayStr);
+    }
+
     if (apptForm) {
         apptForm.addEventListener('submit', function(e) {
             e.preventDefault();
@@ -1494,6 +1505,22 @@ document.addEventListener('DOMContentLoaded', function() {
                 alertBanner.className = 'appt-alert error show';
                 alertMsg.textContent = 'Please enter a valid email address.';
                 return;
+            }
+
+            // Date validation (must be today or future date)
+            const dateInp = document.getElementById('appDate');
+            if (dateInp && dateInp.value) {
+                const today = new Date();
+                const yyyy = today.getFullYear();
+                const mm = String(today.getMonth() + 1).padStart(2, '0');
+                const dd = String(today.getDate()).padStart(2, '0');
+                const todayStr = `${yyyy}-${mm}-${dd}`;
+                if (dateInp.value < todayStr) {
+                    dateInp.classList.add('error');
+                    alertBanner.className = 'appt-alert error show';
+                    alertMsg.textContent = 'Date must be today or a future date.';
+                    return;
+                }
             }
 
             // Simulate loading

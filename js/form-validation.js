@@ -87,13 +87,39 @@
             return true;
         }
 
-        const isNameField = idName.includes('username') || idName.includes('fullname') || (idName.includes('name') && !idName.includes('email'));
+        const isDateField = type === 'date' || idName.includes('date');
+        const isNameField = !isDateField && (idName.includes('username') || idName.includes('fullname') || (idName.includes('name') && !idName.includes('email')));
         const isPhoneField = type === 'tel' || idName.includes('phone') || idName.includes('tel') || idName.includes('mobile');
         const isEmailField = type === 'email' || idName.includes('email');
         const isConfirmPass = idName.includes('confirm') || idName.includes('match');
         const isPasswordField = type === 'password' || idName.includes('password') || idName.includes('pass');
 
-        // 1. Name Input Field Validation (Alphabets & spaces only)
+        // 1. Date Input Field Validation (Today or future date only)
+        if (isDateField) {
+            const today = new Date();
+            const yyyy = today.getFullYear();
+            const mm = String(today.getMonth() + 1).padStart(2, '0');
+            const dd = String(today.getDate()).padStart(2, '0');
+            const todayStr = `${yyyy}-${mm}-${dd}`;
+            
+            if (input.getAttribute('min') !== todayStr) {
+                input.setAttribute('min', todayStr);
+            }
+
+            if (!value.trim()) {
+                if (input.hasAttribute('required') || idName.includes('date')) {
+                    showInlineError(input, 'Date is required.');
+                    return false;
+                }
+            } else if (value < todayStr) {
+                showInlineError(input, 'Date must be today or a future date.');
+                return false;
+            }
+            clearInlineError(input);
+            return true;
+        }
+
+        // 2. Name Input Field Validation (Alphabets & spaces only)
         if (isNameField) {
             if (!value.trim()) {
                 if (input.hasAttribute('required') || idName.includes('name')) {
@@ -108,7 +134,7 @@
             return true;
         }
 
-        // 2. Phone Input Field Validation (Numbers only)
+        // 3. Phone Input Field Validation (Numbers only)
         if (isPhoneField) {
             if (!value.trim()) {
                 if (input.hasAttribute('required') || idName.includes('phone')) {
@@ -123,7 +149,7 @@
             return true;
         }
 
-        // 3. Email Input Field Validation
+        // 4. Email Input Field Validation
         if (isEmailField) {
             if (!value.trim()) {
                 if (input.hasAttribute('required') || idName.includes('email')) {
@@ -138,7 +164,7 @@
             return true;
         }
 
-        // 4. Password & Confirm Password Input Field Validation
+        // 5. Password & Confirm Password Input Field Validation
         if (isPasswordField) {
             if (!value) {
                 if (isConfirmPass) {
@@ -162,7 +188,7 @@
             return true;
         }
 
-        // 5. Generic Required Field Validation
+        // 6. Generic Required Field Validation
         if (input.hasAttribute('required') && !value.trim()) {
             showInlineError(input, 'This field is required.');
             return false;
@@ -174,6 +200,16 @@
 
     function initFormValidation() {
         disableNativeFormValidation();
+
+        // Dynamically set min attribute for date inputs to today's date
+        const today = new Date();
+        const yyyy = today.getFullYear();
+        const mm = String(today.getMonth() + 1).padStart(2, '0');
+        const dd = String(today.getDate()).padStart(2, '0');
+        const todayStr = `${yyyy}-${mm}-${dd}`;
+        document.querySelectorAll('input[type="date"]').forEach(inp => {
+            inp.setAttribute('min', todayStr);
+        });
 
         // Ensure top summary banners like "Please fix the validation errors below." are hidden
         document.querySelectorAll('.alert-banner, #alertBanner, .form-error-banner').forEach(b => {
